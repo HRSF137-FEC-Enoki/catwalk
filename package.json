@@ -1,0 +1,19 @@
+{
+  "name": "project-catwalk",
+  "version": "1.0.0",
+  "description": "E-commerce practice project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HRSF137-FEC-Enoki/catwalk.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/HRSF137-FEC-Enoki/catwalk/issues"
+  },
+  "homepage": "https://github.com/HRSF137-FEC-Enoki/catwalk#readme"
+}
