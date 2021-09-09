@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/HRSF137-FEC-Enoki/catwalk/issues"
   },
-  "homepage": "https://github.com/HRSF137-FEC-Enoki/catwalk#readme"
+  "homepage": "https://github.com/HRSF137-FEC-Enoki/catwalk#readme",
+  "devDependencies": {
+    "webpack": "^5.52.0",
+    "webpack-cli": "^4.8.0"
+  }
 }
