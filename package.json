@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --watch",
     "start": "nodemon server/index.js",
-    "lint": "eslint client/*.jsx && eslint server/*.js"
+    "lint": "eslint \"**/*.js\" \"**/*.jsx\" --ignore-pattern node_modules/ --ignore-pattern public/",
+    "lint:fix": "eslint \"**/*.js\" \"**/*.jsx\" --fix --ignore-pattern node_modules/ --ignore-pattern public/"
   },
   "repository": {
     "type": "git",
