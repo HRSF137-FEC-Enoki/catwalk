@@ -1,5 +1,5 @@
 import React from 'react';
-import ReviewRating from './ReviewRating/ReviewRating';
+import ReviewRating from './ReviewRating/ReviewList/ReviewRating';
 
 const App = () => (
   <div>
