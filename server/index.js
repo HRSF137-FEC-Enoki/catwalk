@@ -6,6 +6,7 @@ const { API_BASE_URL, GITHUB_API_TOKEN } = require('../config/config');
 
 const app = express();
 
+app.use(express.static(path.join(__dirname, '../public')));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
@@ -13,8 +14,6 @@ const port = 3000;
 const options = {
   headers: { Authorization: GITHUB_API_TOKEN },
 };
-
-app.use(express.static(path.join(__dirname, '../public')));
 
 app.get('/products', (req, res) => {
   axios.get(`${API_BASE_URL}/products`, options)
