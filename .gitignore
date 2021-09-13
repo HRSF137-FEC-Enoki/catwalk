@@ -3,6 +3,6 @@ node_modules
 # public
 public/bundle.js
 # config
-config
+config/config.js
 # jest coverage
 coverage
