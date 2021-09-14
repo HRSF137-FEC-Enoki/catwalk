@@ -17,9 +17,16 @@ const RelatedProducts = ({ productId }) => {
       .then(({ data }) => data)
       .then((ids) => ids.map((id) => axios.get(`/api/products/${id}`)))
       .then((promises) => {
-        // TODO: use allSettled to determine if all promises resolve to a product
-        // TODO; Add error handling for when promise is rejected
-        Promise.all(promises).then((values) => {
+        Promise.allSettled(promises).then((results) => {
+          const values = [];
+
+          // Don't include rejected promises
+          results.forEach((result) => {
+            if (result.status === 'fulfilled') {
+              values.push(result.value);
+            }
+          });
+
           setProducts(values);
           setIsLoading(false);
         });
