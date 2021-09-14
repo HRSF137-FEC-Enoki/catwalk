@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import ReviewRating from './ReviewRating/ReviewList/ReviewRating';
 
-<<<<<<< HEAD
 const App = () => {
   const [product, setProduct] = useState('');
   useEffect(() => {
@@ -11,19 +10,9 @@ const App = () => {
   }, []);
   return (
     <div id="app">
-      {product && <ReviewRating id={product[1].id} />}
+      {product && <ReviewRating id={product[3].id} />}
     </div>
   );
 };
-=======
-import ProductOverview from './ProductOverview/ProductOverview';
-
-const App = () => (
-  <>
-    <div>Header</div>
-    <div><ProductOverview /></div>
-  </>
-);
->>>>>>> main
 
 export default App;

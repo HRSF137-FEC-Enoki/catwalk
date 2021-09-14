@@ -2,8 +2,8 @@ import PropTypes from 'prop-types';
 import React, { useState, useEffect } from 'react';
 import ReactModal from 'react-modal';
 
+ReactModal.setAppElement('#app');
 const ReviewBody = ({ review }) => {
-  console.log(review);
   const [isMoreThanMaxChar, setIsMoreThanMaxChar] = useState(false);
   const [isImageOpen, setIsImageOpen] = useState(false);
   const [imageUrl, setImageUrl] = useState('');
@@ -23,23 +23,22 @@ const ReviewBody = ({ review }) => {
     setIsImageOpen(!isImageOpen);
     setImageUrl(e.target.src);
   };
-  ReactModal.setAppElement('#app');
   useEffect(() => {
-    if (review.body.length > 250) {
+    if (review && review.body.length > 250) {
       setIsMoreThanMaxChar(true);
     }
   }, []);
   return (
-    <div className="reviewBody">
+    <div className="reviewBody" data-testid="reviewBody">
       {isMoreThanMaxChar ? (
         <div>
           {review.body.slice(0, 250)}
           <button type="button" onClick={() => setIsMoreThanMaxChar(false)}>show more</button>
         </div>
       )
-        : <div>{review.body}</div>}
+        : <div>{review && review.body}</div>}
       {
-        review.photos.map((photo) => (
+        review && review.photos.map((photo) => (
           <>
             <img src={photo.url} alt="product" width="50px" key={photo.id} onClick={onClickImage} role="presentation" />
           </>
@@ -52,6 +51,6 @@ const ReviewBody = ({ review }) => {
   );
 };
 ReviewBody.propTypes = {
-  review: PropTypes.instanceOf(Object).isRequired,
-};
+  review: PropTypes.instanceOf(Object),
+}.isRequired;
 export default ReviewBody;
