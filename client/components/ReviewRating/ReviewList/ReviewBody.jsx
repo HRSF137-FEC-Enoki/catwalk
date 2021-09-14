@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 import React, { useState, useEffect } from 'react';
 import ReactModal from 'react-modal';
 
-ReactModal.setAppElement('#app');
 const ReviewBody = ({ review }) => {
   const [isMoreThanMaxChar, setIsMoreThanMaxChar] = useState(false);
   const [isImageOpen, setIsImageOpen] = useState(false);
@@ -23,6 +22,7 @@ const ReviewBody = ({ review }) => {
     setIsImageOpen(!isImageOpen);
     setImageUrl(e.target.src);
   };
+  if (process.env.NODE_ENV !== 'test') ReactModal.setAppElement('#app');
   useEffect(() => {
     if (review && review.body.length > 250) {
       setIsMoreThanMaxChar(true);
