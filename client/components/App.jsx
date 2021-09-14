@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import ReviewRating from './ReviewRating/ReviewList/ReviewRating';
+import ProductOverview from './ProductOverview/ProductOverview';
 
 const App = () => {
   const [product, setProduct] = useState('');
@@ -9,6 +10,7 @@ const App = () => {
   }, []);
   return (
     <div id="app">
+      <div><ProductOverview /></div>
       {product && <ReviewRating id={product[1].id} />}
     </div>
   );
