@@ -3,17 +3,17 @@ import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai';
 import PropTypes from 'prop-types';
 
 const ImageGallery = ({ currentStyle }) => {
-  const [currentImageIndex, changeImage] = useState(0);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const currentPhoto = currentStyle.photos[currentImageIndex].url;
   const { photos } = currentStyle;
   const { length } = photos;
 
   const handleLeftArrow = () => {
-    changeImage(currentImageIndex === 0 ? length - 1 : currentImageIndex - 1);
+    setCurrentImageIndex(currentImageIndex === 0 ? length - 1 : currentImageIndex - 1);
   };
 
   const handleRightArrow = () => {
-    changeImage(currentImageIndex === length - 1 ? 0 : currentImageIndex + 1);
+    setCurrentImageIndex(currentImageIndex === length - 1 ? 0 : currentImageIndex + 1);
   };
 
   return (
