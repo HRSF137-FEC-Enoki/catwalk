@@ -11,7 +11,7 @@ const App = () => {
   return (
     <div id="app">
       <div><ProductOverview /></div>
-      {product && <ReviewRating id={product[1].id} />}
+      {product && <ReviewRating id={product[3].id} />}
     </div>
   );
 };

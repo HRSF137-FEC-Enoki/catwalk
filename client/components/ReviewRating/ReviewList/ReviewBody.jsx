@@ -39,9 +39,9 @@ const ReviewBody = ({ review }) => {
         : <div>{review && review.body}</div>}
       {
         review && review.photos.map((photo) => (
-          <>
-            <img src={photo.url} alt="product" width="50px" key={photo.id} onClick={onClickImage} role="presentation" />
-          </>
+          <span key={photo.id}>
+            <img src={photo.url} alt="product" width="50px" onClick={onClickImage} role="presentation" />
+          </span>
         ))
       }
       <ReactModal isOpen={isImageOpen} style={imgStyles} onRequestClose={onClickImage}>

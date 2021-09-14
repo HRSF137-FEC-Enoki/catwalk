@@ -3,6 +3,8 @@
   padding: 10px;
 }
 .reviewList{
+  width: 60%;
+  margin: auto;
   padding: 10px;
 }
 
@@ -23,6 +25,9 @@
 .reviewBody{
   margin-bottom: 5px;
 }
+.reviewBody img{
+  margin:20px 10px;
+}
 .recommend{
   margin-bottom: 10px;
   display: flex;
@@ -40,4 +45,31 @@
 }
 .helpful span{
   margin:5px 10px;
+}
+
+#newReviewForm{
+  border:1px solid black;
+  margin:auto;
+  width: fit-content;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+#newReviewForm input{
+  width:200px;
+}
+#newReviewForm label{
+  margin-bottom: 10px;
+  width: 60%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.reviewBtn{
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin:10px auto;
 }
