@@ -10,8 +10,12 @@ const ProductOverview = () => {
   const currentStyle = mockProductStyles.results[currentStyleIndex];
   return (
     <div className="productOverviewContainer">
-      <div> This is the product overview page </div>
-      <div><ImageGallery currentStyle={currentStyle} id="imageGallery" /></div>
+      <ImageGallery currentStyle={currentStyle} id="imageGallery" />
+      <div className="productInfo">
+        <div>Stars</div>
+        <div>Category</div>
+        <div>Name</div>
+      </div>
     </div>
   );
 };

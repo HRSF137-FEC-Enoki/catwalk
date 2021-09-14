@@ -1,8 +1,21 @@
+.productOverviewContainer {
+  display: flex;
+}
+
+.productInfo{
+  width: 50%;
+}
+
+.imageGalleryContainer {
+  height: 700px;
+  width: 100%;
+}
+
 .mainImageContainer {
   display: flex;
-  align-items: center;
-  border: 1px solid black;
-  justify-content: center;
+  height: 100%;
+  width: 100%;
+
 };
 
 .leftArrow {

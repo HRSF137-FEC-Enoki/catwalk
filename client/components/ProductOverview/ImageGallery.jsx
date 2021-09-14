@@ -9,6 +9,7 @@ const ImageGallery = ({ currentStyle }) => {
   const { length } = photos;
 
   const handleLeftArrow = () => {
+    console.log(currentPhoto)
     setCurrentImageIndex(currentImageIndex === 0 ? length - 1 : currentImageIndex - 1);
   };
 
@@ -17,10 +18,11 @@ const ImageGallery = ({ currentStyle }) => {
   };
 
   return (
-    <div className="mainImageContainer">
-      <AiOutlineArrowLeft className="leftArrow" onClick={handleLeftArrow} />
-      <AiOutlineArrowRight className="rightArrow" onClick={handleRightArrow} />
-      <img className="mainImage" src={currentPhoto} alt="selected style" />
+    <div className="imageGalleryContainer">
+      <div className="mainImageContainer" style={{ backgroundImage: `url(${currentPhoto})` }}>
+        <AiOutlineArrowLeft className="leftArrow" onClick={handleLeftArrow} />
+        <AiOutlineArrowRight className="rightArrow" onClick={handleRightArrow} />
+      </div>
     </div>
   );
 };
