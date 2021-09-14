@@ -1,5 +1,12 @@
 import React from 'react';
 
-const App = () => (<div>Hello from the React App</div>);
+import ProductOverview from './ProductOverview/ProductOverview';
+
+const App = () => (
+  <>
+    <div>Header</div>
+    <div><ProductOverview /></div>
+  </>
+);
 
 export default App;
