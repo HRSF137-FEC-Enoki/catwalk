@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import axios from 'axios';
+
+import Card from './Card';
 
 const RelatedProducts = ({ productId }) => {
   const [products, setProducts] = useState([]);
@@ -17,9 +20,13 @@ const RelatedProducts = ({ productId }) => {
   return (
     <div>
       <h3>RelatedProducts</h3>
-      {products.map(({ data }) => <div key={data.id}>{data.name}</div>)}
+      {products.map((product) => <Card key={product.data.id} relatedProduct={product.data} />)}
     </div>
   );
+};
+
+RelatedProducts.propTypes = {
+  productId: PropTypes.number.isRequired,
 };
 
 export default RelatedProducts;
