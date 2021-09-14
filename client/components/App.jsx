@@ -9,6 +9,7 @@ const App = () => {
   // const [products, setProducts] = useState([]);
   const [currentProduct, setCurrentProduct] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [isError, setIsError] = useState({ error: false, msg: '' });
 
   useEffect(() => {
     axios.get('/api/products')
@@ -16,6 +17,9 @@ const App = () => {
         // setProducts(data);
         setCurrentProduct(data[0]);
         setIsLoading(false);
+      })
+      .catch((err) => {
+        setIsError({ error: true, msg: err });
       });
   }, []);
 
@@ -23,6 +27,7 @@ const App = () => {
     <div className="app__container">
       <header>Logo and Search Go Here</header>
       {isLoading ? <p>Loading!</p> : <RelatedProducts productId={currentProduct.id} />}
+      {isError.error ? <p>Currently unable to load page error!</p> : ''}
     </div>
   );
 };
