@@ -1,4 +1,9 @@
+# node modules
 node_modules
+# public
 public/bundle.js
+# config
+config/config.js
+# jest coverage
 coverage
 MockData
