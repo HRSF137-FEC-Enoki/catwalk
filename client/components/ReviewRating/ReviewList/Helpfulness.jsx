@@ -15,7 +15,7 @@ const Helpfulness = ({ review }) => (
     </div>
   </>
 );
-Helpfulness.propTypes = {
-  review: PropTypes.instanceOf(Object),
-}.isRequired;
+Helpfulness.propTypes = PropTypes.shape({
+  helpfulness: PropTypes.string,
+}).isRequired;
 export default Helpfulness;

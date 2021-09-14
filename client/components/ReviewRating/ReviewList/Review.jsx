@@ -1,7 +1,9 @@
 import React from 'react';
+
+import Moment from 'react-moment';
 import { AiOutlineCheck } from 'react-icons/ai';
 import PropTypes from 'prop-types';
-import Moment from 'react-moment';
+
 import ReviewBody from './ReviewBody';
 import Helpfulness from './Helpfulness';
 import StarRating from './StarRating';
@@ -35,8 +37,12 @@ const Review = ({ review }) => (
     <Helpfulness review={review} />
   </div>
 );
-Review.propTypes = {
-  review: PropTypes.instanceOf(Object).isRequired,
-};
+Review.propTypes = PropTypes.shape({
+  review_name: PropTypes.string,
+  date: PropTypes.string,
+  summary: PropTypes.string,
+  recommend: PropTypes.string,
+  response: PropTypes.string,
+}).isRequired;
 
 export default Review;

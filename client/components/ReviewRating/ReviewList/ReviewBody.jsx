@@ -50,7 +50,8 @@ const ReviewBody = ({ review }) => {
     </div>
   );
 };
-ReviewBody.propTypes = {
-  review: PropTypes.instanceOf(Object),
-}.isRequired;
+ReviewBody.propTypes = PropTypes.shape({
+  body: PropTypes.string,
+  photo: PropTypes.instanceOf(Array),
+}).isRequired;
 export default ReviewBody;
