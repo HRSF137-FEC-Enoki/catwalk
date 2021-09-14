@@ -10,7 +10,7 @@ const ProductOverview = () => {
   return (
     <>
       <div> This is the product overview page </div>
-      <div><ImageGallery currentStyle={currentStyle} /></div>
+      <div><ImageGallery currentStyle={currentStyle} id="imageGallery" /></div>
     </>
   );
 };
