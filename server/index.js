@@ -37,6 +37,18 @@ app.get('/products/:product_id', (req, res) => {
     });
 });
 
+app.get('/api/reviews', (req, res) => {
+  const pid = req.query.product_id;
+
+  axios.get(`${API_BASE_URL}/reviews?product_id=${pid}`, options)
+    .then((response) => {
+      res.send(response.data);
+    })
+    .catch((err) => {
+      res.status(404).send(err);
+    });
+});
+
 app.listen(port, () => {
   // eslint-disable-next-line no-console
   console.log(`server running on ${port}`);
