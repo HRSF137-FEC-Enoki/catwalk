@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-import RelatedProducts from './RelatedProducts';
+import RelatedProducts from './relatedProducts/RelatedProducts';
 
 const App = () => {
   // const [products, setProducts] = useState([]);

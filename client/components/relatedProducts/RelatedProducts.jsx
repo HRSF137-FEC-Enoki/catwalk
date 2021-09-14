@@ -17,9 +17,7 @@ const RelatedProducts = ({ productId }) => {
   return (
     <div>
       <h3>RelatedProducts</h3>
-      {products.map(({ data }) => {
-        return <div key={data.id}>{data.name}</div>;
-      })}
+      {products.map(({ data }) => <div key={data.id}>{data.name}</div>)}
     </div>
   );
 };
