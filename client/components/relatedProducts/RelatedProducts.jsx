@@ -4,6 +4,8 @@ import axios from 'axios';
 
 import Card from './Card';
 
+import '../../css/relatedProducts/RelatedProducts.scss';
+
 const RelatedProducts = ({ productId }) => {
   const [products, setProducts] = useState([]);
 
@@ -18,9 +20,11 @@ const RelatedProducts = ({ productId }) => {
   }, []);
 
   return (
-    <div>
+    <div className="related-products">
       <h3>RelatedProducts</h3>
-      {products.map((product) => <Card key={product.data.id} relatedProduct={product.data} />)}
+      <div className="related-products__row">
+        {products.map((product) => <Card key={product.data.id} relatedProduct={product.data} />)}
+      </div>
     </div>
   );
 };

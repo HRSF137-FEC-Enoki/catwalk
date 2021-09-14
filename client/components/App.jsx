@@ -3,6 +3,8 @@ import axios from 'axios';
 
 import RelatedProducts from './relatedProducts/RelatedProducts';
 
+import '../css/App.scss';
+
 const App = () => {
   // const [products, setProducts] = useState([]);
   const [currentProduct, setCurrentProduct] = useState(null);
@@ -18,7 +20,7 @@ const App = () => {
   }, []);
 
   return (
-    <div className="app-container">
+    <div className="app__container">
       <header>Logo and Search Go Here</header>
       {isLoading ? <p>Loading!</p> : <RelatedProducts productId={currentProduct.id} />}
     </div>
