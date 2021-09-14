@@ -1,9 +1,13 @@
-/* eslint-disable react/prop-types */
 import React from 'react';
+import { AiTwotoneStar, AiOutlineStar } from 'react-icons/ai';
 
-const StarRating = ({ review }) => (
+const StarRating = () => (
   <div>
-    {review.rating}
+    <AiTwotoneStar style={{ color: 'yellow' }} />
+    <AiTwotoneStar style={{ color: 'yellow' }} />
+    <AiTwotoneStar style={{ color: 'yellow' }} />
+    <AiOutlineStar />
+    <AiOutlineStar />
   </div>
 );
 

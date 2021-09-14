@@ -1,16 +1,20 @@
-/* eslint-disable react/prop-types */
+import PropTypes from 'prop-types';
 import React from 'react';
 
 const Helpfulness = ({ review }) => (
-  <div>
-    helpful?:
+
+  <div className="helpful">
+    <span>Helpful?</span>
     <span>
-      Yes (
+      Yes(
       {review.helpfulness}
       )
     </span>
-    <span>No</span>
+    <span>|</span>
+    <span>Report</span>
   </div>
 );
-
+Helpfulness.propTypes = {
+  review: PropTypes.instanceOf(Object).isRequired,
+};
 export default Helpfulness;

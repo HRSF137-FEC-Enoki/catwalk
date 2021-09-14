@@ -1,0 +1,43 @@
+.reviewRatingContainer{
+  border:1px solid black;
+  padding: 10px;
+}
+.reviewList{
+  padding: 10px;
+}
+
+.review{
+  margin:20px auto;
+  border-bottom: 1px solid black;
+  padding-bottom: 10px;
+}
+.rating_reviewer_date{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+}
+.summary{
+  font-weight:bold;
+  margin-bottom: 5px;
+}
+.reviewBody{
+  margin-bottom: 5px;
+}
+.recommend{
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+}
+.reviewResponse{
+  margin-bottom: 5px;
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(235, 228, 228);
+  padding: 5px 10px;
+}
+.reviewResponse p{
+  margin: 5px;
+}
+.helpful span{
+  margin:5px 10px;
+}
