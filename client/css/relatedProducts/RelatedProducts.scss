@@ -1,7 +1,8 @@
 .related-products {
-  &__row {
+  &__carousel {
     display: flex;
     flex-direction: row;
+    list-style-type: none;
     padding: 10px;
   }
 }

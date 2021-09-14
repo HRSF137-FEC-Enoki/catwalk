@@ -8,6 +8,8 @@ import '../../css/relatedProducts/RelatedProducts.scss';
 
 const RelatedProducts = ({ productId }) => {
   const [products, setProducts] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isError, setIsError] = useState({ error: false, msg: '' });
 
   useEffect(() => {
     // make a GET request to /api/products/:product_id/related
@@ -15,7 +17,13 @@ const RelatedProducts = ({ productId }) => {
       .then(({ data }) => data)
       .then((ids) => ids.map((id) => axios.get(`/api/products/${id}`)))
       .then((promises) => {
-        Promise.all(promises).then((values) => setProducts(values));
+        Promise.all(promises).then((values) => {
+          setProducts(values);
+          setIsLoading(false);
+        });
+      })
+      .catch((err) => {
+        setIsError({ error: true, msg: err });
       });
   }, []);
 
@@ -23,7 +31,17 @@ const RelatedProducts = ({ productId }) => {
     <div className="related-products">
       <h3>RelatedProducts</h3>
       <div className="related-products__row">
-        {products.map((product) => <Card key={product.data.id} relatedProduct={product.data} />)}
+        {isLoading ? <div>Loadiing Related Products!</div>
+          : (
+            <ul className="related-products__carousel">
+              {products.map((product) => (
+                <li key={product.data.id} className="related-products__carousel-item">
+                  <Card relatedProduct={product.data} />
+                </li>
+              ))}
+            </ul>
+          )}
+        {isError.error ? <div>Error Loading Related Products</div> : ''}
       </div>
     </div>
   );
