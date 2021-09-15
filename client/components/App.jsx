@@ -17,7 +17,7 @@ const App = () => {
     axios.get('/api/products')
       .then(({ data }) => {
         // setProducts(data);
-        setCurrentProduct(data[0]);
+        setCurrentProduct(data[1]);
         setIsLoading(false);
       })
       .catch((err) => {
