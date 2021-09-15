@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 
-import ReactModal from 'react-modal';
 import PropTypes from 'prop-types';
 
 const WriteReview = ({ isClickAdd, closeWriteReview }) => {
@@ -27,24 +26,11 @@ const WriteReview = ({ isClickAdd, closeWriteReview }) => {
   const onSubmit = (e) => {
     e.preventDefault();
     closeWriteReview();
-    console.log(newReview, characteristics);
   };
-  const imgStyles = {
-    content: {
-      top: '50%',
-      left: '50%',
-      right: 'auto',
-      bottom: 'auto',
-      marginRight: '-50%',
-      transform: 'translate(-50%, -50%)',
-      width: '60%px',
-    },
-  };
-  if (process.env.NODE_ENV !== 'test') ReactModal.setAppElement('#app');
   return (
-    // eslint-disable-next-line max-len
-    <ReactModal style={imgStyles} isOpen={isClickAdd} onRequestClose={onSubmit} shouldCloseOnOverlayClick={false}>
-      <form id="newReviewForm">
+    <div className={isClickAdd ? 'window' : 'close'}>
+      <form className="modal">
+        <h3>Review</h3>
         <label
           htmlFor="rating"
         >
@@ -96,7 +82,7 @@ const WriteReview = ({ isClickAdd, closeWriteReview }) => {
         </label>
         <button type="button" onClick={onSubmit}>Submit</button>
       </form>
-    </ReactModal>
+    </div>
   );
 };
 WriteReview.propTypes = {
