@@ -4,7 +4,7 @@ import axios from 'axios';
 import mockProductStyles from '../../../MockData/ProductStyles';
 import ImageGallery from './ImageGallery';
 
-import '../../css/ProductOverviewCSS.css';
+import '../../css/ProductOverviewCSS.scss';
 
 const ProductOverview = () => {
   const [imageIndex, setImageIndex] = useState(0);

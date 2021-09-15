@@ -43,6 +43,8 @@ ImageGallery.propTypes = {
     photos: PropTypes.arrayOf(PropTypes.object),
     skus: PropTypes.objectOf(PropTypes.object),
   }).isRequired,
+  imageIndex: PropTypes.number.isRequired,
+  updateImageIndex: PropTypes.func.isRequired,
 };
 
 export default ImageGallery;

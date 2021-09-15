@@ -1,4 +1,6 @@
-  # catwalk
+[![CircleCI](https://circleci.com/gh/HRSF137-FEC-Enoki/catwalk/tree/main.svg?style=svg)](https://circleci.com/gh/HRSF137-FEC-Enoki/catwalk/tree/main)
+
+# catwalk
 E-commerce practice project
 
 ## Team Members
