@@ -6,7 +6,7 @@ import '../../css/relatedProducts/Card.scss';
 
 const Card = ({ relatedProduct }) => (
   <div className="related-products__card">
-    <div className="related-products__card-image">
+    <div data-testid="card-image" className="related-products__card-image">
       <AiOutlineStar />
     </div>
     <div className="related-products__card-details">
