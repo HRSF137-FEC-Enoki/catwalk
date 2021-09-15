@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { AiOutlineStar } from 'react-icons/ai';
 
+import StarRating from '../StarRating';
+
 import '../../css/relatedProducts/Card.scss';
 
 const Card = ({ relatedProduct }) => (
@@ -14,8 +16,8 @@ const Card = ({ relatedProduct }) => (
       <p className="related-products__card-expanded-name">
         {`${relatedProduct.name} : ${relatedProduct.slogan}`}
       </p>
-      <p className="related-products__card-price">{`$ ${relatedProduct.default_price}`}</p>
-      <p className="related-products__card-rating">TODO:: Star Rating</p>
+      <p className="related-products__card-price">{`$${relatedProduct.default_price}`}</p>
+      <StarRating size={24} rating={3.5} />
     </div>
   </div>
 );
