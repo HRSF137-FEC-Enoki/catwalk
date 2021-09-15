@@ -61,6 +61,13 @@ app.put('/reviews/:review_id/report', (req, res) => {
       res.sendStatus(404);
     });
 });
+app.put('/reviews/', (req, res) => {
+  axios.put(`${API_BASE_URL}/reviews/${req.params.review_id}/report`, options)
+    .then(() => res.sendStatus(204))
+    .catch(() => {
+      res.sendStatus(404);
+    });
+});
 app.listen(port, () => {
   // eslint-disable-next-line no-console
   console.log(`server running on ${port}`);

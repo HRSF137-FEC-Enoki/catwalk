@@ -96,3 +96,6 @@
 .close{
   display: none;
 }
+.error{
+  border-color:red;
+}

@@ -32,7 +32,7 @@ const ReviewRating = ({ id }) => {
         <button type="button" onClick={() => setIsClickAdd(true)}>
           ADD A REVIEW +
         </button>
-        <WriteReview isClickAdd={isClickAdd} closeWriteReview={closeWriteReview} />
+        <WriteReview isClickAdd={isClickAdd} closeWriteReview={closeWriteReview} id={id} />
       </div>
     </>
   );
