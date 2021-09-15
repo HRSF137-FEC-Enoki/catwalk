@@ -49,9 +49,21 @@ app.get('/api/products/:product_id', (req, res) => {
     });
 });
 
-app.get('/reviews', (req, res) => {
-  const id = req.query.product_id;
-  axios.get(`${API_BASE_URL}/reviews?product_id=${id}`, options)
+app.get('/api/reviews', (req, res) => {
+  const pid = req.query.product_id;
+
+  axios.get(`${API_BASE_URL}/reviews?product_id=${pid}`, options)
+    .then((response) => {
+      res.send(response.data);
+    })
+    .catch((err) => {
+      res.status(404).send(err);
+    });
+});
+app.get('/products/:product_id/styles', (req, res) => {
+  const pid = req.params.product_id;
+
+  axios.get(`${API_BASE_URL}/products/${pid}/styles`, options)
     .then((response) => {
       res.send(response.data);
     })

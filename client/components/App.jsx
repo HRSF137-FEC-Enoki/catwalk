@@ -27,8 +27,8 @@ const App = () => {
 
   return (
     <div className="app__container">
-      <header>Logo and Search Go Here</header>
-      <div><ProductOverview /></div>
+      <header id="header">Logo and Search Go Here</header>
+      <ProductOverview />
       {isLoading ? <p>Loading!</p> : <RelatedProducts productId={currentProduct.id} />}
       {isError.error ? <p>Currently unable to load page error!</p> : ''}
       {currentProduct && <ReviewRating id={currentProduct.id} />}
