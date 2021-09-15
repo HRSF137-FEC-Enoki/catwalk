@@ -1,17 +1,37 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+
+import RelatedProducts from './relatedProducts/RelatedProducts';
 import ReviewRating from './ReviewRating/ReviewList/ReviewRating';
 import ProductOverview from './ProductOverview/ProductOverview';
 
+import '../css/App.scss';
+
 const App = () => {
-  const [product, setProduct] = useState('');
+  // const [products, setProducts] = useState([]);
+  const [currentProduct, setCurrentProduct] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isError, setIsError] = useState({ error: false, msg: '' });
+
   useEffect(() => {
-    axios.get('/products').then((res) => setProduct(res.data));
+    axios.get('/api/products')
+      .then(({ data }) => {
+        // setProducts(data);
+        setCurrentProduct(data[0]);
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        setIsError({ error: true, msg: err });
+      });
   }, []);
+
   return (
-    <div id="app">
+    <div className="app__container">
+      <header>Logo and Search Go Here</header>
       <div><ProductOverview /></div>
-      {product && <ReviewRating id={product[1].id} />}
+      {isLoading ? <p>Loading!</p> : <RelatedProducts productId={currentProduct.id} />}
+      {isError.error ? <p>Currently unable to load page error!</p> : ''}
+      {currentProduct && <ReviewRating id={currentProduct.id} />}
     </div>
   );
 };
