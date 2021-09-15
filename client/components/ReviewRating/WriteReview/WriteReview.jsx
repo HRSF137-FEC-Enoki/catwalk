@@ -167,6 +167,8 @@ const WriteReview = ({ isClickAdd, closeWriteReview, id }) => {
           <input name="characteristics_value" type="range" min="0" max="5" id="characteristics_value" value={characteristics.characteristics_value || ''} onChange={onChangeHandler} />
         </label>
         <button type="button" onClick={onSubmit}>Submit</button>
+        <button type="button" onClick={() => closeWriteReview()}>Cancel</button>
+
       </form>
     </div>
   );
