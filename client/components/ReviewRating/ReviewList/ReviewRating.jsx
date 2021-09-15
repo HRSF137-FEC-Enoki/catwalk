@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import ReviewList from './ReviewList';
 import WriteReview from '../WriteReview/WriteReview';
-import '../../../css/reviewRating.css';
+import '../../../css/reviewRating.scss';
 
 const ReviewRating = ({ id }) => {
   const [reviews, setReviews] = useState([]);
@@ -12,7 +12,7 @@ const ReviewRating = ({ id }) => {
   const [isClickAdd, setIsClickAdd] = useState(false);
 
   useEffect(() => {
-    axios.get('/reviews', { params: { product_id: id } })
+    axios.get('/api/reviews', { params: { product_id: id } })
       .then((res) => setReviews(res.data.results));
   }, []);
   const loadMoreView = () => {

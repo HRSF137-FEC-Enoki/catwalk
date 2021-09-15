@@ -15,7 +15,7 @@ const options = {
   headers: { Authorization: GITHUB_API_TOKEN },
 };
 
-app.get('/products', (req, res) => {
+app.get('/api/products', (req, res) => {
   axios.get(`${API_BASE_URL}/products`, options)
     .then((response) => {
       res.send(response.data);
@@ -25,7 +25,19 @@ app.get('/products', (req, res) => {
     });
 });
 
-app.get('/products/:product_id', (req, res) => {
+app.get('/api/products/:product_id/related', (req, res) => {
+  const pid = req.params.product_id;
+
+  axios.get(`${API_BASE_URL}/products/${pid}/related`, options)
+    .then(({ data }) => {
+      res.send(data);
+    })
+    .catch((err) => {
+      res.status(404).send(err);
+    });
+});
+
+app.get('/api/products/:product_id', (req, res) => {
   const pid = req.params.product_id;
 
   axios.get(`${API_BASE_URL}/products/${pid}`, options)
@@ -37,9 +49,21 @@ app.get('/products/:product_id', (req, res) => {
     });
 });
 
-app.get('/reviews', (req, res) => {
-  const id = req.query.product_id;
-  axios.get(`${API_BASE_URL}/reviews?product_id=${id}`, options)
+app.get('/api/reviews', (req, res) => {
+  const pid = req.query.product_id;
+
+  axios.get(`${API_BASE_URL}/reviews?product_id=${pid}`, options)
+    .then((response) => {
+      res.send(response.data);
+    })
+    .catch((err) => {
+      res.status(404).send(err);
+    });
+});
+app.get('/products/:product_id/styles', (req, res) => {
+  const pid = req.params.product_id;
+
+  axios.get(`${API_BASE_URL}/products/${pid}/styles`, options)
     .then((response) => {
       res.send(response.data);
     })
