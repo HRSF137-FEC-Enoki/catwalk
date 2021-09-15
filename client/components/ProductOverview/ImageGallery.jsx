@@ -2,27 +2,34 @@ import React, { useState } from 'react';
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai';
 import PropTypes from 'prop-types';
 
-const ImageGallery = ({ currentStyle }) => {
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const currentPhoto = currentStyle.photos[currentImageIndex].url;
+import ThumbnailView from './ThumbnailView';
+
+const ImageGallery = ({ currentStyle, imageIndex, updateImageIndex }) => {
   const { photos } = currentStyle;
   const { length } = photos;
+  if (imageIndex > length) {
+    updateImageIndex(0);
+  }
+  const currentPhoto = currentStyle.photos[imageIndex].url;
 
   const handleLeftArrow = () => {
-    console.log(currentPhoto)
-    setCurrentImageIndex(currentImageIndex === 0 ? length - 1 : currentImageIndex - 1);
+    updateImageIndex(imageIndex === 0 ? length - 1 : imageIndex - 1);
   };
 
   const handleRightArrow = () => {
-    setCurrentImageIndex(currentImageIndex === length - 1 ? 0 : currentImageIndex + 1);
+    updateImageIndex(imageIndex === length - 1 ? 0 : imageIndex + 1);
+  };
+
+  const handleThumbNailClick = (index) => {
+    updateImageIndex(index);
   };
 
   return (
     <div className="imageGalleryContainer">
-      <div className="mainImageContainer" style={{ backgroundImage: `url(${currentPhoto})` }}>
-        <AiOutlineArrowLeft className="leftArrow" onClick={handleLeftArrow} />
-        <AiOutlineArrowRight className="rightArrow" onClick={handleRightArrow} />
-      </div>
+      <div className="mainImageContainer" style={{ backgroundImage: `url(${currentPhoto})` }} />
+      <ThumbnailView photos={photos} handleClick={handleThumbNailClick} className="thumbnailComponent" currentIndex={imageIndex} />
+      <AiOutlineArrowLeft className="leftArrow" onClick={handleLeftArrow} size={35} />
+      <AiOutlineArrowRight className="rightArrow" onClick={handleRightArrow} size={35} />
     </div>
   );
 };
