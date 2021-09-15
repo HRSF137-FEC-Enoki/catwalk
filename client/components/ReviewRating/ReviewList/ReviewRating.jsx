@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import ReviewList from './ReviewList';
-import '../../../css/reviewRating.css';
+import '../../../css/reviewRating.scss';
 
 const ReviewRating = ({ id }) => {
   const [reviews, setReviews] = useState([]);
@@ -10,7 +10,7 @@ const ReviewRating = ({ id }) => {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    axios.get('/reviews', { params: { product_id: id } })
+    axios.get('/api/reviews', { params: { product_id: id } })
       .then((res) => setReviews(res.data.results));
   }, []);
   const loadMoreView = () => {
