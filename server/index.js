@@ -83,6 +83,7 @@ app.get('/api/reviews', (req, res) => {
     });
 });
 app.get('/products/:product_id/styles', (req, res) => {
+app.get('/api/products/:product_id/styles', (req, res) => {
   const pid = req.params.product_id;
 
   axios.get(`${API_BASE_URL}/products/${pid}/styles`, options)

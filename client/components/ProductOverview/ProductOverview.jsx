@@ -1,27 +1,23 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import axios from 'axios';
 
-import mockProductStyles from '../../../MockData/ProductStyles';
 import ImageGallery from './ImageGallery';
 
-import '../../css/ProductOverviewCSS.scss';
+import '../../css/ProductOverview.scss';
 
-const ProductOverview = () => {
+const ProductOverview = ({ productId }) => {
   const [imageIndex, setImageIndex] = useState(0);
   const [styleIndex, setStyleIndex] = useState(0);
-  const [currentStyle, setCurrentStyle] = useState(mockProductStyles.results[0]);
+  const [currentStyle, setCurrentStyle] = useState(null);
 
-  // useEffect(() => {
-  //   axios.get('/products/48436/styles')
-  //   .then((response) => {
-  //     console.log(response.data)
-  //     console.log(response.data.results[styleIndex])
-  //     setCurrentStyle('asdasd');
-  //   })
-  //   .then((response) => {
-  //     console.log(currentStyle)
-  //   })
-  // }, [])
+  useEffect(() => {
+    axios.get(`/api/products/${productId}/styles`)
+      .then((response) => {
+        setStyleIndex(0);
+        setCurrentStyle(response.data.results[styleIndex]);
+      });
+  }, []);
 
   const updateImageIndex = (index) => {
     setImageIndex(index);
@@ -29,7 +25,7 @@ const ProductOverview = () => {
 
   return (
     <div>
-      <div className="productOverviewContainer">
+      <div className="productOverviewContainer" data-testid="productOverView">
         <ImageGallery currentStyle={currentStyle} id="imageGallery" imageIndex={imageIndex} updateImageIndex={updateImageIndex} />
         <div className="productInfo">
           <div>Stars</div>
@@ -40,6 +36,10 @@ const ProductOverview = () => {
       <div className="productDescription">Product Description</div>
     </div>
   );
+};
+
+ProductOverview.propTypes = {
+  productId: PropTypes.number.isRequired,
 };
 
 export default ProductOverview;
