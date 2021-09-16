@@ -3,10 +3,10 @@ import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import App from '../components/JestComponent';
+import JestAppExample from '../components/JestAppExample';
 
 beforeEach(() => {
-  render(<App />);
+  render(<JestAppExample />);
 });
 
 describe('App Component', () => {
