@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 import RelatedProducts from './relatedProducts/RelatedProducts';
+import ProductOverview from './ProductOverview/ProductOverview';
 
 import '../css/App.scss';
 
@@ -24,7 +25,8 @@ const App = () => {
 
   return (
     <div className="app__container">
-      <header>Logo and Search Go Here</header>
+      <header id="header">Logo and Search Go Here</header>
+      {isLoading ? <p>Loading!</p> : <ProductOverview productId={currentProduct.id} />}
       {isLoading ? <p>Loading!</p> : <RelatedProducts productId={currentProduct.id} />}
       {isError.error ? <p>Currently unable to load page error!</p> : ''}
     </div>
