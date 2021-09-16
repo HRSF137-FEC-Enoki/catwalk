@@ -17,7 +17,7 @@ const Card = ({ relatedProduct }) => (
         {`${relatedProduct.name} : ${relatedProduct.slogan}`}
       </p>
       <p className="related-products__card-price">{`$${relatedProduct.default_price}`}</p>
-      <StarRating size={24} rating={3.5} />
+      <StarRating size={24} rating={3.15} />
     </div>
   </div>
 );

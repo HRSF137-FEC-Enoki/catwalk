@@ -36,12 +36,16 @@ const StarRating = ({
         const ratingVal = i + 1;
         let percentage = null;
 
-        if (val >= 1) {
+        if (val >= (7 / 8)) {
           percentage = 100;
-        } else if (val <= 0) {
-          percentage = 0;
+        } else if (val >= (5 / 8)) {
+          percentage = 75;
+        } else if (val >= (3 / 8)) {
+          percentage = 50;
+        } else if (val >= (1 / 8)) {
+          percentage = 25;
         } else {
-          percentage = val * 100;
+          percentage = 0;
         }
 
         val -= 1;
