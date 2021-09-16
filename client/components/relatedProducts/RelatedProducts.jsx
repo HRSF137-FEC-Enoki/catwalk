@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 
+import getImageUrl from '../../utils/getImageUrl';
+
 import Card from './Card';
 
 import '../../css/relatedProducts/RelatedProducts.scss';
@@ -10,6 +12,7 @@ const RelatedProducts = ({ productId }) => {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState({ error: false, msg: '' });
+  const [imageUrl, setImageUrl] = useState('');
 
   useEffect(() => {
     // make a GET request to /api/products/:product_id/related
@@ -36,6 +39,10 @@ const RelatedProducts = ({ productId }) => {
       });
   }, []);
 
+  useEffect(() => {
+    getImageUrl(productId).then((url) => setImageUrl(url));
+  }, []);
+
   return (
     <div className="related-products">
       <h3>RelatedProducts</h3>
@@ -45,7 +52,7 @@ const RelatedProducts = ({ productId }) => {
             <ul className="related-products__carousel">
               {products.map((product) => (
                 <li key={product.data.id} className="related-products__carousel-item">
-                  <Card relatedProduct={product.data} />
+                  <Card relatedProduct={product.data} imageUrl={imageUrl} />
                 </li>
               ))}
             </ul>

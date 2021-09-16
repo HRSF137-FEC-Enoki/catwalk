@@ -2,11 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { AiOutlineStar } from 'react-icons/ai';
 
+import StarRating from '../StarRating';
+
 import '../../css/relatedProducts/Card.scss';
 
-const Card = ({ relatedProduct }) => (
+const Card = ({ relatedProduct, imageUrl }) => (
   <div className="related-products__card">
-    <div className="related-products__card-image">
+    <div className="related-products__card-image" style={{ backgroundImage: `url(${imageUrl})` }}>
       <AiOutlineStar />
     </div>
     <div className="related-products__card-details">
@@ -14,8 +16,8 @@ const Card = ({ relatedProduct }) => (
       <p className="related-products__card-expanded-name">
         {`${relatedProduct.name} : ${relatedProduct.slogan}`}
       </p>
-      <p className="related-products__card-price">{`$ ${relatedProduct.default_price}`}</p>
-      <p className="related-products__card-rating">TODO:: Star Rating</p>
+      <p className="related-products__card-price">{`$${relatedProduct.default_price}`}</p>
+      <StarRating size={24} rating={3.15} />
     </div>
   </div>
 );
@@ -27,6 +29,7 @@ Card.propTypes = {
     category: PropTypes.string,
     default_price: PropTypes.string,
   }).isRequired,
+  imageUrl: PropTypes.string.isRequired,
 };
 
 export default Card;
