@@ -3,7 +3,7 @@ import axios from 'axios';
 
 import ImageGallery from './ImageGallery';
 
-import '../../css/ProductOverviewCSS.scss';
+import '../../css/ProductOverview.scss';
 
 const ProductOverview = () => {
   const [imageIndex, setImageIndex] = useState(0);

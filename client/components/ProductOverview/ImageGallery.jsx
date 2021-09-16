@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 
 import ThumbnailView from './ThumbnailView';
 
+import '../../css/ImageGallery.scss';
+
 const ImageGallery = ({ currentStyle, imageIndex, updateImageIndex }) => {
   if (currentStyle === null) {
     return <div>No data available</div>;
@@ -11,17 +13,19 @@ const ImageGallery = ({ currentStyle, imageIndex, updateImageIndex }) => {
 
   const { photos } = currentStyle;
   const { length } = photos;
+  const arrowSize = 35;
+
   if (imageIndex > length) {
     updateImageIndex(0);
   }
   const currentPhoto = currentStyle.photos[imageIndex].url;
 
-  const handleLeftArrow = () => {
-    updateImageIndex(imageIndex === 0 ? length - 1 : imageIndex - 1);
-  };
-
-  const handleRightArrow = () => {
-    updateImageIndex(imageIndex === length - 1 ? 0 : imageIndex + 1);
+  const handleArrow = (direction) => {
+    if (direction === 'left') {
+      updateImageIndex(imageIndex === 0 ? length - 1 : imageIndex - 1);
+    } else if (direction === 'right') {
+      updateImageIndex(imageIndex === length - 1 ? 0 : imageIndex + 1);
+    }
   };
 
   const handleThumbNailClick = (index) => {
@@ -32,8 +36,8 @@ const ImageGallery = ({ currentStyle, imageIndex, updateImageIndex }) => {
     <div className="imageGalleryContainer">
       <div className="mainImageContainer" style={{ backgroundImage: `url(${currentPhoto})` }} />
       <ThumbnailView photos={photos} handleClick={handleThumbNailClick} className="thumbnailComponent" currentIndex={imageIndex} />
-      <AiOutlineArrowLeft className="leftArrow" onClick={handleLeftArrow} size={35} />
-      <AiOutlineArrowRight className="rightArrow" onClick={handleRightArrow} size={35} />
+      <AiOutlineArrowLeft className="leftArrow" onClick={() => handleArrow('left')} size={arrowSize} />
+      <AiOutlineArrowRight className="rightArrow" onClick={() => handleArrow('right')} size={arrowSize} />
     </div>
   );
 };
