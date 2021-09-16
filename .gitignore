@@ -6,3 +6,5 @@ public/bundle.js
 config/config.js
 # jest coverage
 coverage
+#MockData used for ProductOverview component
+MockData
