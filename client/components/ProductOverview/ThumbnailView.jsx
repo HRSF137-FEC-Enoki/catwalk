@@ -6,6 +6,8 @@ const ThumbnailView = ({ photos, handleClick, currentIndex }) => {
   const [thumbnailStart, setThumbnailStart] = useState(currentIndex);
   const [thumbnailEnd, setThumbnailEnd] = useState(7);
 
+  const arrowSize = 45;
+
   useEffect(() => {
     if (photos.length <= 7) {
       setThumbnailStart(0);
@@ -43,7 +45,7 @@ const ThumbnailView = ({ photos, handleClick, currentIndex }) => {
 
   return (
     <div className="arrowsThumbnailContainer">
-      {currentIndex !== 0 ? <AiOutlineArrowUp className="upArrow" size={45} onClick={handleArrowUp} /> : null}
+      {currentIndex !== 0 ? <AiOutlineArrowUp className="upArrow" size={arrowSize} onClick={handleArrowUp} /> : null}
       <div className="thumbnailContainer">
         {photos.map((photo, index) => {
           if (index >= thumbnailStart && index < thumbnailEnd) {
@@ -61,7 +63,7 @@ const ThumbnailView = ({ photos, handleClick, currentIndex }) => {
           } return null;
         })}
       </div>
-      {currentIndex !== photos.length - 1 ? <AiOutlineArrowDown className="downArrow" size={45} onClick={handleArrowDown} /> : null}
+      {currentIndex !== photos.length - 1 ? <AiOutlineArrowDown className="downArrow" size={arrowSize} onClick={handleArrowDown} /> : null}
     </div>
   );
 };

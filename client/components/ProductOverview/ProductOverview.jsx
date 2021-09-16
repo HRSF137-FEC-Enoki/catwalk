@@ -12,7 +12,7 @@ const ProductOverview = ({ productId }) => {
   const [currentStyle, setCurrentStyle] = useState(null);
 
   useEffect(() => {
-    axios.get(`/products/${productId}/styles`)
+    axios.get(`/api/products/${productId}/styles`)
       .then((response) => {
         setStyleIndex(0);
         setCurrentStyle(response.data.results[styleIndex]);
