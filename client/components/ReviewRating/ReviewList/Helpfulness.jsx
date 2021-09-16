@@ -15,7 +15,6 @@ const Helpfulness = ({ review, fetchReviews }) => {
       <a
         name="helpful"
         href="/"
-        aria-hidden="true"
         onClick={onChangeHandler}
       >
         Yes(
@@ -26,7 +25,6 @@ const Helpfulness = ({ review, fetchReviews }) => {
       <a
         name="report"
         href="/"
-        aria-hidden="true"
         onClick={onChangeHandler}
       >
         Report

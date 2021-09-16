@@ -4,6 +4,7 @@ import axios from 'axios';
 import ReviewList from './ReviewList';
 import WriteReview from '../WriteReview/WriteReview';
 import Sorting from '../Sorting/Sorting';
+import RatingBreakDown from '../RatingBreakDown/RatingBreakDown';
 import '../../../css/reviewRating.scss';
 
 const ReviewRating = ({ id }) => {
@@ -32,19 +33,24 @@ const ReviewRating = ({ id }) => {
     setIsClickAdd(false);
   };
   return (
-    <>
-      <Sorting id={id} setSort={setSort} reviews={reviews} />
-      <div className="reviewRatingContainer">
-        <ReviewList reviews={reviews} reviewShow={reviewShow} fetchReviews={fetchReviews} />
+    <div className="reviewRatingContainer">
+      <div className="ratingCol">
+        <RatingBreakDown reviews={reviews} id={id} />
       </div>
-      <div className="reviewBtn">
-        {reviews.length > 2 && !isLoading && <button data-testid="button" type="button" onClick={loadMoreView}>More View</button>}
-        <button type="button" onClick={() => setIsClickAdd(true)}>
-          ADD A REVIEW +
-        </button>
-        <WriteReview isClickAdd={isClickAdd} closeWriteReview={closeWriteReview} id={id} />
+      <div className="reviewCOL">
+        <Sorting id={id} setSort={setSort} reviews={reviews} />
+        <div className="reviewListContainer">
+          <ReviewList reviews={reviews} reviewShow={reviewShow} fetchReviews={fetchReviews} />
+        </div>
+        <div className="reviewBtn">
+          {reviews.length > 2 && !isLoading && <button data-testid="button" type="button" onClick={loadMoreView}>More View</button>}
+          <button type="button" onClick={() => setIsClickAdd(true)}>
+            ADD A REVIEW +
+          </button>
+          <WriteReview isClickAdd={isClickAdd} closeWriteReview={closeWriteReview} id={id} />
+        </div>
       </div>
-    </>
+    </div>
   );
 };
 ReviewRating.propTypes = {
