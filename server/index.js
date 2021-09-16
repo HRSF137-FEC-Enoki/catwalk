@@ -82,7 +82,6 @@ app.get('/api/reviews', (req, res) => {
       res.status(404).send(err);
     });
 });
-app.get('/products/:product_id/styles', (req, res) => {
 app.get('/api/products/:product_id/styles', (req, res) => {
   const pid = req.params.product_id;
 
