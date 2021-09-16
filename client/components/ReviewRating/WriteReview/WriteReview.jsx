@@ -169,13 +169,13 @@ const WriteReview = ({ isClickAdd, closeWriteReview, id }) => {
           id="urlBox"
         >
           {charName && charName.map((char, index) => (
-            <div>
+            <div key={char}>
               <label
                 htmlFor={char}
               >
                 {char}
               </label>
-              <input className="formInput" value={charValue[index]} name={char} id={char} type="range" min="1" max="5" onChange={onChangeHandler} />
+              <input className="formInput" value={charValue[index] || ''} name={char} id={char} type="range" min="1" max="5" onChange={onChangeHandler} />
             </div>
           ))}
         </label>
