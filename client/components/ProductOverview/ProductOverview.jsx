@@ -24,7 +24,7 @@ const ProductOverview = () => {
 
   return (
     <div>
-      <div className="productOverviewContainer">
+      <div className="productOverviewContainer" data-testid="productOverView">
         <ImageGallery currentStyle={currentStyle} id="imageGallery" imageIndex={imageIndex} updateImageIndex={updateImageIndex} />
         <div className="productInfo">
           <div>Stars</div>

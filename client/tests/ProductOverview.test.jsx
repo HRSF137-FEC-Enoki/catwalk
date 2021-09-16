@@ -10,7 +10,7 @@ beforeEach(() => {
 });
 
 describe('Product Overview Component', () => {
-  test('Product thumbnails should be present', () => {
-    expect(screen.getAllByRole('button'));
+  test('Product overview container should exist', () => {
+    expect(screen.getByTestId('productOverView'));
   });
 });
