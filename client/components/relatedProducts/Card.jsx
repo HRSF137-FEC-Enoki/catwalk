@@ -6,6 +6,8 @@ import StarRating from '../StarRating';
 
 import '../../css/relatedProducts/Card.scss';
 
+const STAR_SIZE = 24;
+
 const Card = ({ relatedProduct, imageUrl, rating }) => (
   <div className="related-products__card">
     <div className="related-products__card-image" style={{ backgroundImage: `url(${imageUrl})` }}>
@@ -17,7 +19,7 @@ const Card = ({ relatedProduct, imageUrl, rating }) => (
         {`${relatedProduct.name} : ${relatedProduct.slogan}`}
       </p>
       <p className="related-products__card-price">{`$${relatedProduct.default_price}`}</p>
-      <StarRating size={24} rating={rating} />
+      <StarRating size={STAR_SIZE} rating={rating} />
     </div>
   </div>
 );
