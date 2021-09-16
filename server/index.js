@@ -94,14 +94,14 @@ app.get('/api/products/:product_id/styles', (req, res) => {
     });
 });
 app.put('/reviews/:review_id/helpful', (req, res) => {
-  axios.put(`${API_BASE_URL}/reviews/${req.params.review_id}/helpful`, options)
+  axios.put(`${API_BASE_URL}/reviews/${req.params.review_id}/helpful`, {}, options)
     .then(() => res.sendStatus(204))
     .catch(() => {
       res.sendStatus(404);
     });
 });
 app.put('/reviews/:review_id/report', (req, res) => {
-  axios.put(`${API_BASE_URL}/reviews/${req.params.review_id}/report`, options)
+  axios.put(`${API_BASE_URL}/reviews/${req.params.review_id}/report`, {}, options)
     .then(() => res.sendStatus(204))
     .catch(() => {
       res.sendStatus(404);

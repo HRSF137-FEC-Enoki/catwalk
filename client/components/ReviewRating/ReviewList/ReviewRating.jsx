@@ -13,9 +13,12 @@ const ReviewRating = ({ id }) => {
   const [isClickAdd, setIsClickAdd] = useState(false);
   const [sort, setSort] = useState('relevant');
 
-  useEffect(() => {
+  const fetchReviews = () => {
     axios.get('/api/reviews', { params: { product_id: id, sort } })
       .then((res) => setReviews(res.data.results));
+  };
+  useEffect(() => {
+    fetchReviews();
   }, [sort]);
 
   const loadMoreView = () => {
@@ -32,7 +35,7 @@ const ReviewRating = ({ id }) => {
     <>
       <Sorting id={id} setSort={setSort} reviews={reviews} />
       <div className="reviewRatingContainer">
-        <ReviewList reviews={reviews} reviewShow={reviewShow} />
+        <ReviewList reviews={reviews} reviewShow={reviewShow} fetchReviews={fetchReviews} />
       </div>
       <div className="reviewBtn">
         {reviews.length > 2 && !isLoading && <button data-testid="button" type="button" onClick={loadMoreView}>More View</button>}

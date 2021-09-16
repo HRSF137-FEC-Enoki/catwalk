@@ -112,84 +112,77 @@ const WriteReview = ({ isClickAdd, closeWriteReview, id }) => {
     <div className={isClickAdd ? 'window' : 'close'}>
       <form className="modal">
         <h3>Review</h3>
-        <label
-          className="inputLabel"
-          htmlFor="rating"
-        >
-          Rating:
-          <input className="formInput" name="rating" id="rating" type="range" min="1" max="5" value={newReview.rating || ''} onChange={onChangeHandler} required />
-        </label>
-        <label
-          className="inputLabel"
-          htmlFor="summary"
-        >
-          Summary:
+        <div className="inputLabel">
+          <span>
+            Rating:
+          </span>
+          <input className="formInput" name="rating" id="rating" type="range" min="0" max="5" value={newReview.rating || ''} onChange={onChangeHandler} required />
+        </div>
+        <div className="inputLabel">
+          <span>
+            Summary:
+          </span>
           <input className="formInput" name="summary" id="summary" value={newReview.summary || ''} onChange={onChangeHandler} maxLength="60" required />
-        </label>
-        <label
-          className="inputLabel"
-          htmlFor="body"
-        >
-          Body:
+        </div>
+        <div className="inputLabel">
+          <span>
+            Body:
+          </span>
           <textarea className="formInput" name="body" id="body" value={newReview.body || ''} onChange={onChangeHandler} maxLength="2500" row="10" required />
-        </label>
-        <label
-          className="inputLabel"
-          htmlFor="recommend"
-        >
+        </div>
+        <div className="inputLabel">
           Recommend:
-          <label htmlFor="yes">
+          <span htmlFor="yes">
             Yes
             <input name="recommend" id="yes" type="radio" value={true || ''} onChange={onChangeHandler} checked />
-          </label>
-
-          <label htmlFor="no">
+          </span>
+          <span htmlFor="no">
             No
             <input name="recommend" id="no" type="radio" value={false || ''} onChange={onChangeHandler} />
-          </label>
-        </label>
-        <label
-          className="inputLabel"
-          htmlFor="name"
-        >
-          Name:
+          </span>
+        </div>
+        <div className="inputLabel">
+          <span>
+            Name:
+          </span>
           <input className="formInput" name="name" id="name" value={newReview.name || ''} onChange={onChangeHandler} />
-        </label>
-        <label
-          className="inputLabel"
-          htmlFor="email"
-        >
-          Email:
+        </div>
+        <div className="inputLabel">
+          <span>
+            Email:
+          </span>
           <input className="formInput" name="email" id="email" value={newReview.email || ''} onChange={onChangeHandler} required />
-        </label>
-        <label
-          className="inputLabel"
-          htmlFor="photos"
-        >
-          Photos:
+        </div>
+        <div className="inputLabel">
+          <span>
+            Photos:
+          </span>
           <input name="photos" id="photos" value={newReview.photos || ''} onChange={onChangeHandler} />
           <button type="button" onClick={saveUrl}>add url</button>
-        </label>
+        </div>
         {photoUrl && photoUrl.map((url) => (
           <div key={url}>{url}</div>
         ))}
         <label
           htmlFor="characteristics"
+          className="characteristicsLabel"
+          id="urlBox"
         >
-          Characteristics:
           {charName && charName.map((char, index) => (
             <div>
               <label
                 htmlFor={char}
               >
                 {char}
-                <input className="formInput" value={charValue[index]} name={char} id={char} type="range" min="0" max="5" onChange={onChangeHandler} />
               </label>
+              <input className="formInput" value={charValue[index]} name={char} id={char} type="range" min="1" max="5" onChange={onChangeHandler} />
             </div>
           ))}
         </label>
-        <button type="button" onClick={onSubmit}>Submit</button>
-        <button type="button" onClick={() => closeWriteReview()}>Cancel</button>
+        <div className="reviewBtn">
+          <button type="button" onClick={() => closeWriteReview()}>Cancel</button>
+          <button type="button" onClick={onSubmit}>Submit</button>
+        </div>
 
       </form>
     </div>
