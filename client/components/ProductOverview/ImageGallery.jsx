@@ -1,26 +1,43 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai';
 import PropTypes from 'prop-types';
 
-const ImageGallery = ({ currentStyle }) => {
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const currentPhoto = currentStyle.photos[currentImageIndex].url;
+import ThumbnailView from './ThumbnailView';
+
+import '../../css/ImageGallery.scss';
+
+const ImageGallery = ({ currentStyle, imageIndex, updateImageIndex }) => {
+  if (currentStyle === null) {
+    return <div>No data available</div>;
+  }
+
   const { photos } = currentStyle;
   const { length } = photos;
+  const arrowSize = 35;
 
-  const handleLeftArrow = () => {
-    setCurrentImageIndex(currentImageIndex === 0 ? length - 1 : currentImageIndex - 1);
+  if (imageIndex > length) {
+    updateImageIndex(0);
+  }
+  const currentPhoto = currentStyle.photos[imageIndex].url;
+
+  const handleArrow = (direction) => {
+    if (direction === 'left') {
+      updateImageIndex(imageIndex === 0 ? length - 1 : imageIndex - 1);
+    } else if (direction === 'right') {
+      updateImageIndex(imageIndex === length - 1 ? 0 : imageIndex + 1);
+    }
   };
 
-  const handleRightArrow = () => {
-    setCurrentImageIndex(currentImageIndex === length - 1 ? 0 : currentImageIndex + 1);
+  const handleThumbNailClick = (index) => {
+    updateImageIndex(index);
   };
 
   return (
-    <div className="mainImageContainer">
-      <AiOutlineArrowLeft className="leftArrow" onClick={handleLeftArrow} />
-      <AiOutlineArrowRight className="rightArrow" onClick={handleRightArrow} />
-      <img className="mainImage" src={currentPhoto} alt="selected style" />
+    <div className="imageGalleryContainer">
+      <div className="mainImageContainer" style={{ backgroundImage: `url(${currentPhoto})` }} />
+      <ThumbnailView photos={photos} handleClick={handleThumbNailClick} className="thumbnailComponent" currentIndex={imageIndex} />
+      <AiOutlineArrowLeft className="leftArrow" onClick={() => handleArrow('left')} size={arrowSize} />
+      <AiOutlineArrowRight className="rightArrow" onClick={() => handleArrow('right')} size={arrowSize} />
     </div>
   );
 };
@@ -33,7 +50,13 @@ ImageGallery.propTypes = {
     sale_price: PropTypes.string,
     photos: PropTypes.arrayOf(PropTypes.object),
     skus: PropTypes.objectOf(PropTypes.object),
-  }).isRequired,
+  }),
+  imageIndex: PropTypes.number.isRequired,
+  updateImageIndex: PropTypes.func.isRequired,
+};
+
+ImageGallery.defaultProps = {
+  currentStyle: null,
 };
 
 export default ImageGallery;
