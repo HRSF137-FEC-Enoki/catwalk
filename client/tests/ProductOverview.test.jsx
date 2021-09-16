@@ -10,10 +10,7 @@ beforeEach(() => {
 });
 
 describe('Product Overview Component', () => {
-  test('Header Contains Greeting', () => {
-    expect(screen.getByText('This is the product overview page')).toBeInTheDocument();
-  });
-  test('Product Image Should Be Present', () => {
-    expect(screen.getByRole('img')).toBeInTheDocument();
+  test('Product thumbnails should be present', () => {
+    expect(screen.getAllByRole('button'));
   });
 });

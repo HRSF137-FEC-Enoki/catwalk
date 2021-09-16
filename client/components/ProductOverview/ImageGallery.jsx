@@ -1,10 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai';
 import PropTypes from 'prop-types';
 
 import ThumbnailView from './ThumbnailView';
 
 const ImageGallery = ({ currentStyle, imageIndex, updateImageIndex }) => {
+  if (currentStyle === null) {
+    return <div>No data available</div>;
+  }
+
   const { photos } = currentStyle;
   const { length } = photos;
   if (imageIndex > length) {
@@ -42,9 +46,13 @@ ImageGallery.propTypes = {
     sale_price: PropTypes.string,
     photos: PropTypes.arrayOf(PropTypes.object),
     skus: PropTypes.objectOf(PropTypes.object),
-  }).isRequired,
+  }),
   imageIndex: PropTypes.number.isRequired,
   updateImageIndex: PropTypes.func.isRequired,
+};
+
+ImageGallery.defaultProps = {
+  currentStyle: null,
 };
 
 export default ImageGallery;
