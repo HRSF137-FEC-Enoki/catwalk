@@ -6,9 +6,9 @@ import StarRating from '../StarRating';
 
 import '../../css/relatedProducts/Card.scss';
 
-const Card = ({ relatedProduct }) => (
+const Card = ({ relatedProduct, imageUrl }) => (
   <div className="related-products__card">
-    <div className="related-products__card-image">
+    <div className="related-products__card-image" style={{ backgroundImage: `url(${imageUrl})` }}>
       <AiOutlineStar />
     </div>
     <div className="related-products__card-details">
@@ -29,6 +29,7 @@ Card.propTypes = {
     category: PropTypes.string,
     default_price: PropTypes.string,
   }).isRequired,
+  imageUrl: PropTypes.string.isRequired,
 };
 
 export default Card;
