@@ -8,10 +8,15 @@ import '../../css/relatedProducts/Card.scss';
 
 const STAR_SIZE = 24;
 
-const Card = ({ relatedProduct, imageUrl, rating }) => (
+const Card = ({ relatedProduct, imageUrl, rating, handleCardClick }) => (
+  // TODO:: handle these airbnb eslint rules
+  // - click-events-have-key-events
+  // - no-static-element-interactions
   <div className="related-products__card">
     <div className="related-products__card-image" style={{ backgroundImage: `url(${imageUrl})` }}>
-      <AiOutlineStar />
+      <a className="related-products__action-btn" onClick={() => handleCardClick(relatedProduct)}>
+        <AiOutlineStar size={STAR_SIZE} />
+      </a>
     </div>
     <div className="related-products__card-details">
       <p className="related-products__card-category">{relatedProduct.category}</p>
@@ -33,6 +38,7 @@ Card.propTypes = {
   }).isRequired,
   imageUrl: PropTypes.string.isRequired,
   rating: PropTypes.number.isRequired,
+  handleCardClick: PropTypes.func.isRequired,
 };
 
 export default Card;

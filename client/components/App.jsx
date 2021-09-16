@@ -16,10 +16,12 @@ const App = () => {
   const [rating, setRating] = useState(0);
 
   useEffect(() => {
-    axios.get('/api/products')
+    const productId = window.location.search.split('=')[1];
+
+    axios.get(`/api/products/${productId}`)
       .then(({ data }) => {
-        setCurrentProduct(data[0]);
-        getStarRatingAvg(data[0].id)
+        setCurrentProduct(data);
+        getStarRatingAvg(data.id)
           .then((result) => setRating(result));
         setIsLoading(false);
       })
@@ -33,7 +35,7 @@ const App = () => {
       <header className="app__header">Logo and Search Go Here</header>
       {isLoading ? <p>Loading!</p> : <ProductOverview productId={currentProduct.id} />}
       {isLoading ? <p>Loading!</p>
-        : <RelatedProducts rating={rating} productId={currentProduct.id} />}
+        : <RelatedProducts rating={rating} currentProduct={currentProduct} />}
       {isError.error && <p>Currently unable to load page error!</p>}
     </div>
   );
