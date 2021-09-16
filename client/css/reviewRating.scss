@@ -70,10 +70,16 @@
 .modal input{
   width:50%;
 }
-.modal label{
+.modal .inputLabel{
   margin-bottom: 20px;
   width: 60%;
   display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.characteristicsLabel{
+  display: flex;
+  flex-direction: column;
   justify-content: space-between;
   align-items: center;
 }

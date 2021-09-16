@@ -50,9 +50,8 @@ app.get('/api/products/:product_id', (req, res) => {
 });
 
 app.get('/api/reviews', (req, res) => {
-  const pid = req.query.product_id;
-
-  axios.get(`${API_BASE_URL}/reviews?product_id=${pid}`, options)
+  const { pid, sort } = req.query;
+  axios.get(`${API_BASE_URL}/reviews?product_id=${pid}&sort=${sort}`, options)
     .then((response) => {
       res.send(response.data);
     })
@@ -85,9 +84,18 @@ app.put('/reviews/:review_id/report', (req, res) => {
       res.sendStatus(404);
     });
 });
-app.put('/reviews/', (req, res) => {
-  axios.put(`${API_BASE_URL}/reviews/${req.params.review_id}/report`, options)
-    .then(() => res.sendStatus(204))
+app.post('/reviews', (req, res) => {
+  axios.post(`${API_BASE_URL}/reviews?product_id${req.body.product_id}`, req.body, options)
+    .then(() => {
+      res.sendStatus(201);
+    })
+    .catch(() => {
+      res.sendStatus(404);
+    });
+});
+app.get('/reviews/meta/:id', (req, res) => {
+  axios.get(`${API_BASE_URL}/reviews/meta?product_id=${req.params.id}`, options)
+    .then((data) => res.send(data.data))
     .catch(() => {
       res.sendStatus(404);
     });

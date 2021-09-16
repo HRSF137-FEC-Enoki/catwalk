@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import PropTypes from 'prop-types';
 import axios from 'axios';
@@ -8,18 +8,28 @@ const WriteReview = ({ isClickAdd, closeWriteReview, id }) => {
     rating: 5,
     summary: '',
     body: '',
-    recommend: 'Yes',
+    recommend: true,
     name: '',
     email: '',
-    photo: '',
+    photos: '',
+    characteristics: {},
     product_id: id,
-  });
-  const [characteristics, setCharacteristics] = useState({
-    characteristics: '',
-    characteristics_value: 5,
   });
   const [isValid, setIsValid] = useState(true);
   const [photoUrl, setPhotoUrl] = useState([]);
+  const [charName, setCharName] = useState([]);
+  const [charId, setCharId] = useState([]);
+  const [charValue, setCharValue] = useState([]);
+
+  useEffect(() => {
+    axios.get(`/reviews/meta/${id}`)
+      .then((res) => {
+        setCharName(Object.entries(res.data.characteristics).map((i) => i[0]));
+        setCharId(Object.entries(res.data.characteristics).map((i) => i[1]).map((i) => i.id));
+        // eslint-disable-next-line max-len
+        setCharValue(Object.entries(res.data.characteristics).map((i) => i[1]).map((i) => parseInt(i.value, 10)));
+      });
+  }, []);
 
   const looksLikeMail = (str) => {
     const lastAtPos = str.lastIndexOf('@');
@@ -27,24 +37,23 @@ const WriteReview = ({ isClickAdd, closeWriteReview, id }) => {
     return (lastAtPos < lastDotPos && lastAtPos > 0 && str.indexOf('@@') === -1 && lastDotPos > 2 && (str.length - lastDotPos) > 2);
   };
   const saveUrl = () => {
-    if (newReview.photo && (newReview.photo.match(/\.(jpeg|jpg|gif|png)$/) != null)) {
-      setPhotoUrl([...photoUrl, newReview.photo]);
+    if (newReview.photos && (newReview.photos.match(/\.(jpeg|jpg|gif|png)$/) != null)) {
+      setPhotoUrl([...photoUrl, newReview.photos]);
     } else {
-      document.getElementById('photo').classList.add('error');
-      document.getElementById('photo').placeholder = 'invalid ulr';
+      document.getElementById('photos').classList.add('error');
+      document.getElementById('photos').placeholder = 'invalid ulr';
     }
-    setNewReview({ ...newReview, photo: '' });
+    setNewReview({ ...newReview, photos: '' });
   };
   const onChangeHandler = (e) => {
-    document.getElementById('summary').classList.remove('error');
-    document.getElementById('name').classList.remove('error');
-    document.getElementById('email').classList.remove('error');
-    document.getElementById('body').classList.remove('error');
-    document.getElementById('characteristics').classList.remove('error');
-    document.getElementById('photo').classList.remove('error');
-
-    if (e.target.name === 'characteristics_value' || e.target.name === 'characteristics') {
-      setCharacteristics({ ...characteristics, [e.target.name]: e.target.value });
+    if (e.target.name !== 'recommend') {
+      document.getElementById(e.target.name).classList.remove('error');
+    }
+    if (charName.includes(e.target.name)) {
+      // eslint-disable-next-line max-len
+      const copyCharValue = [...charValue];
+      copyCharValue[charName.indexOf(e.target.name)] = e.target.value;
+      setCharValue(copyCharValue);
     } else {
       setNewReview({ ...newReview, [e.target.name]: e.target.value });
     }
@@ -56,11 +65,6 @@ const WriteReview = ({ isClickAdd, closeWriteReview, id }) => {
     if (!newReview.summary) {
       document.getElementById('summary').classList.add('error');
       document.getElementById('summary').placeholder = 'can not be empty';
-      setIsValid(false);
-    }
-    if (!characteristics.characteristics) {
-      document.getElementById('characteristics').classList.add('error');
-      document.getElementById('characteristics').placeholder = 'can not be empty';
       setIsValid(false);
     }
     if (!newReview.body) {
@@ -92,12 +96,15 @@ const WriteReview = ({ isClickAdd, closeWriteReview, id }) => {
     }
     if (isValid) {
       const review = newReview;
-      review.photo = photoUrl;
-      review.characteristics = characteristics;
+      review.photos = photoUrl;
+      review.rating = Number(review.rating);
+      for (let i = 0; i < charName.length; i += 1) {
+        review.characteristics[charId[i]] = Number(charValue[i]);
+      }
+
       if (review.name !== '') {
         axios.post('/reviews', review);
         closeWriteReview();
-        console.log(review);
       }
     }
   };
@@ -106,54 +113,61 @@ const WriteReview = ({ isClickAdd, closeWriteReview, id }) => {
       <form className="modal">
         <h3>Review</h3>
         <label
+          className="inputLabel"
           htmlFor="rating"
         >
           Rating:
-          <input className="formInput" name="rating" id="rating" type="range" min="0" max="5" value={newReview.rating || ''} onChange={onChangeHandler} required />
+          <input className="formInput" name="rating" id="rating" type="range" min="1" max="5" value={newReview.rating || ''} onChange={onChangeHandler} required />
         </label>
         <label
+          className="inputLabel"
           htmlFor="summary"
         >
           Summary:
           <input className="formInput" name="summary" id="summary" value={newReview.summary || ''} onChange={onChangeHandler} maxLength="60" required />
         </label>
         <label
+          className="inputLabel"
           htmlFor="body"
         >
           Body:
           <textarea className="formInput" name="body" id="body" value={newReview.body || ''} onChange={onChangeHandler} maxLength="2500" row="10" required />
         </label>
         <label
+          className="inputLabel"
           htmlFor="recommend"
         >
           Recommend:
           <label htmlFor="yes">
             Yes
-            <input name="recommend" id="yes" type="radio" value={'yes' || ''} onChange={onChangeHandler} checked />
+            <input name="recommend" id="yes" type="radio" value={true || ''} onChange={onChangeHandler} checked />
           </label>
 
           <label htmlFor="no">
             No
-            <input name="recommend" id="no" type="radio" value={'no' || ''} onChange={onChangeHandler} />
+            <input name="recommend" id="no" type="radio" value={false || ''} onChange={onChangeHandler} />
           </label>
         </label>
         <label
+          className="inputLabel"
           htmlFor="name"
         >
           Name:
           <input className="formInput" name="name" id="name" value={newReview.name || ''} onChange={onChangeHandler} />
         </label>
         <label
+          className="inputLabel"
           htmlFor="email"
         >
           Email:
           <input className="formInput" name="email" id="email" value={newReview.email || ''} onChange={onChangeHandler} required />
         </label>
         <label
-          htmlFor="photo"
+          className="inputLabel"
+          htmlFor="photos"
         >
           Photos:
-          <input name="photo" id="photo" value={newReview.photo || ''} onChange={onChangeHandler} />
+          <input name="photos" id="photos" value={newReview.photos || ''} onChange={onChangeHandler} />
           <button type="button" onClick={saveUrl}>add url</button>
         </label>
         {photoUrl && photoUrl.map((url) => (
@@ -163,8 +177,16 @@ const WriteReview = ({ isClickAdd, closeWriteReview, id }) => {
           htmlFor="characteristics"
         >
           Characteristics:
-          <input name="characteristics" placeholder="characteristics" id="characteristics" value={characteristics.characteristics || ''} onChange={onChangeHandler} />
-          <input name="characteristics_value" type="range" min="0" max="5" id="characteristics_value" value={characteristics.characteristics_value || ''} onChange={onChangeHandler} />
+          {charName && charName.map((char, index) => (
+            <div>
+              <label
+                htmlFor={char}
+              >
+                {char}
+                <input className="formInput" value={charValue[index]} name={char} id={char} type="range" min="0" max="5" onChange={onChangeHandler} />
+              </label>
+            </div>
+          ))}
         </label>
         <button type="button" onClick={onSubmit}>Submit</button>
         <button type="button" onClick={() => closeWriteReview()}>Cancel</button>
