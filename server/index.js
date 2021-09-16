@@ -63,7 +63,6 @@ app.get('/api/products/:product_id/related', (req, res) => {
 
 app.get('/api/reviews', (req, res) => {
   const pid = req.query.product_id;
-
   axios.get(`${API_BASE_URL}/reviews?product_id=${pid}`, options)
     .then((response) => {
       res.send(response.data);

@@ -14,7 +14,7 @@ const ReviewRating = ({ id }) => {
   const [sort, setSort] = useState('relevant');
 
   useEffect(() => {
-    axios.get('/api/reviews', { params: { pid: id, sort } })
+    axios.get('/api/reviews', { params: { product_id: id, sort } })
       .then((res) => setReviews(res.data.results));
   }, [sort]);
 
@@ -31,7 +31,9 @@ const ReviewRating = ({ id }) => {
   return (
     <>
       <Sorting id={id} setSort={setSort} reviews={reviews} />
-      <div className="reviewRatingContainer"><ReviewList reviews={reviews} reviewShow={reviewShow} /></div>
+      <div className="reviewRatingContainer">
+        <ReviewList reviews={reviews} reviewShow={reviewShow} />
+      </div>
       <div className="reviewBtn">
         {reviews.length > 2 && !isLoading && <button data-testid="button" type="button" onClick={loadMoreView}>More View</button>}
         <button type="button" onClick={() => setIsClickAdd(true)}>
