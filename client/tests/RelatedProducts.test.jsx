@@ -5,11 +5,22 @@ import '@testing-library/jest-dom';
 import RelatedProducts from '../components/relatedProducts/RelatedProducts';
 
 describe('Related Products', () => {
-  const mockProductId = 43432;
+  const mockCurrent = {
+    id: 48432,
+    name: 'Jackson Pollock',
+    category: 'art',
+    default_price: '8765',
+    features: [
+      { feature: 'medium', value: 'walls' },
+      { feature: 'design', value: 'abstract' },
+      { feature: 'tools', value: 'splattergun' },
+    ],
+  };
+
   const mockRating = 3.5;
 
   beforeEach(() => {
-    render(<RelatedProducts productId={mockProductId} rating={mockRating} />);
+    render(<RelatedProducts currentProduct={mockCurrent} rating={mockRating} />);
   });
 
   test('it should have a header element', () => {
