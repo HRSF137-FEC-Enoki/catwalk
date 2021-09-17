@@ -16,12 +16,9 @@ const App = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState({ error: false, msg: '' });
   const [rating, setRating] = useState(0);
-  // TODO: Remove this line once setProductId is being used
-  // eslint-disable-next-line no-unused-vars
-  const [productId, setProductId] = useState(INITIAL_PRODUCT_ID);
 
   useEffect(() => {
-    axios.get(`/api/products/${productId}`)
+    axios.get(`/api/products/${INITIAL_PRODUCT_ID}`)
       .then(({ data }) => {
         setCurrentProduct(data);
         getStarRatingAvg(data.id)
