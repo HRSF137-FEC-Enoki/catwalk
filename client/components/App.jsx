@@ -16,6 +16,8 @@ const App = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState({ error: false, msg: '' });
   const [rating, setRating] = useState(0);
+  // TODO: Remove this line once setProductId is being used
+  // eslint-disable-next-line no-unused-vars
   const [productId, setProductId] = useState(INITIAL_PRODUCT_ID);
 
   useEffect(() => {
@@ -23,7 +25,7 @@ const App = () => {
       .then(({ data }) => {
         setCurrentProduct(data);
         getStarRatingAvg(data.id)
-          .then((result) => setRating(result));
+          .then((result) => setRating(result.avg));
         setIsLoading(false);
       })
       .catch((err) => {
