@@ -9,16 +9,16 @@ import ProductOverview from './ProductOverview/ProductOverview';
 
 import '../css/App.scss';
 
+const INITIAL_PRODUCT_ID = 48432;
+
 const App = () => {
-  // const [products, setProducts] = useState([]);
   const [currentProduct, setCurrentProduct] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState({ error: false, msg: '' });
   const [rating, setRating] = useState(0);
+  const [productId, setProductId] = useState(INITIAL_PRODUCT_ID);
 
   useEffect(() => {
-    const productId = window.location.search.split('=')[1];
-
     axios.get(`/api/products/${productId}`)
       .then(({ data }) => {
         setCurrentProduct(data);
