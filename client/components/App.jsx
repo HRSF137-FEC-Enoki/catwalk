@@ -19,6 +19,7 @@ const App = () => {
   const [productId, setProductId] = useState(INITIAL_PRODUCT_ID);
 
   useEffect(() => {
+    setIsLoading(true);
     axios.get(`/api/products/${productId}`)
       .then(({ data }) => {
         setCurrentProduct(data);
@@ -27,6 +28,7 @@ const App = () => {
         setIsLoading(false);
       })
       .catch((err) => {
+        setIsLoading(false);
         setIsError({ error: true, msg: err });
       });
   }, [productId]);
