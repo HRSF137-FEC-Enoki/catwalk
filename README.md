@@ -1,6 +1,6 @@
 [![CircleCI](https://circleci.com/gh/HRSF137-FEC-Enoki/catwalk/tree/main.svg?style=svg)](https://circleci.com/gh/HRSF137-FEC-Enoki/catwalk/tree/main)
 
-# catwalk
+# Project Catwalk by Effervescent Enoki
 E-commerce practice project
 
 ## Team Members

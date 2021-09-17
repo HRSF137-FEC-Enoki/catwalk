@@ -1,8 +1,15 @@
 .related-products {
+  position: relative;
+
   &__carousel {
     display: flex;
     flex-direction: row;
     list-style-type: none;
     padding: 10px;
+  }
+
+  &__action-btn {
+    float: right;
+    margin: 5px 5px 0 0;
   }
 }
