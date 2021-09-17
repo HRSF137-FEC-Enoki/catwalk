@@ -2,8 +2,6 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 
-import getImageUrl from '../../utils/getImageUrl';
-
 import Card from './Card';
 import ComparisonModal from './ComparisonModal';
 
@@ -13,7 +11,6 @@ const RelatedProducts = ({ currentProduct, handleCardClick }) => {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState({ error: false, msg: '' });
-  const [imageUrl, setImageUrl] = useState('');
   const [showComparison, setShowComparison] = useState(false);
   const [relatedProduct, setRelatedProduct] = useState(null);
 
@@ -29,7 +26,7 @@ const RelatedProducts = ({ currentProduct, handleCardClick }) => {
           // Don't include rejected promises
           results.forEach((result) => {
             if (result.status === 'fulfilled') {
-              values.push(result.value);
+              values.push(result.value.data);
             }
           });
 
@@ -58,11 +55,11 @@ const RelatedProducts = ({ currentProduct, handleCardClick }) => {
         {!isLoading ? (
           <ul className="related-products__carousel">
             {products.map((product) => (
-              <li key={product.data.id} className="related-products__carousel-item">
+              <li key={product.id} className="related-products__carousel-item">
                 <Card
                   handleCardClick={handleCardClick}
                   handleActionBtnClick={handleActionBtnClick}
-                  relatedProduct={product.data}
+                  relatedProduct={product}
                 />
               </li>
             ))}

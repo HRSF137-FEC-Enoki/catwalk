@@ -1,9 +1,15 @@
 @import url("https://use.fontawesome.com/releases/v5.13.0/css/all.css");
 
 .star-rating {
+  margin: 10px 0;
+
   &__no-rating-msg {
     color: #bbb;
     font-size: 12px;
     margin: 5px 0 0 5px;
+  }
+
+  span:first-child {
+    margin-left: 0;
   }
 }
