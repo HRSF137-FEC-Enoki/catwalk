@@ -29,6 +29,7 @@ const App = () => {
         setIsError({ error: true, msg: err });
       });
   }, []);
+
   return (
     <div className="app__container">
       <header className="app__header">Logo and Search Go Here</header>
