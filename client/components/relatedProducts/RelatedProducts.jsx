@@ -56,7 +56,7 @@ const RelatedProducts = ({ currentProduct, rating }) => {
   };
 
   return (
-    <div className="related-products">
+    <div data-testid="related-products" className="related-products">
       <h3>RelatedProducts</h3>
       <div className="related-products__row">
         {isLoading ? <div>Loadiing Related Products!</div>
