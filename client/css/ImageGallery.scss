@@ -25,6 +25,10 @@
   max-height: 50%;
 }
 
+.mainImageContainer:hover {
+  cursor: zoom-in;
+}
+
 .arrowsThumbnailContainer {
   display: flex;
   flex-direction: column;
@@ -73,3 +77,4 @@
 .upArrow, .downArrow {
   cursor: pointer;
 }
+

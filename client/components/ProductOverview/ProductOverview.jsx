@@ -5,6 +5,7 @@ import axios from 'axios';
 
 import ImageGallery from './ImageGallery';
 import StyleSelector from './StyleSelector';
+import AddToCart from './AddToCart';
 import StarRating from '../StarRating';
 
 import '../../css/ProductOverview.scss';
@@ -13,9 +14,10 @@ const ProductOverview = ({
   productId, rating, totalReviews, currentProduct,
 }) => {
   const [imageIndex, setImageIndex] = useState(0);
-  const [styleIndex, setStyleIndex] = useState(2);
+  const [styleIndex, setStyleIndex] = useState(0);
   const [currentStyle, setCurrentStyle] = useState(null);
   const [allStyles, setAllStyles] = useState(null);
+  const [isCollapsed, setCollapse] = useState(false);
   const starSize = 20;
   const socialMediaButtonSize = 40;
   const salePrice = () => {
@@ -52,12 +54,16 @@ const ProductOverview = ({
     setCurrentStyle(allStyles[index]);
   };
 
+  const expand = () => {
+    setCollapse(!isCollapsed);
+  };
+
   if (currentStyle) {
     return (
       <div>
         <div className="productOverviewContainer" data-testid="productOverview">
-          <ImageGallery currentStyle={currentStyle} id="imageGallery" imageIndex={imageIndex} updateImageIndex={updateImageIndex} />
-          <div className="productInfo">
+          <ImageGallery currentStyle={currentStyle} id="imageGallery" imageIndex={imageIndex} updateImageIndex={updateImageIndex} expand={expand} />
+          <div className="productInfo" id={isCollapsed ? 'collapsed' : 'fullSize'}>
             <div className="starRating">
               <StarRating rating={rating} size={starSize} />
             </div>
@@ -75,6 +81,7 @@ const ProductOverview = ({
               currentStyle={currentStyle}
               updateCurrentStyle={updateCurrentStyle}
             />
+            <AddToCart currentStyle={currentStyle} />
           </div>
         </div>
         <div className="productDescription">{currentProduct.description}</div>

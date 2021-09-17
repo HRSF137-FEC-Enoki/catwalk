@@ -6,7 +6,9 @@ import ThumbnailView from './ThumbnailView';
 
 import '../../css/ImageGallery.scss';
 
-const ImageGallery = ({ currentStyle, imageIndex, updateImageIndex }) => {
+const ImageGallery = ({
+  currentStyle, imageIndex, updateImageIndex, expand,
+}) => {
   if (currentStyle === null) {
     return <div>No data available</div>;
   }
@@ -34,7 +36,7 @@ const ImageGallery = ({ currentStyle, imageIndex, updateImageIndex }) => {
 
   return (
     <div className="imageGalleryContainer">
-      <div className="mainImageContainer" style={{ backgroundImage: `url(${currentPhoto})` }} />
+      <input className="mainImageContainer" style={{ backgroundImage: `url(${currentPhoto})` }} onClick={expand} />
       <ThumbnailView photos={photos} handleClick={handleThumbNailClick} className="thumbnailComponent" currentIndex={imageIndex} />
       {imageIndex === 0 ? null : <AiOutlineArrowLeft className="leftArrow" onClick={() => handleArrow('left')} size={arrowSize} />}
       {imageIndex === length - 1 ? null : <AiOutlineArrowRight className="rightArrow" onClick={() => handleArrow('right')} size={arrowSize} />}
@@ -53,6 +55,7 @@ ImageGallery.propTypes = {
   }),
   imageIndex: PropTypes.number.isRequired,
   updateImageIndex: PropTypes.func.isRequired,
+  expand: PropTypes.func.isRequired,
 };
 
 ImageGallery.defaultProps = {

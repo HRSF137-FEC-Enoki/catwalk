@@ -8,6 +8,12 @@
   margin: 0 1%;
 }
 
+#collapsed {
+  margin: 0;
+  display: none;
+  width: 0;
+}
+
 .starRating {
   background-color: blue;
   width: 40%;
@@ -56,3 +62,4 @@
   margin: 1% 0;
   font-size: 25px;
 }
+

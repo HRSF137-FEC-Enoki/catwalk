@@ -9,19 +9,20 @@ const ThumbnailView = ({ photos, handleClick, currentIndex }) => {
   const arrowSize = 45;
 
   useEffect(() => {
-    if (photos.length <= 7) {
+    const THUMBNAIL_LIMIT = 7;
+    if (photos.length <= THUMBNAIL_LIMIT) {
       setThumbnailStart(0);
       setThumbnailEnd(photos.length);
-    } else if (photos.length > 7) {
-      if (currentIndex > photos.length - 7) {
-        setThumbnailStart(photos.length - 7);
+    } else if (photos.length > THUMBNAIL_LIMIT) {
+      if (currentIndex > photos.length - THUMBNAIL_LIMIT) {
+        setThumbnailStart(photos.length - THUMBNAIL_LIMIT);
         setThumbnailEnd(photos.length);
-      } else if (currentIndex < 7) {
+      } else if (currentIndex < THUMBNAIL_LIMIT) {
         setThumbnailStart(0);
-        setThumbnailEnd(7);
+        setThumbnailEnd(THUMBNAIL_LIMIT);
       } else {
         setThumbnailStart(currentIndex);
-        setThumbnailEnd(currentIndex + 7);
+        setThumbnailEnd(currentIndex + THUMBNAIL_LIMIT);
       }
     }
   }, [currentIndex]);
