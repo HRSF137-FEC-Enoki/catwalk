@@ -13,7 +13,7 @@ const getStarRatingAvg = (productId) => new Promise((resolve, reject) => {
 
       const avg = Math.round((count * 100) / results.length) / 100;
 
-      resolve(avg);
+      resolve({ avg, count });
     })
     .catch((err) => {
       reject(err);

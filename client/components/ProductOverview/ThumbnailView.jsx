@@ -19,6 +19,9 @@ const ThumbnailView = ({ photos, handleClick, currentIndex }) => {
       } else if (currentIndex < 7) {
         setThumbnailStart(0);
         setThumbnailEnd(7);
+      } else {
+        setThumbnailStart(currentIndex);
+        setThumbnailEnd(currentIndex + 7);
       }
     }
   }, [currentIndex]);
