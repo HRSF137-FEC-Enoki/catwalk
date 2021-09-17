@@ -4,7 +4,9 @@ import axios from 'axios';
 
 import StarRating from '../../StarRating';
 
-const RatingBreakDown = ({ id, setStarFilter, starFilter, rating }) => {
+const RatingBreakDown = ({
+  id, setStarFilter, starFilter, rating,
+}) => {
   const [ratings, setRatings] = useState({});
   const [recommended, setRecommended] = useState({});
 
@@ -68,9 +70,10 @@ const RatingBreakDown = ({ id, setStarFilter, starFilter, rating }) => {
         <p>{rating}</p>
         <StarRating size={36} rating={rating} />
       </div>
-      <p>
+      <p className="ratingRecommended">
         {recommended && getPercentage(recommended.true)}
-        {'  '}of reviews recommend this product
+        {'  '}
+        of reviews recommend this product
       </p>
       {[...Array(5)].map((star, index) => (
         <div className="starBreakDown">
