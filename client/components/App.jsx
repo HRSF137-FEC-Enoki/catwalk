@@ -31,24 +31,24 @@ const App = () => {
       });
   }, [productId]);
 
-  const handleCardClick = (productId) => {
-    console.log('id:: ', productId);
-    setProductId(productId);
+  const handleCardClick = (id) => {
+    setProductId(id);
   };
 
   return (
     <div className="app__container">
       <header className="app__header">Logo and Search Go Here</header>
-      {isLoading ? <p>Loading!</p> : <ProductOverview productId={currentProduct.id} />}
-      {isLoading ? <p>Loading!</p>
-        : (
+      {!isLoading ? (
+        <>
+          <ProductOverview productId={productId} />
           <RelatedProducts
             rating={rating}
             currentProduct={currentProduct}
             handleCardClick={handleCardClick}
           />
-        )}
-      {currentProduct && <ReviewRating id={currentProduct.id} />}
+          <ReviewRating id={currentProduct.id} />
+        </>
+      ) : <p>Loading!</p>}
       {isError.error && <p>Currently unable to load page error!</p>}
     </div>
   );
