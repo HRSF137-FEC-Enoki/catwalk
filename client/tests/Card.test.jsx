@@ -11,10 +11,10 @@ beforeEach(() => {
     category: 'Footwear',
     default_price: '90.00',
   };
-  const mockRatiing = 2.25;
+  const mockRating = 2.25;
   const mockUrl = 'https://images.unsplash.com/photo-1501088430049-71c79fa3283e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80';
 
-  render(<Card relatedProduct={mockProduct} rating={mockRatiing} imageUrl={mockUrl} />);
+  render(<Card relatedProduct={mockProduct} rating={mockRating} imageUrl={mockUrl} />);
 });
 
 describe('Card Component', () => {
