@@ -120,25 +120,25 @@ const WriteReview = ({
     <div className={isClickAdd ? 'window' : 'close'}>
       <form className="modal">
         <h3>Review</h3>
-        <div className="inputLabel">
+        <div className="input_label">
           <span>
             Rating:
           </span>
-          <input className="formInput" name="rating" id="rating" type="range" min="0" max="5" value={newReview.rating || ''} onChange={onChangeHandler} required />
+          <input className="form_input" name="rating" id="rating" type="range" min="0" max="5" value={newReview.rating || ''} onChange={onChangeHandler} required />
         </div>
-        <div className="inputLabel">
+        <div className="input_label">
           <span>
             Summary:
           </span>
-          <input className="formInput" name="summary" id="summary" value={newReview.summary || ''} onChange={onChangeHandler} maxLength="60" required />
+          <input className="form_input" name="summary" id="summary" value={newReview.summary || ''} onChange={onChangeHandler} maxLength="60" required />
         </div>
-        <div className="inputLabel">
+        <div className="input_label">
           <span>
             Body:
           </span>
-          <textarea className="formInput" name="body" id="body" value={newReview.body || ''} onChange={onChangeHandler} maxLength="2500" row="10" required />
+          <textarea className="form_input" name="body" id="body" value={newReview.body || ''} onChange={onChangeHandler} maxLength="2500" row="10" required />
         </div>
-        <div className="inputLabel">
+        <div className="input_label">
           Recommend:
           <span htmlFor="yes">
             Yes
@@ -149,19 +149,19 @@ const WriteReview = ({
             <input name="recommend" id="no" type="radio" value={false || ''} onChange={onChangeHandler} />
           </span>
         </div>
-        <div className="inputLabel">
+        <div className="input_label">
           <span>
             Name:
           </span>
-          <input className="formInput" name="name" id="name" value={newReview.name || ''} onChange={onChangeHandler} />
+          <input className="form_input" name="name" id="name" value={newReview.name || ''} onChange={onChangeHandler} />
         </div>
-        <div className="inputLabel">
+        <div className="input_label">
           <span>
             Email:
           </span>
-          <input className="formInput" name="email" id="email" value={newReview.email || ''} onChange={onChangeHandler} required />
+          <input className="form_input" name="email" id="email" value={newReview.email || ''} onChange={onChangeHandler} required />
         </div>
-        <div className="inputLabel">
+        <div className="input_label">
           <span>
             Photos:
           </span>
@@ -173,8 +173,8 @@ const WriteReview = ({
         ))}
         <label
           htmlFor="characteristics"
-          className="characteristicsLabel"
-          id="urlBox"
+          className="characteristics_label"
+          id="url_box"
         >
           {charName && charName.map((char, index) => (
             <div key={char}>
@@ -183,11 +183,11 @@ const WriteReview = ({
               >
                 {char}
               </label>
-              <input className="formInput" value={charValue[index] || ''} name={char} id={char} type="range" min="1" max="5" onChange={onChangeHandler} />
+              <input className="form_input" value={charValue[index] || ''} name={char} id={char} type="range" min="1" max="5" onChange={onChangeHandler} />
             </div>
           ))}
         </label>
-        <div className="reviewBtn">
+        <div className="review_btn">
           <button type="button" onClick={() => closeWriteReview()}>Cancel</button>
           <button type="button" onClick={onSubmit}>Submit</button>
         </div>

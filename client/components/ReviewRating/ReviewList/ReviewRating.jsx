@@ -37,8 +37,8 @@ const ReviewRating = ({ id, rating }) => {
     setIsClickAdd(false);
   };
   return (
-    <div className="reviewRatingContainer">
-      <div className="ratingCol">
+    <div className="review_rating_container">
+      <div className="rating_col">
         <RatingBreakDown
           id={id}
           starFilter={starFilter}
@@ -46,9 +46,9 @@ const ReviewRating = ({ id, rating }) => {
           rating={rating}
         />
       </div>
-      <div className="reviewCOL">
+      <div className="review_col">
         <Sorting id={id} setSort={setSort} reviews={reviews} />
-        <div className="reviewListContainer">
+        <div className="review_list_container">
           <ReviewList
             reviews={reviews}
             reviewShow={reviewShow}
@@ -57,10 +57,10 @@ const ReviewRating = ({ id, rating }) => {
             setCurrReviewsLength={setCurrReviewsLength}
           />
         </div>
-        <div className="reviewBtn">
-          {reviews.length > 2 && !isLoading && <button data-testid="button" type="button" onClick={loadMoreView}>More View</button>}
+        <div className="review_btn">
+          {reviews.length > 2 && !isLoading && <button data-testid="button" type="button" onClick={loadMoreView}>View More</button>}
           <button type="button" onClick={() => setIsClickAdd(true)}>
-            ADD A REVIEW +
+            Add a Review +
           </button>
           <WriteReview
             isClickAdd={isClickAdd}
