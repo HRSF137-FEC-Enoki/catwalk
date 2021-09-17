@@ -8,7 +8,7 @@ import Card from './Card';
 
 import '../../css/relatedProducts/RelatedProducts.scss';
 
-const RelatedProducts = ({ productId }) => {
+const RelatedProducts = ({ productId, rating }) => {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState({ error: false, msg: '' });
@@ -52,12 +52,12 @@ const RelatedProducts = ({ productId }) => {
             <ul className="related-products__carousel">
               {products.map((product) => (
                 <li key={product.data.id} className="related-products__carousel-item">
-                  <Card relatedProduct={product.data} imageUrl={imageUrl} />
+                  <Card rating={rating} relatedProduct={product.data} imageUrl={imageUrl} />
                 </li>
               ))}
             </ul>
           )}
-        {isError.error ? <div>Error Loading Related Products</div> : ''}
+        {isError.error && <div>Error Loading Related Products</div>}
       </div>
     </div>
   );
@@ -65,6 +65,7 @@ const RelatedProducts = ({ productId }) => {
 
 RelatedProducts.propTypes = {
   productId: PropTypes.number.isRequired,
+  rating: PropTypes.number.isRequired,
 };
 
 export default RelatedProducts;

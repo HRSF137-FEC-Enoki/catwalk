@@ -5,11 +5,11 @@ import axios from 'axios';
 const Helpfulness = ({ review, fetchReviews }) => {
   const [clickHelpful, setClickHelpful] = useState(false);
 
-  const onChangeHandler = (e) => {
+  const onClickHandler = (e) => {
     e.preventDefault();
     const action = e.target.name;
     if (!clickHelpful) {
-      axios.put(`/reviews/${review.review_id}/${action}`);
+      axios.put(`/api/reviews/${review.review_id}/${action}`);
       setClickHelpful(true);
       fetchReviews();
       if (e.target.name === 'helpful') {
@@ -26,8 +26,8 @@ const Helpfulness = ({ review, fetchReviews }) => {
       <a
         name="helpful"
         href="/"
-        onClick={onChangeHandler}
-        id="helpful"
+        aria-hidden="true"
+        onClick={onClickHandler}
       >
         Yes(
         {review && review.helpfulness}
@@ -37,8 +37,8 @@ const Helpfulness = ({ review, fetchReviews }) => {
       <a
         name="report"
         href="/"
-        id="report"
-        onClick={onChangeHandler}
+        aria-hidden="true"
+        onClick={onClickHandler}
       >
         Report
       </a>

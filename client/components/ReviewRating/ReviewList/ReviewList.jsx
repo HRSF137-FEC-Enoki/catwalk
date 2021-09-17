@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
+
 import Review from './Review';
 
 const ReviewList = ({
   reviews, reviewShow, fetchReviews, starFilter, setCurrReviewsLength,
 }) => {
+  let list;
   const filterList = (num) => {
-    let list;
     if (num === 0) {
       list = reviews.filter(
         (element, index) => index < reviewShow,
@@ -16,9 +17,11 @@ const ReviewList = ({
         (element, index) => index < reviewShow,
       );
     }
-    setCurrReviewsLength(list.length);
     return list;
   };
+  useEffect(() => {
+    setCurrReviewsLength(list.length);
+  }, [list]);
   return (
     <>
       {

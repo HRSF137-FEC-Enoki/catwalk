@@ -1,13 +1,15 @@
+import axios from 'axios';
 import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import ReviewList from './ReviewList';
+
 import WriteReview from '../WriteReview/WriteReview';
 import Sorting from '../Sorting/Sorting';
 import RatingBreakDown from '../RatingBreakDown/RatingBreakDown';
+import ReviewList from './ReviewList';
+
 import '../../../css/reviewRating.scss';
 
-const ReviewRating = ({ id }) => {
+const ReviewRating = ({ id, rating }) => {
   const [reviews, setReviews] = useState([]);
   const [reviewShow, setReviewShow] = useState(2);
   const [isLoading, setIsLoading] = useState(false);
@@ -41,6 +43,7 @@ const ReviewRating = ({ id }) => {
           id={id}
           starFilter={starFilter}
           setStarFilter={setStarFilter}
+          rating={rating}
         />
       </div>
       <div className="reviewCOL">

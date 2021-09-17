@@ -93,21 +93,21 @@ app.get('/api/products/:product_id/styles', (req, res) => {
       res.send(`Error:: ${err}`);
     });
 });
-app.put('/reviews/:review_id/helpful', (req, res) => {
+app.put('/api/reviews/:review_id/helpful', (req, res) => {
   axios.put(`${API_BASE_URL}/reviews/${req.params.review_id}/helpful`, {}, options)
     .then(() => res.sendStatus(204))
     .catch(() => {
       res.sendStatus(404);
     });
 });
-app.put('/reviews/:review_id/report', (req, res) => {
+app.put('/api/reviews/:review_id/report', (req, res) => {
   axios.put(`${API_BASE_URL}/reviews/${req.params.review_id}/report`, {}, options)
     .then(() => res.sendStatus(204))
     .catch(() => {
       res.sendStatus(404);
     });
 });
-app.post('/reviews', (req, res) => {
+app.post('/api/reviews', (req, res) => {
   axios.post(`${API_BASE_URL}/reviews?product_id${req.body.product_id}`, req.body, options)
     .then(() => {
       res.sendStatus(201);
@@ -116,7 +116,7 @@ app.post('/reviews', (req, res) => {
       res.sendStatus(404);
     });
 });
-app.get('/reviews/meta/:id', (req, res) => {
+app.get('/api/reviews/meta/:id', (req, res) => {
   axios.get(`${API_BASE_URL}/reviews/meta?product_id=${req.params.id}`, options)
     .then((data) => res.send(data.data))
     .catch(() => {

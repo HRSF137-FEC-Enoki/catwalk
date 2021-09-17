@@ -24,12 +24,16 @@ const WriteReview = ({
   const [charValue, setCharValue] = useState([]);
 
   useEffect(() => {
-    axios.get(`/reviews/meta/${id}`)
+    axios.get(`/api/reviews/meta/${id}`)
       .then((res) => {
-        setCharName(Object.entries(res.data.characteristics).map((i) => i[0]));
-        setCharId(Object.entries(res.data.characteristics).map((i) => i[1]).map((i) => i.id));
-        // eslint-disable-next-line max-len
-        setCharValue(Object.entries(res.data.characteristics).map((i) => i[1]).map((i) => parseInt(i.value, 10)));
+        setCharName(Object.entries(res.data.characteristics)
+          .map((name) => name[0]));
+        setCharId(Object.entries(res.data.characteristics)
+          .map((name) => name[1])
+          .map((_id) => _id.id));
+        setCharValue(Object.entries(res.data.characteristics)
+          .map((name) => name[1])
+          .map((val) => parseInt(val.value, 10)));
       });
   }, []);
 
@@ -52,7 +56,6 @@ const WriteReview = ({
       document.getElementById(e.target.name).classList.remove('error');
     }
     if (charName.includes(e.target.name)) {
-      // eslint-disable-next-line max-len
       const copyCharValue = [...charValue];
       copyCharValue[charName.indexOf(e.target.name)] = e.target.value;
       setCharValue(copyCharValue);
@@ -105,8 +108,10 @@ const WriteReview = ({
       }
 
       if (review.name !== '') {
-        axios.post('/reviews', review);
-        fetchReviews();
+        axios.post('/api/reviews', review)
+          .then(() => {
+            fetchReviews();
+          });
         closeWriteReview();
       }
     }

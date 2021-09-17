@@ -4,13 +4,12 @@ import axios from 'axios';
 
 import StarRating from '../../StarRating';
 
-const RatingBreakDown = ({ id, setStarFilter, starFilter }) => {
+const RatingBreakDown = ({ id, setStarFilter, starFilter, rating }) => {
   const [ratings, setRatings] = useState({});
   const [recommended, setRecommended] = useState({});
-  const rating = 3.2;
 
   useEffect(() => {
-    axios.get(`/reviews/meta/${id}`)
+    axios.get(`/api/reviews/meta/${id}`)
       .then((res) => {
         setRatings(res.data.ratings);
         setRecommended(res.data.recommended);
@@ -67,11 +66,11 @@ const RatingBreakDown = ({ id, setStarFilter, starFilter }) => {
     <div className="ratingBreakDown">
       <div className="ratingScore">
         <p>{rating}</p>
-        <StarRating size={16} rating={rating} />
+        <StarRating size={36} rating={rating} />
       </div>
       <p>
         {recommended && getPercentage(recommended.true)}
-        of reviews recommend this product
+        {'  '}of reviews recommend this product
       </p>
       {[...Array(5)].map((star, index) => (
         <div className="starBreakDown">
@@ -90,18 +89,17 @@ const RatingBreakDown = ({ id, setStarFilter, starFilter }) => {
           <div className="starFilter">
 
             <span>
-              Filter:
               {starFilter.map((i) => (
                 <div>
                   {String(i)}
                   {' '}
                   star
-                  <StarRating rating={i} />
+                  <StarRating size={16} rating={i} />
                 </div>
               ))}
             </span>
             <div>
-              <a href="/" onClick={clearFilter}>remove all filter</a>
+              <button type="button" onClick={clearFilter}>clear</button>
             </div>
           </div>
         )}

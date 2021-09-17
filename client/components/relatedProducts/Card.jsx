@@ -6,7 +6,9 @@ import StarRating from '../StarRating';
 
 import '../../css/relatedProducts/Card.scss';
 
-const Card = ({ relatedProduct, imageUrl }) => (
+const STAR_SIZE = 24;
+
+const Card = ({ relatedProduct, imageUrl, rating }) => (
   <div className="related-products__card">
     <div className="related-products__card-image" style={{ backgroundImage: `url(${imageUrl})` }}>
       <AiOutlineStar />
@@ -17,7 +19,7 @@ const Card = ({ relatedProduct, imageUrl }) => (
         {`${relatedProduct.name} : ${relatedProduct.slogan}`}
       </p>
       <p className="related-products__card-price">{`$${relatedProduct.default_price}`}</p>
-      <StarRating size={24} rating={3.15} />
+      <StarRating size={STAR_SIZE} rating={rating} />
     </div>
   </div>
 );
@@ -30,6 +32,7 @@ Card.propTypes = {
     default_price: PropTypes.string,
   }).isRequired,
   imageUrl: PropTypes.string.isRequired,
+  rating: PropTypes.number.isRequired,
 };
 
 export default Card;
