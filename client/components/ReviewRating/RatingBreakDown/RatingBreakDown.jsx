@@ -3,9 +3,11 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 
 import StarRating from '../../StarRating';
-import ProductBreakDown from './ProductBreakDown'
+import ProductBreakDown from './ProductBreakDown';
 
-const RatingBreakDown = ({ id, setStarFilter, starFilter, rating, charValue, charName}) => {
+const RatingBreakDown = ({
+  id, setStarFilter, starFilter, rating, charValue, charName,
+}) => {
   const [ratings, setRatings] = useState({});
   const [recommended, setRecommended] = useState({});
 
@@ -66,12 +68,13 @@ const RatingBreakDown = ({ id, setStarFilter, starFilter, rating, charValue, cha
     <>
       <div className="ratingBreakDown">
         <div className="ratingScore">
-          <p>{rating}</p>
+          <p>{Number.isNaN(rating) ? 0 : rating}</p>
           <StarRating size={36} rating={rating} />
         </div>
-        <p>
+        <p className="ratingRecommended">
           {recommended && getPercentage(recommended.true)}
-          {'  '}of reviews recommend this product
+          {'  '}
+          of reviews recommend this product
         </p>
         {[...Array(5)].map((star, index) => (
           <div className="starBreakDown">
@@ -107,7 +110,8 @@ const RatingBreakDown = ({ id, setStarFilter, starFilter, rating, charValue, cha
       </div>
       <ProductBreakDown
         charName={charName}
-        charValue={charValue} />
+        charValue={charValue}
+      />
     </>
   );
 };

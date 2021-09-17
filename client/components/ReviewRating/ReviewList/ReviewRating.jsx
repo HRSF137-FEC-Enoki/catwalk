@@ -54,45 +54,49 @@ const ReviewRating = ({ id, rating }) => {
     setIsClickAdd(false);
   };
   return (
-    <div className="reviewRatingContainer">
-      <div className="ratingCol">
-        <RatingBreakDown
-          id={id}
-          starFilter={starFilter}
-          setStarFilter={setStarFilter}
-          rating={rating}
-          charName={charName}
-          charValue={charValue}
-        />
-      </div>
-      <div className="reviewCOL">
-        <Sorting id={id} setSort={setSort} reviews={reviews} />
-        <div className="reviewListContainer">
-          <ReviewList
-            reviews={reviews}
-            reviewShow={reviewShow}
-            fetchReviews={fetchReviews}
-            starFilter={starFilter}
-            setCurrReviewsLength={setCurrReviewsLength}
-          />
-        </div>
-        <div className="reviewBtn">
-          {reviews.length > 2 && !isLoading && <button data-testid="button" type="button" onClick={loadMoreView}>More View</button>}
-          <button type="button" onClick={() => setIsClickAdd(true)}>
-            ADD A REVIEW +
-          </button>
-          <WriteReview
-            isClickAdd={isClickAdd}
-            closeWriteReview={closeWriteReview}
+    <>
+      <div className="noReviews">{reviews.length === 0 ? 'No Review' : 'Ratings & Reviews'}</div>
+      <div className="reviewRatingContainer">
+        <div className="ratingCol">
+          <RatingBreakDown
             id={id}
-            fetchReviews={fetchReviews}
+            starFilter={starFilter}
+            setStarFilter={setStarFilter}
+            rating={rating}
             charName={charName}
-            charId={charId}
             charValue={charValue}
           />
         </div>
+        <div className="reviewCOL">
+          <Sorting id={id} setSort={setSort} reviews={reviews} />
+          <div className="reviewListContainer">
+            <ReviewList
+              reviews={reviews}
+              reviewShow={reviewShow}
+              fetchReviews={fetchReviews}
+              starFilter={starFilter}
+              setCurrReviewsLength={setCurrReviewsLength}
+            />
+          </div>
+          <div className="reviewBtn">
+            {reviews.length > 2 && !isLoading && <button data-testid="button" type="button" onClick={loadMoreView}>More View</button>}
+            <button type="button" onClick={() => setIsClickAdd(true)}>
+              ADD A REVIEW +
+            </button>
+            <WriteReview
+              isClickAdd={isClickAdd}
+              closeWriteReview={closeWriteReview}
+              id={id}
+              fetchReviews={fetchReviews}
+              charName={charName}
+              charId={charId}
+              charValue={charValue}
+            />
+          </div>
+        </div>
       </div>
-    </div>
+
+    </>
   );
 };
 ReviewRating.propTypes = {

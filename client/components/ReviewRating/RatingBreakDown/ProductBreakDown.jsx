@@ -10,7 +10,6 @@ const ProductBreakDown = ({ charValue, charName }) => {
 
     for (let i = 0; i < char.length; i += 1) {
       if (charName.includes(char[i][0])) {
-        console.log(char[i][0]);
         const index = charName.indexOf(char[i][0]);
         const position = ((charValue[index] / 5) * 100).toFixed(0).concat('%');
         document.getElementById(char[i][0]).style.left = position;
