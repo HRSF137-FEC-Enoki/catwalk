@@ -16,7 +16,7 @@ const App = () => {
   useEffect(() => {
     axios.get('/api/products')
       .then(({ data }) => {
-        setCurrentProduct(data[3]);
+        setCurrentProduct(data[0]);
         setIsLoading(false);
       })
       .catch((err) => {

@@ -1,13 +1,24 @@
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 
 const Helpfulness = ({ review, fetchReviews }) => {
+  const [clickHelpful, setClickHelpful] = useState(false);
+
   const onChangeHandler = (e) => {
     e.preventDefault();
     const action = e.target.name;
-    axios.put(`/reviews/${review.review_id}/${action}`);
-    fetchReviews();
+    if (!clickHelpful) {
+      axios.put(`/reviews/${review.review_id}/${action}`);
+      setClickHelpful(true);
+      fetchReviews();
+      if (e.target.name === 'helpful') {
+        e.target.nextSibling.nextSibling.removeAttribute('href');
+      } else {
+        e.target.previousSibling.previousSibling.removeAttribute('href');
+      }
+      e.target.removeAttribute('href');
+    }
   };
   return (
     <div className="helpful">
@@ -16,6 +27,7 @@ const Helpfulness = ({ review, fetchReviews }) => {
         name="helpful"
         href="/"
         onClick={onChangeHandler}
+        id="helpful"
       >
         Yes(
         {review && review.helpfulness}
@@ -25,6 +37,7 @@ const Helpfulness = ({ review, fetchReviews }) => {
       <a
         name="report"
         href="/"
+        id="report"
         onClick={onChangeHandler}
       >
         Report

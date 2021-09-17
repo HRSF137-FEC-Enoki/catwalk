@@ -4,11 +4,10 @@ import axios from 'axios';
 
 import StarRating from '../../StarRating';
 
-const RatingBreakDown = ({ reviews, id }) => {
+const RatingBreakDown = ({ id, setStarFilter, starFilter }) => {
   const [ratings, setRatings] = useState({});
   const [recommended, setRecommended] = useState({});
   const rating = 3.2;
-  const reviewsCount = Number(recommended.true) + Number(recommended.false);
 
   useEffect(() => {
     axios.get(`/reviews/meta/${id}`)
@@ -19,6 +18,16 @@ const RatingBreakDown = ({ reviews, id }) => {
   }, []);
 
   const getPercentage = (target) => {
+    if (target === undefined) {
+      return 0;
+    }
+    let reviewsCount = 0;
+    if (recommended.true) {
+      reviewsCount += Number(recommended.true);
+    }
+    if (recommended.false) {
+      reviewsCount += Number(recommended.false);
+    }
     let recRate = Number(target) / reviewsCount;
     recRate = (parseFloat(recRate * 100).toFixed(0));
     return recRate.concat('%');
@@ -33,12 +42,24 @@ const RatingBreakDown = ({ reviews, id }) => {
   };
 
   useEffect(() => {
-    console.log(Object.keys(ratings).length, recommended)
     updateRatingBar();
   }, [recommended]);
 
-  const onClickHandler = () => {
-    console.log('click');
+  const clearFilter = (e) => {
+    e.preventDefault();
+    setStarFilter([]);
+  };
+
+  const onClickHandler = (e) => {
+    e.preventDefault();
+    const copy = [...starFilter];
+    const set = new Set(copy);
+    if (set.has(Number(e.target.name))) {
+      set.delete(Number(e.target.name));
+    } else {
+      set.add(Number(e.target.name));
+    }
+    setStarFilter(Array.from(set));
   };
 
   return (
@@ -49,13 +70,13 @@ const RatingBreakDown = ({ reviews, id }) => {
         <StarRating size={16} rating={rating} />
       </div>
       <p>
-        {Object.keys(recommended).length === 0 ? '0 ' : getPercentage(recommended.true)}
+        {recommended && getPercentage(recommended.true)}
         of reviews recommend this product
       </p>
       {[...Array(5)].map((star, index) => (
         <div className="starBreakDown">
-          <a href="/" onClick={onClickHandler}>
-            {index}
+          <a href="/" name={5 - index} onClick={onClickHandler}>
+            {5 - index}
             star
           </a>
           <div className="ratingBar">
@@ -64,10 +85,26 @@ const RatingBreakDown = ({ reviews, id }) => {
 
         </div>
       ))}
-      <div className="starFilter">
-        <span>Filter: 2star</span>
-        <a href="/">remove all</a>
-      </div>
+      {starFilter.length !== 0
+        && (
+          <div className="starFilter">
+
+            <span>
+              Filter:
+              {starFilter.map((i) => (
+                <div>
+                  {String(i)}
+                  {' '}
+                  star
+                  <StarRating rating={i} />
+                </div>
+              ))}
+            </span>
+            <div>
+              <a href="/" onClick={clearFilter}>remove all filter</a>
+            </div>
+          </div>
+        )}
     </div>
   );
 };

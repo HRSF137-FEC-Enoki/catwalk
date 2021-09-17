@@ -3,7 +3,9 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 
-const WriteReview = ({ isClickAdd, closeWriteReview, id }) => {
+const WriteReview = ({
+  isClickAdd, closeWriteReview, id, fetchReviews,
+}) => {
   const [newReview, setNewReview] = useState({
     rating: 5,
     summary: '',
@@ -104,6 +106,7 @@ const WriteReview = ({ isClickAdd, closeWriteReview, id }) => {
 
       if (review.name !== '') {
         axios.post('/reviews', review);
+        fetchReviews();
         closeWriteReview();
       }
     }
