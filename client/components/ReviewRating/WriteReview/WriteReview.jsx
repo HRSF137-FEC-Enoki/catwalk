@@ -22,12 +22,16 @@ const WriteReview = ({ isClickAdd, closeWriteReview, id }) => {
   const [charValue, setCharValue] = useState([]);
 
   useEffect(() => {
-    axios.get(`/reviews/meta/${id}`)
+    axios.get(`/api/reviews/meta/${id}`)
       .then((res) => {
-        setCharName(Object.entries(res.data.characteristics).map((i) => i[0]));
-        setCharId(Object.entries(res.data.characteristics).map((i) => i[1]).map((i) => i.id));
-        // eslint-disable-next-line max-len
-        setCharValue(Object.entries(res.data.characteristics).map((i) => i[1]).map((i) => parseInt(i.value, 10)));
+        setCharName(Object.entries(res.data.characteristics)
+          .map((name) => name[0]));
+        setCharId(Object.entries(res.data.characteristics)
+          .map((name) => name[1])
+          .map((_id) => _id.id));
+        setCharValue(Object.entries(res.data.characteristics)
+          .map((name) => name[1])
+          .map((val) => parseInt(val.value, 10)));
       });
   }, []);
 
@@ -103,7 +107,7 @@ const WriteReview = ({ isClickAdd, closeWriteReview, id }) => {
       }
 
       if (review.name !== '') {
-        axios.post('/reviews', review);
+        axios.post('/api/reviews', review);
         closeWriteReview();
       }
     }

@@ -41,4 +41,5 @@ ReviewBody.propTypes = PropTypes.shape({
   body: PropTypes.string,
   photo: PropTypes.instanceOf(Array),
 }).isRequired;
+
 export default ReviewBody;

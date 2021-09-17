@@ -1,13 +1,13 @@
-import PropTypes from 'prop-types';
 import React from 'react';
+import PropTypes from 'prop-types';
 import axios from 'axios';
 
 const Helpfulness = ({ review, fetchReviews }) => {
   const onChangeHandler = (e) => {
     e.preventDefault();
     const action = e.target.name;
-    axios.put(`/reviews/${review.review_id}/${action}`);
-    fetchReviews();
+    axios.put(`/api/reviews/${review.review_id}/${action}`)
+      .then(() => fetchReviews());
   };
   return (
     <div className="helpful">
