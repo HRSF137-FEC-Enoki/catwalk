@@ -2,9 +2,14 @@
   &__card {
     border: 1px solid #bbb;
     border-radius: 3px;
+    cursor: pointer;
     height: 350px;
     margin: 10px;
-    width: 300px
+    width: 300px;
+
+    &:hover {
+      border-color: dodgerblue;
+    }
   }
 
   &__card-image {

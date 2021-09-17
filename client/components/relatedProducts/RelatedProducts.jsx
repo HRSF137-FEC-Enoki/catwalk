@@ -9,7 +9,7 @@ import ComparisonModal from './ComparisonModal';
 
 import '../../css/relatedProducts/RelatedProducts.scss';
 
-const RelatedProducts = ({ currentProduct, rating }) => {
+const RelatedProducts = ({ currentProduct, rating, handleCardClick }) => {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState({ error: false, msg: '' });
@@ -46,7 +46,7 @@ const RelatedProducts = ({ currentProduct, rating }) => {
     getImageUrl(currentProduct.id).then((url) => setImageUrl(url));
   }, []);
 
-  const handleCardClick = (related) => {
+  const handleActionBtnClick = (related) => {
     setRelatedProduct(related);
     setShowComparison(true);
   };
@@ -66,6 +66,7 @@ const RelatedProducts = ({ currentProduct, rating }) => {
                 <li key={product.data.id} className="related-products__carousel-item">
                   <Card
                     handleCardClick={handleCardClick}
+                    handleActionBtnClick={handleActionBtnClick}
                     rating={rating}
                     relatedProduct={product.data}
                     imageUrl={imageUrl}
@@ -94,6 +95,7 @@ RelatedProducts.propTypes = {
     features: PropTypes.arrayOf(PropTypes.object),
   }).isRequired,
   rating: PropTypes.number.isRequired,
+  handleCardClick: PropTypes.func.isRequired,
 };
 
 export default RelatedProducts;

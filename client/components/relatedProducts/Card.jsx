@@ -9,11 +9,11 @@ import '../../css/relatedProducts/Card.scss';
 const STAR_SIZE = 24;
 
 const Card = ({
-  relatedProduct, imageUrl, rating, handleCardClick,
+  relatedProduct, imageUrl, rating, handleActionBtnClick, handleCardClick,
 }) => (
-  <div className="related-products__card">
+  <div className="related-products__card" role="button" tabIndex={0} onKeyPress={() => { handleCardClick(relatedProduct.id); }} onClick={() => { handleCardClick(relatedProduct.id); }}>
     <div className="related-products__card-image" style={{ backgroundImage: `url(${imageUrl})` }}>
-      <span className="related-products__action-btn" role="button" tabIndex="0" onKeyPress={() => { handleCardClick(relatedProduct); }} onClick={() => handleCardClick(relatedProduct)}>
+      <span className="related-products__action-btn" role="button" tabIndex={0} onKeyPress={() => { handleActionBtnClick(relatedProduct); }} onClick={() => handleActionBtnClick(relatedProduct)}>
         <AiOutlineStar size={STAR_SIZE} />
       </span>
     </div>
@@ -30,6 +30,7 @@ const Card = ({
 
 Card.propTypes = {
   relatedProduct: PropTypes.shape({
+    id: PropTypes.number,
     name: PropTypes.string,
     slogan: PropTypes.string,
     category: PropTypes.string,
@@ -37,6 +38,7 @@ Card.propTypes = {
   }).isRequired,
   imageUrl: PropTypes.string.isRequired,
   rating: PropTypes.number.isRequired,
+  handleActionBtnClick: PropTypes.func.isRequired,
   handleCardClick: PropTypes.func.isRequired,
 };
 
