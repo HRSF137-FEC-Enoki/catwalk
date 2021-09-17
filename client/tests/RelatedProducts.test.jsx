@@ -6,10 +6,10 @@ import RelatedProducts from '../components/relatedProducts/RelatedProducts';
 
 describe('Related Products', () => {
   const mockProductId = 43432;
-  const mockRatiing = 3.5;
+  const mockRating = 3.5;
 
   beforeEach(() => {
-    render(<RelatedProducts productId={mockProductId} rating={mockRatiing} />);
+    render(<RelatedProducts productId={mockProductId} rating={mockRating} />);
   });
 
   test('it should have a header element', () => {
