@@ -9,7 +9,7 @@ import ComparisonModal from './ComparisonModal';
 
 import '../../css/relatedProducts/RelatedProducts.scss';
 
-const RelatedProducts = ({ currentProduct, rating, handleCardClick }) => {
+const RelatedProducts = ({ currentProduct, handleCardClick }) => {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState({ error: false, msg: '' });
@@ -59,22 +59,20 @@ const RelatedProducts = ({ currentProduct, rating, handleCardClick }) => {
     <div className="related-products">
       <h3>Related Products</h3>
       <div className="related-products__row">
-        {isLoading ? <div>Loadiing Related Products!</div>
-          : (
-            <ul className="related-products__carousel">
-              {products.map((product) => (
-                <li key={product.data.id} className="related-products__carousel-item">
-                  <Card
-                    handleCardClick={handleCardClick}
-                    handleActionBtnClick={handleActionBtnClick}
-                    rating={rating}
-                    relatedProduct={product.data}
-                    imageUrl={imageUrl}
-                  />
-                </li>
-              ))}
-            </ul>
-          )}
+        {!isLoading ? (
+          <ul className="related-products__carousel">
+            {products.map((product) => (
+              <li key={product.data.id} className="related-products__carousel-item">
+                <Card
+                  handleCardClick={handleCardClick}
+                  handleActionBtnClick={handleActionBtnClick}
+                  relatedProduct={product.data}
+                  imageUrl={imageUrl}
+                />
+              </li>
+            ))}
+          </ul>
+        ) : <div>Loadiing Related Products!</div>}
         {isError.error && <div>Error Loading Related Products</div>}
       </div>
       {showComparison
@@ -94,7 +92,6 @@ RelatedProducts.propTypes = {
     id: PropTypes.number.isRequired,
     features: PropTypes.arrayOf(PropTypes.object),
   }).isRequired,
-  rating: PropTypes.number.isRequired,
   handleCardClick: PropTypes.func.isRequired,
 };
 
