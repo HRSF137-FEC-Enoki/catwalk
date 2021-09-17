@@ -1,7 +1,6 @@
 import React from 'react';
 import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
 
 import ComparisonModal from '../components/relatedProducts/ComparisonModal';
 
@@ -37,8 +36,6 @@ describe('Comparison Modal', () => {
   });
 
   test('renders the comparison modal', async () => {
-    screen.debug();
-
     expect(screen.getByText('Comparing')).toBeInTheDocument();
   });
 
@@ -52,6 +49,6 @@ describe('Comparison Modal', () => {
 
   test('It should set a feature when not in current', () => {
     expect(screen.getByText('tools')).toBeInTheDocument();
-    expect(screen.getByText('splatterfun')).toBeInTheDocument();
+    expect(screen.getByText('splattergun')).toBeInTheDocument();
   });
 });

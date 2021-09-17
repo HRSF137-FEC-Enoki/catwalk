@@ -8,15 +8,14 @@ import '../../css/relatedProducts/Card.scss';
 
 const STAR_SIZE = 24;
 
-const Card = ({ relatedProduct, imageUrl, rating, handleCardClick }) => (
-  // TODO:: handle these airbnb eslint rules
-  // - click-events-have-key-events
-  // - no-static-element-interactions
+const Card = ({
+  relatedProduct, imageUrl, rating, handleCardClick,
+}) => (
   <div className="related-products__card">
     <div className="related-products__card-image" style={{ backgroundImage: `url(${imageUrl})` }}>
-      <a className="related-products__action-btn" onClick={() => handleCardClick(relatedProduct)}>
+      <span className="related-products__action-btn" role="button" tabIndex="0" onKeyPress={() => { handleCardClick(relatedProduct); }} onClick={() => handleCardClick(relatedProduct)}>
         <AiOutlineStar size={STAR_SIZE} />
-      </a>
+      </span>
     </div>
     <div className="related-products__card-details">
       <p className="related-products__card-category">{relatedProduct.category}</p>

@@ -25,10 +25,17 @@ const ComparisonModal = ({ related, current, handleCloseClick }) => {
     }
   });
 
+  const keyPressHandler = (e) => {
+    // airbnb style guide requires keypress and tab index for accessibility
+    if (e.keyCode === 0) {
+      handleCloseClick();
+    }
+  };
+
   return (
     <div className="comparison-modal">
       <h3 className="comparison-modal__heading">Comparing</h3>
-      <span className="comparison-modal__close" onClick={handleCloseClick}>
+      <span data-testid="close-modal" role="button" tabIndex="0" onKeyPress={keyPressHandler} className="comparison-modal__close" onClick={handleCloseClick}>
         <AiOutlineClose size={24} />
       </span>
       <table className="comparison-modal__table">
