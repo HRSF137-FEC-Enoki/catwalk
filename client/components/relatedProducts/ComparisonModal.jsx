@@ -42,9 +42,9 @@ const ComparisonModal = ({ related, current, handleCloseClick }) => {
         <tbody>
           {Object.keys(comparisonObj).map((key) => (
             <tr key={key + Math.random()}>
-              <td>{comparisonObj[key][0]}</td>
+              <td>{key === 'Price' ? `$ ${comparisonObj[key][0]}` : comparisonObj[key][0]}</td>
               <td>{key}</td>
-              <td>{comparisonObj[key][1]}</td>
+              <td>{key === 'Price' ? `$ ${comparisonObj[key][1]}` : comparisonObj[key][1]}</td>
             </tr>
           ))}
         </tbody>

@@ -1,3 +1,5 @@
+$modal-width: 450px;
+
 .comparison-modal {
   background-color: #eee;
   border: 1px solid #bbb;
@@ -5,9 +7,9 @@
   font-size: 16px;
   padding: 30px;
   position: absolute;
-  right: 0;
+  right: calc(50% - $modal-width / 2);
   top: -30px;
-  width: 450px;
+  width: $modal-width;
 
   &__heading {
     color: #bbb;
