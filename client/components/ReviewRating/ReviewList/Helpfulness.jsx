@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 
 const Helpfulness = ({ review, fetchReviews }) => {
-  const onChangeHandler = (e) => {
+  const onClickHandler = (e) => {
     e.preventDefault();
     const action = e.target.name;
     axios.put(`/api/reviews/${review.review_id}/${action}`)
@@ -16,7 +16,7 @@ const Helpfulness = ({ review, fetchReviews }) => {
         name="helpful"
         href="/"
         aria-hidden="true"
-        onClick={onChangeHandler}
+        onClick={onClickHandler}
       >
         Yes(
         {review && review.helpfulness}
@@ -27,7 +27,7 @@ const Helpfulness = ({ review, fetchReviews }) => {
         name="report"
         href="/"
         aria-hidden="true"
-        onClick={onChangeHandler}
+        onClick={onClickHandler}
       >
         Report
       </a>
