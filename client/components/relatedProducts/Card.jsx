@@ -5,22 +5,22 @@ import { AiOutlineStar } from 'react-icons/ai';
 import StarRating from '../StarRating';
 
 import getStarRatingAvg from '../../utils/getStarRatingAvg';
+import getImageUrl from '../../utils/getImageUrl';
 
 import '../../css/relatedProducts/Card.scss';
 
 const STAR_SIZE = 24;
 
 const Card = ({
-  relatedProduct, imageUrl, handleActionBtnClick, handleCardClick,
+  relatedProduct, handleActionBtnClick, handleCardClick,
 }) => {
   const [rating, setRating] = useState(0);
+  const [imageUrl, setImageUrl] = useState('');
   const hasNoRating = Number.isNaN(rating);
 
   useEffect(() => {
-    getStarRatingAvg(relatedProduct.id)
-      .then((result) => {
-        setRating(result.avg);
-      });
+    getStarRatingAvg(relatedProduct.id).then((result) => setRating(result.avg));
+    getImageUrl(relatedProduct.id).then((url) => setImageUrl(url));
   }, []);
 
   return (
@@ -51,7 +51,6 @@ Card.propTypes = {
     category: PropTypes.string,
     default_price: PropTypes.string,
   }).isRequired,
-  imageUrl: PropTypes.string.isRequired,
   handleActionBtnClick: PropTypes.func.isRequired,
   handleCardClick: PropTypes.func.isRequired,
 };

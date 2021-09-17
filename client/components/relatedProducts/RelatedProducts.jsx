@@ -42,10 +42,6 @@ const RelatedProducts = ({ currentProduct, handleCardClick }) => {
       });
   }, []);
 
-  useEffect(() => {
-    getImageUrl(currentProduct.id).then((url) => setImageUrl(url));
-  }, []);
-
   const handleActionBtnClick = (related) => {
     setRelatedProduct(related);
     setShowComparison(true);
@@ -67,7 +63,6 @@ const RelatedProducts = ({ currentProduct, handleCardClick }) => {
                   handleCardClick={handleCardClick}
                   handleActionBtnClick={handleActionBtnClick}
                   relatedProduct={product.data}
-                  imageUrl={imageUrl}
                 />
               </li>
             ))}
