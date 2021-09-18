@@ -20,7 +20,11 @@ describe('Related Products', () => {
   const mockRating = 3.5;
 
   beforeEach(() => {
-    render(<RelatedProducts currentProduct={mockCurrent} rating={mockRating} />);
+    render(<RelatedProducts
+      currentProduct={mockCurrent}
+      rating={mockRating}
+      handleCardClick={() => {}}
+    />);
   });
 
   test('it should have a header element', () => {

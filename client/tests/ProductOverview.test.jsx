@@ -6,7 +6,19 @@ import { render, screen } from '@testing-library/react';
 import ProductOverview from '../components/ProductOverview/ProductOverview';
 
 beforeEach(() => {
-  render(<ProductOverview />);
+  const mockCurrent = {
+    id: 48432,
+    name: 'Jackson Pollock',
+    category: 'art',
+    default_price: '8765',
+    features: [
+      { feature: 'medium', value: 'walls' },
+      { feature: 'design', value: 'abstract' },
+      { feature: 'tools', value: 'splattergun' },
+    ],
+  };
+
+  render(<ProductOverview currentProduct={mockCurrent} productId={mockCurrent.id} />);
 });
 
 describe('Product Overview Component', () => {

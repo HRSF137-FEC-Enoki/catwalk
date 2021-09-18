@@ -16,10 +16,12 @@ const App = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState({ error: false, msg: '' });
   const [rating, setRating] = useState(0);
+  const [productId, setProductId] = useState(INITIAL_PRODUCT_ID);
   const [totalReviews, setTotalReviews] = useState(0);
 
   useEffect(() => {
-    axios.get(`/api/products/${INITIAL_PRODUCT_ID}`)
+    setIsLoading(true);
+    axios.get(`/api/products/${productId}`)
       .then(({ data }) => {
         setCurrentProduct(data);
         getStarRatingAvg(data.id)
@@ -30,25 +32,34 @@ const App = () => {
         setIsLoading(false);
       })
       .catch((err) => {
+        setIsLoading(false);
         setIsError({ error: true, msg: err });
       });
-  }, []);
+  }, [productId]);
+
+  const handleCardClick = (id) => {
+    setProductId(id);
+  };
 
   return (
     <div className="app__container">
       <header className="app__header">Logo and Search Go Here</header>
-      {isLoading ? <p>Loading!</p>
-        : (
+      {!isLoading ? (
+        <>
           <ProductOverview
-            productId={currentProduct.id}
+            currentProduct={currentProduct}
+            productId={productId}
             rating={rating}
             totalReviews={totalReviews}
-            currentProduct={currentProduct}
           />
-        )}
-      {isLoading ? <p>Loading!</p>
-        : <RelatedProducts rating={rating} currentProduct={currentProduct} />}
-      {currentProduct && <ReviewRating id={currentProduct.id} />}
+          <RelatedProducts
+            rating={rating}
+            currentProduct={currentProduct}
+            handleCardClick={handleCardClick}
+          />
+          <ReviewRating id={productId} />
+        </>
+      ) : <p>Loading!</p>}
       {isError.error && <p>Currently unable to load page error!</p>}
     </div>
   );
