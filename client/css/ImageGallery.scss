@@ -73,7 +73,19 @@
   height: 100px;
   width: 100px;
   margin: 5% 0;
+  background-size: 100%;
+  background-position: center;
+}
 
+.thumbnailInput {
+  height: 100px;
+  width: 100px;
+  margin: 0;
+  opacity: 0;
+}
+
+.thumbnailInput:hover {
+  cursor: pointer;
 }
 
 .leftArrow {

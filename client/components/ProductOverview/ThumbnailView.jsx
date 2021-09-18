@@ -54,15 +54,14 @@ const ThumbnailView = ({ photos, handleClick, currentIndex }) => {
         {photos.map((photo, index) => {
           if (index >= thumbnailStart && index < thumbnailEnd) {
             return (
-              <input
-                type="image"
-                alt="style of thumbnail"
-                src={photo.thumbnail_url}
-                id={index === currentIndex ? 'selected' : 'unselected'}
-                key={photo.thumbnail_url}
-                className="thumbnail"
-                onClick={() => handleClick(index)}
-              />
+              <div style={{ backgroundImage: `url(${photo.thumbnail_url})` }} id={index === currentIndex ? 'selected' : 'unselected'} className="thumbnail" key={photo.thumbnail_url}>
+                <input
+                  className="thumbnailInput"
+                  type="button"
+                  onClick={() => handleClick(index)}
+                />
+              </div>
+
             );
           } return null;
         })}
