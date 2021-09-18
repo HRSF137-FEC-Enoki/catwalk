@@ -1,13 +1,24 @@
-import React from 'react';
 import PropTypes from 'prop-types';
+import React, { useState } from 'react';
 import axios from 'axios';
 
 const Helpfulness = ({ review, fetchReviews }) => {
+  const [hasClickedHelpful, setHasClickedHelpful] = useState(false);
+
   const onClickHandler = (e) => {
     e.preventDefault();
     const action = e.target.name;
-    axios.put(`/api/reviews/${review.review_id}/${action}`)
-      .then(() => fetchReviews());
+    if (!hasClickedHelpful) {
+      axios.put(`/api/reviews/${review.review_id}/${action}`);
+      setHasClickedHelpful(true);
+      fetchReviews();
+      if (e.target.name === 'helpful') {
+        e.target.nextSibling.nextSibling.removeAttribute('href');
+      } else {
+        e.target.previousSibling.previousSibling.removeAttribute('href');
+      }
+      e.target.removeAttribute('href');
+    }
   };
   return (
     <div className="helpful">

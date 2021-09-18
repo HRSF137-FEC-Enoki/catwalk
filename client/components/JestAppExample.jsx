@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const JestEnzyme = () => {
+const JestAppExample = () => {
   const [count, setCount] = useState(0);
   return (
     <div>
@@ -10,4 +10,4 @@ const JestEnzyme = () => {
   );
 };
 
-export default JestEnzyme;
+export default JestAppExample;
