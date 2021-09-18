@@ -9,7 +9,7 @@ import ReviewList from './ReviewList';
 
 import '../../../css/reviewRating.scss';
 
-const ReviewRating = ({ id, rating }) => {
+const ReviewRating = ({ id, rating, productName }) => {
   const [reviews, setReviews] = useState([]);
   const [reviewShow, setReviewShow] = useState(2);
   const [isLoading, setIsLoading] = useState(false);
@@ -91,6 +91,7 @@ const ReviewRating = ({ id, rating }) => {
               charName={charName}
               charId={charId}
               charValue={charValue}
+              productName={productName}
             />
           </div>
         </div>

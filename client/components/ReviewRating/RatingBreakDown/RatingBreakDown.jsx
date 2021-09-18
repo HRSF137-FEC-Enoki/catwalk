@@ -94,7 +94,7 @@ const RatingBreakDown = ({
 
               <span>
                 {starFilter.map((i) => (
-                  <div>
+                  <div key={i}>
                     {String(i)}
                     {' '}
                     star

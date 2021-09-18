@@ -19,8 +19,8 @@ const App = () => {
   useEffect(() => {
     axios.get('/api/products')
       .then(({ data }) => {
-        setCurrentProduct(data[0]);
-        getStarRatingAvg(data[0].id)
+        setCurrentProduct(data[4]);
+        getStarRatingAvg(data[4].id)
           .then((result) => setRating(result));
         setIsLoading(false);
       })
@@ -34,7 +34,14 @@ const App = () => {
       {isLoading ? <p>Loading!</p> : <ProductOverview productId={currentProduct.id} />}
       {isLoading ? <p>Loading!</p> : <RelatedProducts productId={currentProduct.id} />}
       {isError.error ? <p>Currently unable to load page error!</p> : ''}
-      {currentProduct && <ReviewRating id={currentProduct.id} rating={rating} />}
+      {currentProduct
+        && (
+        <ReviewRating
+          id={currentProduct.id}
+          rating={rating}
+          productName={currentProduct.name}
+        />
+        )}
     </div>
   );
 };

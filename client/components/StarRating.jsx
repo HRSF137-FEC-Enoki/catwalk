@@ -26,10 +26,17 @@ const Span = styled.span`
 `;
 
 const StarRating = ({
-  backgroundColor, color, rating, size,
+  backgroundColor, color, rating, size, callback,
 }) => {
   let val = rating;
-
+  const onClickHandler = (e) => {
+    if (callback) {
+      const firstIndex = e.target.getAttribute('data-id');
+      const secondIndex = e.target.parentElement.getAttribute('data-id');
+      const index = firstIndex === null ? Number(secondIndex) : Number(firstIndex);
+      callback(index);
+    }
+  };
   return (
     <div className="star-rating">
       {[...Array(5)].map((star, i) => {
@@ -58,8 +65,10 @@ const StarRating = ({
             color={color}
             key={ratingVal}
             className="star"
+            data-id={ratingVal}
+            onClick={onClickHandler}
           >
-            <FaStar />
+            <FaStar data-id={ratingVal} />
           </Span>
         );
       })}
@@ -72,6 +81,7 @@ StarRating.propTypes = {
   backgroundColor: PropTypes.string,
   color: PropTypes.string,
   rating: PropTypes.number,
+  callback: PropTypes.func,
 };
 
 StarRating.defaultProps = {
@@ -79,6 +89,7 @@ StarRating.defaultProps = {
   backgroundColor: '#ddd',
   color: 'goldenrod',
   rating: 5,
+  callback: undefined,
 };
 
 export default StarRating;

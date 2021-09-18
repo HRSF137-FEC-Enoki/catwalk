@@ -20,7 +20,11 @@ const ReviewBody = ({ review }) => {
       {isMoreThanMaxChar ? (
         <div>
           {review.body.slice(0, 250)}
-          <button type="button" onClick={() => setIsMoreThanMaxChar(false)}>show more</button>
+          ...
+          {' '}
+          <button type="button" onClick={() => setIsMoreThanMaxChar(false)}>
+            show more
+          </button>
         </div>
       )
         : <div>{review && review.body}</div>}
