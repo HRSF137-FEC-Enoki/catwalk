@@ -4,12 +4,14 @@ import axios from 'axios';
 import getStarRatingAvg from '../utils/getStarRatingAvg';
 
 import RelatedProducts from './relatedProducts/RelatedProducts';
+import ReviewRating from './ReviewRating/ReviewList/ReviewRating';
 import ProductOverview from './ProductOverview/ProductOverview';
 
 import '../css/App.scss';
 
+const INITIAL_PRODUCT_ID = 48432;
+
 const App = () => {
-  // const [products, setProducts] = useState([]);
   const [currentProduct, setCurrentProduct] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState({ error: false, msg: '' });
@@ -17,10 +19,10 @@ const App = () => {
   const [totalReviews, setTotalReviews] = useState(0);
 
   useEffect(() => {
-    axios.get('/api/products')
+    axios.get(`/api/products/${INITIAL_PRODUCT_ID}`)
       .then(({ data }) => {
-        setCurrentProduct(data[0]);
-        getStarRatingAvg(data[0].id)
+        setCurrentProduct(data);
+        getStarRatingAvg(data.id)
           .then((result) => {
             setRating(result.avg);
             setTotalReviews(result.count);
@@ -45,7 +47,8 @@ const App = () => {
           />
         )}
       {isLoading ? <p>Loading!</p>
-        : <RelatedProducts rating={rating} productId={currentProduct.id} />}
+        : <RelatedProducts rating={rating} currentProduct={currentProduct} />}
+      {currentProduct && <ReviewRating id={currentProduct.id} />}
       {isError.error && <p>Currently unable to load page error!</p>}
     </div>
   );
