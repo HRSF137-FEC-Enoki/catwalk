@@ -76,7 +76,7 @@ const RatingBreakDown = ({
         of reviews recommend this product
       </p>
       {[...Array(5)].map((star, index) => (
-        <div className="star_breakdown">
+        <div key={Math.random()} className="star_breakdown">
           <a href="/" name={5 - index} onClick={onClickHandler}>
             {5 - index}
             star
