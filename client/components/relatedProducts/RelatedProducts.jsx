@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
+import $ from 'jquery';
 
-import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
+// import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 
 import Card from './Card';
 import ComparisonModal from './ComparisonModal';
@@ -15,8 +16,6 @@ const RelatedProducts = ({ currentProduct, handleCardClick }) => {
   const [isError, setIsError] = useState({ error: false, msg: '' });
   const [showComparison, setShowComparison] = useState(false);
   const [relatedProduct, setRelatedProduct] = useState(null);
-
-  const CHEVRON_SIZE = 48;
 
   useEffect(() => {
     // make a GET request to /api/products/:product_id/related
@@ -54,7 +53,11 @@ const RelatedProducts = ({ currentProduct, handleCardClick }) => {
 
   const handleNavigationClick = (e) => {
     e.stopPropagation();
-    console.log(e.target);
+    const isLeft = $(e.target).hasClass('related-products__chevron-left');
+    const direction = isLeft ? { right: '+=250' } : { right: '-=250' };
+    const duration = 300;
+
+    $('.related-products__card').animate(direction, duration);
   };
 
   return (
@@ -62,8 +65,8 @@ const RelatedProducts = ({ currentProduct, handleCardClick }) => {
       <h3>Related Products</h3>
       <div className="related-products__row">
         <div className="related-products__nav-overlay">
-          <span className="related-products__chevron-left related-products__navigation" onClick={handleNavigationClick} ><FiChevronLeft size={CHEVRON_SIZE} /></span>
-          <span className="related-products__chevron-right related-products__navigation" onClick={handleNavigationClick} ><FiChevronRight size={CHEVRON_SIZE} /></span>
+          <button type="button" onClick={handleNavigationClick} className="related-products__chevron-left related-products__navigation">{'<'}</button>
+          <button type="button" onClick={handleNavigationClick} className="related-products__chevron-right related-products__navigation">{'>'}</button>
         </div>
         {!isLoading ? (
           <ul className="related-products__carousel">
