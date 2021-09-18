@@ -16,6 +16,7 @@ const RelatedProducts = ({ currentProduct, handleCardClick }) => {
   const [isError, setIsError] = useState({ error: false, msg: '' });
   const [showComparison, setShowComparison] = useState(false);
   const [relatedProduct, setRelatedProduct] = useState(null);
+  const [imageIndex, setImageIndex] = useState(0);
 
   useEffect(() => {
     // make a GET request to /api/products/:product_id/related
@@ -54,8 +55,11 @@ const RelatedProducts = ({ currentProduct, handleCardClick }) => {
   const handleNavigationClick = (e) => {
     e.stopPropagation();
     const isLeft = $(e.target).hasClass('related-products__chevron-left');
-    const direction = isLeft ? { right: '+=250' } : { right: '-=250' };
+    const direction = isLeft ? { right: '-=270' } : { right: '+=270' };
     const duration = 300;
+    const idx = imageIndex;
+
+    setImageIndex(isLeft ? idx - 1 : idx + 1);
 
     $('.related-products__card').animate(direction, duration);
   };
@@ -65,8 +69,8 @@ const RelatedProducts = ({ currentProduct, handleCardClick }) => {
       <h3>Related Products</h3>
       <div className="related-products__row">
         <div className="related-products__nav-overlay">
-          <button type="button" onClick={handleNavigationClick} className="related-products__chevron-left related-products__navigation">{'<'}</button>
-          <button type="button" onClick={handleNavigationClick} className="related-products__chevron-right related-products__navigation">{'>'}</button>
+          <button type="button" onClick={handleNavigationClick} className={`related-products__chevron-left related-products__navigation ${imageIndex <= 0 ? 'invisible' : ''}`}>{'<'}</button>
+          <button type="button" onClick={handleNavigationClick} className={`related-products__chevron-right related-products__navigation ${imageIndex >= products.length - 4 ? 'invisible' : ''}`}>{'>'}</button>
         </div>
         {!isLoading ? (
           <ul className="related-products__carousel">
