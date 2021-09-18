@@ -6,10 +6,12 @@ import PropTypes from 'prop-types';
 
 import ReviewBody from './ReviewBody';
 import Helpfulness from './Helpfulness';
+import StarRating from '../../StarRating';
 
 const Review = ({ review, fetchReviews }) => (
   <div className="review">
     <div className="rating_reviewer_date">
+      <StarRating size={10} rating={review.rating} />
       <div>
         {review.reviewer_name}
         <span>,&nbsp;</span>
@@ -26,7 +28,7 @@ const Review = ({ review, fetchReviews }) => (
       </div>
     ) : ''}
     {review.response ? (
-      <div className="reviewResponse">
+      <div className="review_response">
         <p>Response:</p>
         <p>{review.response}</p>
       </div>
