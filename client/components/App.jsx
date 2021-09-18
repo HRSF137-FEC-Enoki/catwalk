@@ -17,6 +17,7 @@ const App = () => {
   const [isError, setIsError] = useState({ error: false, msg: '' });
   const [rating, setRating] = useState(0);
   const [productId, setProductId] = useState(INITIAL_PRODUCT_ID);
+  const [totalReviews, setTotalReviews] = useState(0);
 
   useEffect(() => {
     setIsLoading(true);
@@ -24,7 +25,10 @@ const App = () => {
       .then(({ data }) => {
         setCurrentProduct(data);
         getStarRatingAvg(data.id)
-          .then((result) => setRating(result.avg));
+          .then((result) => {
+            setRating(result.avg);
+            setTotalReviews(result.count);
+          });
         setIsLoading(false);
       })
       .catch((err) => {
