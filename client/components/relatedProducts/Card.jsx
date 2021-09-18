@@ -23,9 +23,9 @@ const Card = ({
   }, []);
 
   return (
-    <div className="related-products__card" role="button" tabIndex={0} onKeyPress={() => { handleCardClick(relatedProduct.id); }} onClick={() => { handleCardClick(relatedProduct.id); }}>
+    <div className="related-products__card" role="button" tabIndex={0} onKeyPress={() => { handleCardClick(relatedProduct.id); }} onClick={() => handleCardClick(relatedProduct.id)}>
       <div className="related-products__card-image" style={imageUrl ? { backgroundImage: `url(${imageUrl})` } : {}}>
-        <span className="related-products__action-btn" role="button" tabIndex={0} onKeyPress={() => { handleActionBtnClick(relatedProduct); }} onClick={() => handleActionBtnClick(relatedProduct)}>
+        <span className="related-products__action-btn" role="button" tabIndex={0} onKeyPress={() => { handleActionBtnClick(relatedProduct); }} onClick={(e) => { e.stopPropagation(); handleActionBtnClick(relatedProduct); }}>
           <AiOutlineStar color="goldenrod" size={STAR_SIZE} />
         </span>
       </div>
