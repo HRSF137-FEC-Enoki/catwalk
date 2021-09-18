@@ -1,12 +1,20 @@
 .related-products {
+  background-color: #eee;
+  padding: 25px;
+
+  &__row {
+    overflow: hidden;
+  }
+
   &__card {
     background-color: #fff;
     border: 1px solid #bbb;
     border-radius: 3px;
     cursor: pointer;
-    height: 350px;
+    height: 400px;
     margin: 10px;
-    width: 300px;
+    position: relative;
+    width: 250px;
 
     &:hover {
       border-color: dodgerblue;
@@ -17,7 +25,7 @@
     background-image: url('../../../public/no_image.png');
     background-repeat: no-repeat;
     background-size: cover;
-    height: 200px;
+    height: 250px;
   }
 
   &__card-details {
@@ -27,10 +35,12 @@
   &__card-category,
   &__card-price {
     color: #999;
+    font-size: 12px;
     margin: 0;
   }
 
   &__card-expanded-name {
+    font-size: 14px;
     font-weight: bold;
     margin: 10px 0;
   }

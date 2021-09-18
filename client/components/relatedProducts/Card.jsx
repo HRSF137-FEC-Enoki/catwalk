@@ -9,14 +9,13 @@ import getImageUrl from '../../utils/getImageUrl';
 
 import '../../css/relatedProducts/Card.scss';
 
-const STAR_SIZE = 24;
+const STAR_SIZE = 16;
 
 const Card = ({
   relatedProduct, handleActionBtnClick, handleCardClick,
 }) => {
   const [rating, setRating] = useState(0);
   const [imageUrl, setImageUrl] = useState('');
-  const hasNoRating = Number.isNaN(rating);
 
   useEffect(() => {
     getStarRatingAvg(relatedProduct.id).then((result) => setRating(result.avg));
@@ -27,7 +26,7 @@ const Card = ({
     <div className="related-products__card" role="button" tabIndex={0} onKeyPress={() => { handleCardClick(relatedProduct.id); }} onClick={() => { handleCardClick(relatedProduct.id); }}>
       <div className="related-products__card-image" style={imageUrl ? { backgroundImage: `url(${imageUrl})` } : {}}>
         <span className="related-products__action-btn" role="button" tabIndex={0} onKeyPress={() => { handleActionBtnClick(relatedProduct); }} onClick={() => handleActionBtnClick(relatedProduct)}>
-          <AiOutlineStar size={STAR_SIZE} />
+          <AiOutlineStar color="goldenrod" size={STAR_SIZE} />
         </span>
       </div>
       <div className="related-products__card-details">
@@ -37,7 +36,6 @@ const Card = ({
         </p>
         <p className="related-products__card-price">{`$${relatedProduct.default_price}`}</p>
         <StarRating size={STAR_SIZE} rating={rating} />
-        {hasNoRating && <span className="star-rating__no-rating-msg">Be the first to rate this product!</span>}
       </div>
     </div>
   );
