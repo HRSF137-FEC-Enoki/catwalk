@@ -10,7 +10,7 @@ beforeEach(() => {
 });
 
 describe('Product Overview Component', () => {
-  test('Product overview container should exist', () => {
-    expect(screen.getByTestId('productOverView'));
+  test('Should show loading indicator before item render', () => {
+    expect(screen.getByText('Loading Product Info'));
   });
 });

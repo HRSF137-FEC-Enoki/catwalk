@@ -16,13 +16,17 @@ const App = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState({ error: false, msg: '' });
   const [rating, setRating] = useState(0);
+  const [totalReviews, setTotalReviews] = useState(0);
 
   useEffect(() => {
     axios.get(`/api/products/${INITIAL_PRODUCT_ID}`)
       .then(({ data }) => {
         setCurrentProduct(data);
         getStarRatingAvg(data.id)
-          .then((result) => setRating(result.avg));
+          .then((result) => {
+            setRating(result.avg);
+            setTotalReviews(result.count);
+          });
         setIsLoading(false);
       })
       .catch((err) => {
@@ -33,7 +37,15 @@ const App = () => {
   return (
     <div className="app__container">
       <header className="app__header">Logo and Search Go Here</header>
-      {isLoading ? <p>Loading!</p> : <ProductOverview productId={currentProduct.id} />}
+      {isLoading ? <p>Loading!</p>
+        : (
+          <ProductOverview
+            productId={currentProduct.id}
+            rating={rating}
+            totalReviews={totalReviews}
+            currentProduct={currentProduct}
+          />
+        )}
       {isLoading ? <p>Loading!</p>
         : <RelatedProducts rating={rating} currentProduct={currentProduct} />}
       {currentProduct && <ReviewRating id={currentProduct.id} />}
