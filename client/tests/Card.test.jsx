@@ -19,6 +19,7 @@ beforeEach(() => {
     rating={mockRating}
     imageUrl={mockUrl}
     handleActionBtnClick={() => {}}
+    handleCardClick={() => {}}
   />);
 });
 
