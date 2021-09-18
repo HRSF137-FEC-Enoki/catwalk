@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 
+import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
+
 import Card from './Card';
 import ComparisonModal from './ComparisonModal';
 
@@ -13,6 +15,8 @@ const RelatedProducts = ({ currentProduct, handleCardClick }) => {
   const [isError, setIsError] = useState({ error: false, msg: '' });
   const [showComparison, setShowComparison] = useState(false);
   const [relatedProduct, setRelatedProduct] = useState(null);
+
+  const CHEVRON_SIZE = 48;
 
   useEffect(() => {
     // make a GET request to /api/products/:product_id/related
@@ -48,10 +52,19 @@ const RelatedProducts = ({ currentProduct, handleCardClick }) => {
     setShowComparison(false);
   };
 
+  const handleNavigationClick = (e) => {
+    e.stopPropagation();
+    console.log(e.target);
+  };
+
   return (
     <div className="related-products">
       <h3>Related Products</h3>
       <div className="related-products__row">
+        <div className="related-products__nav-overlay">
+          <span className="related-products__chevron-left related-products__navigation" onClick={handleNavigationClick} ><FiChevronLeft size={CHEVRON_SIZE} /></span>
+          <span className="related-products__chevron-right related-products__navigation" onClick={handleNavigationClick} ><FiChevronRight size={CHEVRON_SIZE} /></span>
+        </div>
         {!isLoading ? (
           <ul className="related-products__carousel">
             {products.map((product) => (
