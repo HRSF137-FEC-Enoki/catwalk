@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 import $ from 'jquery';
 
-// import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
-
 import Card from './Card';
 import ComparisonModal from './ComparisonModal';
 
@@ -55,6 +53,7 @@ const RelatedProducts = ({ currentProduct, handleCardClick }) => {
   const handleNavigationClick = (e) => {
     e.stopPropagation();
     const isLeft = $(e.target).hasClass('related-products__chevron-left');
+    // margin-left: 10px + card width: 250px + margin-rignt: 10px = 270px
     const direction = isLeft ? { right: '-=270' } : { right: '+=270' };
     const duration = 300;
     const idx = imageIndex;
