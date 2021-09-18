@@ -46,7 +46,12 @@ const App = () => {
       <header className="app__header">Logo and Search Go Here</header>
       {!isLoading ? (
         <>
-          <ProductOverview currentProduct={currentProduct} productId={productId} />
+          <ProductOverview
+            currentProduct={currentProduct}
+            productId={productId}
+            rating={rating}
+            totalReviews={totalReviews}
+          />
           <RelatedProducts
             rating={rating}
             currentProduct={currentProduct}
