@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai';
 import PropTypes from 'prop-types';
 
@@ -13,6 +13,9 @@ const ImageGallery = ({
     return <div>No data available</div>;
   }
 
+  const [bgPosition, setPosition] = useState('center');
+  const [isImageExpanded, setImageExpanded] = useState(false);
+
   const { photos } = currentStyle;
   const { length } = photos;
   const arrowSize = 35;
@@ -21,6 +24,22 @@ const ImageGallery = ({
     updateImageIndex(0);
   }
   const currentPhoto = currentStyle.photos[imageIndex].url;
+
+  const handleMousePosition = (e) => {
+    const relativeX = e.clientX - e.target.offsetLeft;
+    const relativeY = e.clientY - e.target.offsetTop;
+    const width = e.target.offsetWidth;
+    const height = e.target.offsetHeight;
+
+    const bgPosX = ((relativeX) / width) * 100;
+    const bgPosY = ((relativeY) / height) * 100;
+
+    setPosition(`${bgPosX}% ${bgPosY}%`);
+  };
+
+  const handleMouseLeave = () => {
+    setPosition('center');
+  };
 
   const handleArrow = (direction) => {
     if (direction === 'left') {
@@ -34,9 +53,24 @@ const ImageGallery = ({
     updateImageIndex(index);
   };
 
+  const handleImageClick = () => {
+    expand();
+    setImageExpanded(!isImageExpanded);
+  };
+
   return (
     <div className="imageGalleryContainer">
-      <input className="mainImageContainer" style={{ backgroundImage: `url(${currentPhoto})` }} onClick={expand} />
+      <div className="mainImageContainer">
+        <input
+          className={isImageExpanded ? 'focusedImageExpand' : 'focusedImage'}
+          style={
+            isImageExpanded ? { backgroundImage: `url(${currentPhoto})`, backgroundPosition: `${bgPosition}` } : { backgroundImage: `url(${currentPhoto})` }
+          }
+          onClick={handleImageClick}
+          onMouseMove={handleMousePosition}
+          onMouseLeave={handleMouseLeave}
+        />
+      </div>
       <ThumbnailView photos={photos} handleClick={handleThumbNailClick} className="thumbnailComponent" currentIndex={imageIndex} />
       {imageIndex === 0 ? null : <AiOutlineArrowLeft className="leftArrow" onClick={() => handleArrow('left')} size={arrowSize} />}
       {imageIndex === length - 1 ? null : <AiOutlineArrowRight className="rightArrow" onClick={() => handleArrow('right')} size={arrowSize} />}
