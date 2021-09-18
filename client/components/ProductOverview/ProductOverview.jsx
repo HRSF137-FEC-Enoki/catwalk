@@ -86,7 +86,6 @@ const ProductOverview = ({
         </div>
         <div className="productDescription">{currentProduct.description}</div>
       </div>
-  );
     );
   }
   return <div>Loading Product Info</div>;
@@ -103,7 +102,6 @@ ProductOverview.propTypes = {
     description: PropTypes.string,
     category: PropTypes.string,
     default_price: PropTypes.string,
-
   }).isRequired,
 };
 
