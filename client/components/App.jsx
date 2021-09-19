@@ -43,7 +43,7 @@ const App = () => {
 
   return (
     <div className="app__container">
-      <header className="app__header">Logo and Search Go Here</header>
+      <header className="app__header">Project Catwalk</header>
       {!isLoading ? (
         <>
           <ProductOverview
