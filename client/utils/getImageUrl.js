@@ -1,17 +1,17 @@
 import axios from 'axios';
 
-const getImageUrl = (productId) => new Promise((resolve, reject) => {
+const getPhotos = (productId) => new Promise((resolve, reject) => {
   axios.get(`/api/products/${productId}/styles`)
     .then((styles) => {
       const { results } = styles.data;
       const { photos } = results[0];
-      const firstPhotoUrl = photos[0].url;
+      // const firstPhotoUrl = photos[0].url;
 
-      resolve(firstPhotoUrl);
+      resolve(photos);
     })
     .catch((err) => {
       reject(err);
     });
 });
 
-export default getImageUrl;
+export default getPhotos;
