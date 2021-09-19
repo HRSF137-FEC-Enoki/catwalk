@@ -15,19 +15,42 @@ const Card = ({
   relatedProduct, handleActionBtnClick, handleCardClick,
 }) => {
   const [rating, setRating] = useState(0);
-  const [thumbnails, setThumbnails] = useState([]);
+  const [photos, setPhotos] = useState([]);
   const [mainImageUrl, setMainImageUrl] = useState('');
 
   useEffect(() => {
     getStarRatingAvg(relatedProduct.id).then((result) => setRating(result.avg));
     getPhotos(relatedProduct.id).then((images) => {
       const firstImage = images[0];
-      const remaining = images.slice(1, 5);
 
       setMainImageUrl(firstImage.url);
-      setThumbnails(remaining);
+      setPhotos(images.slice(0, 5));
     });
   }, []);
+
+  const handleThumbnailClick = (e) => {
+    e.stopPropagation();
+    const { id } = e.target;
+    const photosCopy = photos.slice();
+    const temp = photosCopy[0];
+    photosCopy[0] = photosCopy[id];
+    photosCopy[id] = temp;
+
+    setMainImageUrl(photosCopy[0].url);
+    setPhotos(photosCopy);
+  };
+
+  const handleKeyPress = (e) => {
+    e.stopPropagation();
+    const { id } = e.target;
+    const photosCopy = photos.slice();
+    const temp = photosCopy[0];
+    photosCopy[0] = photosCopy[id];
+    photosCopy[id] = temp;
+
+    setMainImageUrl(photosCopy[0].url);
+    setPhotos(photosCopy);
+  };
 
   return (
     <div className="related-products__card" role="button" tabIndex={0} onKeyPress={() => { handleCardClick(relatedProduct.id); }} onClick={() => handleCardClick(relatedProduct.id)}>
@@ -36,9 +59,19 @@ const Card = ({
           <AiOutlineStar color="goldenrod" size={STAR_SIZE} />
         </span>
         <div className="related-products__card-thumbnails">
-          {thumbnails.map((image) => {
-            return <span className="related-products__card-thumbnail" style={{backgroundImage: `url(${image.thumbnail_url})`}} />
-          })}
+          {photos.slice(1, 5).map((image, idx) => (
+            <span
+              id={idx + 1}
+              className="related-products__card-thumbnail"
+              key={`${image.url + Math.random()}`}
+              role="button"
+              tabIndex={0}
+              aria-label="thumbnail"
+              onKeyPress={handleKeyPress}
+              onClick={handleThumbnailClick}
+              style={{ backgroundImage: `url(${image.thumbnail_url})` }}
+            />
+          ))}
         </div>
       </div>
       <div className="related-products__card-details">
