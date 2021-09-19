@@ -22,7 +22,7 @@ const Card = ({
     getStarRatingAvg(relatedProduct.id).then((result) => setRating(result.avg));
     getPhotos(relatedProduct.id).then((images) => {
       const firstImage = images[0];
-      const remaining = images.slice(1, 4);
+      const remaining = images.slice(1, 5);
 
       setMainImageUrl(firstImage.url);
       setThumbnails(remaining);
@@ -37,7 +37,7 @@ const Card = ({
         </span>
         <div className="related-products__card-thumbnails">
           {thumbnails.map((image) => {
-            return <img className="related-products__card-thumbnail" src={image.thumbnail_url} />
+            return <span className="related-products__card-thumbnail" style={{backgroundImage: `url(${image.thumbnail_url})`}} />
           })}
         </div>
       </div>
