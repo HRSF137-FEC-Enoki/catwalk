@@ -81,12 +81,12 @@
 .thumbnailInput {
   height: 100px;
   width: 100px;
-  margin: 0;
-  opacity: 0;
-}
-
-.thumbnailInput:hover {
-  cursor: pointer;
+  margin: 5px;
+  padding: 0;
+  border: 0;
+  background-size: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .leftArrow {
@@ -103,7 +103,7 @@
 }
 
 #selected {
-  border: 3px solid blue;
+  border: 3px solid black;
 }
 
 .upArrow, .downArrow {
