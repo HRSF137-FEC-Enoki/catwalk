@@ -1,19 +1,19 @@
-$modal-width: 450px;
+$modal-width: 50%;
 
 .comparison-modal {
-  background-color: #eee;
-  border: 1px solid #bbb;
+  background-color: #fff;
+  border: 2px solid goldenrod;
   border-radius: 5px;
   font-size: 16px;
   padding: 30px;
   position: absolute;
   right: calc(50% - $modal-width / 2);
-  top: -30px;
+  top: 0;
   width: $modal-width;
 
   &__heading {
     color: #bbb;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 100;
     margin: 0;
     text-transform: uppercase;

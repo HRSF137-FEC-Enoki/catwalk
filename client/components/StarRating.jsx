@@ -10,6 +10,7 @@ const Span = styled.span`
   display: inline-block;
   font-size: ${({ size }) => size}px;
   margin: 0 5px;
+  padding-right: 5px;
   position: relative;
 
   &:after {
