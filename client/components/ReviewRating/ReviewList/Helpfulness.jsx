@@ -9,9 +9,12 @@ const Helpfulness = ({ review, fetchReviews }) => {
     e.preventDefault();
     const action = e.target.name;
     if (!clickHelpful) {
-      axios.put(`/api/reviews/${review.review_id}/${action}`);
-      setClickHelpful(true);
-      fetchReviews();
+      axios.put(`/api/reviews/${review.review_id}/${action}`)
+        .then(() => {
+          fetchReviews();
+          setClickHelpful(true);
+        });
+
       if (e.target.name === 'helpful') {
         e.target.nextSibling.nextSibling.removeAttribute('href');
       } else {

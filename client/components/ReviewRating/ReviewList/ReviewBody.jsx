@@ -31,7 +31,7 @@ const ReviewBody = ({ review }) => {
       {
         review && review.photos.map((photo) => (
           <span key={photo.id}>
-            <img src={photo.url} alt="product" width="50px" onClick={onClickImage} role="presentation" />
+            <img src={photo.url} alt="product" width="100px" onClick={onClickImage} role="presentation" />
           </span>
         ))
       }
