@@ -62,6 +62,8 @@ const ReviewRating = ({ id, rating }) => {
           starFilter={starFilter}
           setStarFilter={setStarFilter}
           rating={rating}
+          charName={charName}
+          charValue={charValue}
         />
       </div>
       <div className="review_col">
@@ -76,6 +78,7 @@ const ReviewRating = ({ id, rating }) => {
             rating={rating}
             charName={charName}
             charValue={charValue}
+            setCurrReviewsLength={setCurrReviewsLength}
           />
         </div>
         <div className="review_btn">
@@ -88,6 +91,7 @@ const ReviewRating = ({ id, rating }) => {
             closeWriteReview={closeWriteReview}
             id={id}
             fetchReviews={fetchReviews}
+            charId={charId}
           />
         </div>
       </div>

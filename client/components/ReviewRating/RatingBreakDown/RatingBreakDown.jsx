@@ -6,11 +6,7 @@ import StarRating from '../../StarRating';
 import ProductBreakDown from './ProductBreakDown';
 
 const RatingBreakDown = ({
-<<<<<<< HEAD
   id, setStarFilter, starFilter, rating, charValue, charName,
-=======
-  id, setStarFilter, starFilter, rating,
->>>>>>> main
 }) => {
   const [ratings, setRatings] = useState({});
   const [recommended, setRecommended] = useState({});
@@ -70,7 +66,6 @@ const RatingBreakDown = ({
   };
 
   return (
-<<<<<<< HEAD
     <>
       <div className="ratingBreakDown">
         <div className="ratingScore">
@@ -92,33 +87,12 @@ const RatingBreakDown = ({
               <div className="ratingBarLeft" id={5 - index} />
             </div>
 
-=======
-    <div className="rating_breakdown">
-      <div className="rating_score">
-        <p>{rating}</p>
-        <StarRating size={36} rating={rating} />
-      </div>
-      <p className="rating_recommended">
-        {recommended && getPercentage(recommended.true)}
-        {'  '}
-        of reviews recommend this product
-      </p>
-      {[...Array(5)].map((star, index) => (
-        <div key={Math.random()} className="star_breakdown">
-          <a href="/" name={5 - index} onClick={onClickHandler}>
-            {5 - index}
-            star
-          </a>
-          <div className="rating_bar">
-            <div className="rating_bar_left" id={5 - index} />
->>>>>>> main
           </div>
         ))}
-        {starFilter.length !== 0
+        {starFilter && starFilter.length !== 0
           && (
             <div className="starFilter">
 
-<<<<<<< HEAD
               <span>
                 {starFilter.map((i) => (
                   <div>
@@ -132,25 +106,6 @@ const RatingBreakDown = ({
               <div>
                 <button type="button" onClick={clearFilter}>clear</button>
               </div>
-=======
-        </div>
-      ))}
-      {starFilter.length !== 0
-        && (
-          <div className="star_filter">
-            <span>
-              {starFilter.map((i) => (
-                <div>
-                  {String(i)}
-                  {' '}
-                  star
-                  <StarRating size={16} rating={i} />
-                </div>
-              ))}
-            </span>
-            <div>
-              <button type="button" onClick={clearFilter}>clear</button>
->>>>>>> main
             </div>
           )}
       </div>
