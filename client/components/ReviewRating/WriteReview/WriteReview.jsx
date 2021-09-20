@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from 'react';
-
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 
 const WriteReview = ({
-  isClickAdd, closeWriteReview, id, fetchReviews,
+  isClickAdd, closeWriteReview, id, fetchReviews, charName, charId, charValue,
 }) => {
   const [newReview, setNewReview] = useState({
     rating: 5,
@@ -19,23 +18,6 @@ const WriteReview = ({
   });
   const [isValid, setIsValid] = useState(true);
   const [photoUrl, setPhotoUrl] = useState([]);
-  const [charName, setCharName] = useState([]);
-  const [charId, setCharId] = useState([]);
-  const [charValue, setCharValue] = useState([]);
-
-  useEffect(() => {
-    axios.get(`/api/reviews/meta/${id}`)
-      .then((res) => {
-        setCharName(Object.entries(res.data.characteristics)
-          .map((name) => name[0]));
-        setCharId(Object.entries(res.data.characteristics)
-          .map((name) => name[1])
-          .map((_id) => _id.id));
-        setCharValue(Object.entries(res.data.characteristics)
-          .map((name) => name[1])
-          .map((val) => parseInt(val.value, 10)));
-      });
-  }, []);
 
   const looksLikeMail = (str) => {
     const lastAtPos = str.lastIndexOf('@');
@@ -58,7 +40,7 @@ const WriteReview = ({
     if (charName.includes(e.target.name)) {
       const copyCharValue = [...charValue];
       copyCharValue[charName.indexOf(e.target.name)] = e.target.value;
-      setCharValue(copyCharValue);
+      // setCharValue(copyCharValue);
     } else {
       setNewReview({ ...newReview, [e.target.name]: e.target.value });
     }

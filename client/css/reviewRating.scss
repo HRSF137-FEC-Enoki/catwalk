@@ -27,12 +27,14 @@
   display: flex;
   justify-content: center;
   align-items:flex-start;
+  margin: 20px auto;
+  width: 80%;
 }
 .rating_bar{
   border: 1px solid black;
   background-color: rgb(199, 197, 197);
   height: 5px;
-  width: 70%;
+  width: 80%;
   margin:5px 10px;
 }
 .rating_bar_left{
@@ -157,4 +159,40 @@
 }
 .star_filter{
   text-align: center;
+}
+.productBreakDown{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 30px auto;
+
+}
+.productBar{
+  position: relative;
+  width: 100%;
+  height: 10px;
+  background-color: rgb(199, 197, 197);
+}
+.charName{
+  position: absolute;
+  top:-20px;
+  left:0;
+}
+.scale{
+  width: 80%;
+  margin: 10px auto;
+}
+.pointer{
+  position: absolute;
+  font-size: 45px;
+  top: -15px;
+  left:50%
+}
+.level{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: xx-small;
+  margin: 8px 0;
 }

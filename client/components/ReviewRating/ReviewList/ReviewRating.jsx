@@ -17,11 +17,28 @@ const ReviewRating = ({ id, rating }) => {
   const [sort, setSort] = useState('relevant');
   const [starFilter, setStarFilter] = useState([]);
   const [currReviewsLength, setCurrReviewsLength] = useState(0);
+  const [charName, setCharName] = useState([]);
+  const [charId, setCharId] = useState([]);
+  const [charValue, setCharValue] = useState([]);
 
   const fetchReviews = () => {
     axios.get('/api/reviews', { params: { product_id: id, sort } })
       .then((res) => setReviews(res.data.results));
   };
+  useEffect(() => {
+    axios.get(`/api/reviews/meta/${id}`)
+      .then((res) => {
+        setCharName(Object.entries(res.data.characteristics)
+          .map((name) => name[0]));
+        setCharId(Object.entries(res.data.characteristics)
+          .map((name) => name[1])
+          .map((_id) => _id.id));
+        setCharValue(Object.entries(res.data.characteristics)
+          .map((name) => name[1])
+          .map((val) => parseInt(val.value, 10)));
+      });
+  }, []);
+
   useEffect(() => {
     fetchReviews();
   }, [sort]);
@@ -44,6 +61,8 @@ const ReviewRating = ({ id, rating }) => {
           starFilter={starFilter}
           setStarFilter={setStarFilter}
           rating={rating}
+          charName={charName}
+          charValue={charValue}
         />
       </div>
       <div className="review_col">
@@ -54,6 +73,10 @@ const ReviewRating = ({ id, rating }) => {
             reviewShow={reviewShow}
             fetchReviews={fetchReviews}
             starFilter={starFilter}
+            setStarFilter={setStarFilter}
+            rating={rating}
+            charName={charName}
+            charValue={charValue}
             setCurrReviewsLength={setCurrReviewsLength}
           />
         </div>
@@ -67,6 +90,7 @@ const ReviewRating = ({ id, rating }) => {
             closeWriteReview={closeWriteReview}
             id={id}
             fetchReviews={fetchReviews}
+            charId={charId}
           />
         </div>
       </div>
