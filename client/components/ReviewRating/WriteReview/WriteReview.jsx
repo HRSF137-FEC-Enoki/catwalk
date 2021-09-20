@@ -25,8 +25,8 @@ const WriteReview = ({
     Fit: null,
   });
   const [isValid, setIsValid] = useState(true);
-  const [errorGroup, setErrorGroup] = useState([]);
   const [selectRate, setSelectRate] = useState(5);
+  const [errMsg, setErrMsg] = useState([]);
 
   useEffect(() => {
     if (newReview.photos.length === 5) {
@@ -60,47 +60,39 @@ const WriteReview = ({
   const onSubmit = (e) => {
     setIsValid(true);
     e.preventDefault();
+    const errBlock = [];
     if (!newReview.summary) {
-      setErrorGroup([...errorGroup, 'summary']);
-      setNewReview({ ...newReview, summary: '' });
       document.getElementById('summary').placeholder = 'Example: Best purchase ever!';
-      setIsValid(false);
+      errBlock.push('Summary');
     }
     if (!newReview.body) {
-      setErrorGroup([...errorGroup, 'body']);
-      setNewReview({ ...newReview, body: '' });
+      errBlock.push('Body');
       document.getElementById('body').placeholder = 'Why did you like the product or not?';
-      setIsValid(false);
     }
     if (!newReview.email) {
-      setErrorGroup([...errorGroup, 'email']);
-      setNewReview({ ...newReview, email: '' });
+      errBlock.push('Email');
       document.getElementById('email').placeholder = 'Example: jackson11@email.com';
-      setIsValid(false);
     }
     if (!newReview.name) {
-      setErrorGroup([...errorGroup, 'Nikename']);
-      setNewReview({ ...newReview, name: '' });
+      errBlock.push('Nikename');
       document.getElementById('name').placeholder = 'Example: jackson11!';
-      setIsValid(false);
     }
     if (newReview.email && !looksLikeMail(newReview.email)) {
-      if (!errorGroup.includes('email')) {
-        setErrorGroup([...errorGroup, 'email']);
+      if (!errMsg.includes('Email')) {
+        errBlock.push('Email');
       }
-      setNewReview({ ...newReview, email: '' });
       document.getElementById('email').placeholder = 'Example: jackson11@email.com';
-      setIsValid(false);
     }
     if (newReview.body && newReview.body.length < 5) {
-      setNewReview({ ...newReview, body: '' });
-      if (!errorGroup.includes('body')) {
-        setErrorGroup([...errorGroup, 'body']);
+      if (!errMsg.includes('Body')) {
+        errBlock.push('Body');
       }
       document.getElementById('body').placeholder = 'must be greater than 50 characters';
-      setIsValid(false);
     }
-    if (isValid) {
+    setErrMsg([...errMsg, errBlock]);
+    if (errBlock.length !== 0) {
+      setIsValid(false);
+    } else {
       const review = newReview;
       review.rating = Number(selectRate);
       const newChar = {};
@@ -119,125 +111,163 @@ const WriteReview = ({
           .then(() => {
             fetchReviews();
           });
+        setNewReview({
+          summary: '',
+          body: '',
+          recommend: true,
+          name: '',
+          email: '',
+          photos: [],
+          product_id: id,
+        });
+        setCharacteristics({
+          Size: null,
+          Width: null,
+          Comfort: null,
+          Quality: null,
+          Length: null,
+          Fit: null,
+        });
+        setErrMsg([]);
+        setSelectRate(5);
         closeWriteReview();
       }
     }
   };
   return (
     <div className={isClickAdd ? 'window' : 'close'}>
-      {!isValid && <div id="error_message">“You must enter the following:”</div>}
-      <form className="modal">
-        <h1>Write Your Review</h1>
-        <h3>
-          About the
-          {' '}
-          {productName}
-        </h3>
-        <div className="inputLabel">
-          <span>
-            Rating:
-            <StarRating size={30} rating={selectRate} callback={setSelectRate} />
-          </span>
-        </div>
-        <div className="inputLabel">
-          Recommend:
-          <span>
-            Yes
-            <input name="recommend" id="yes" type="radio" value onChange={onChangeHandler} defaultChecked />
-          </span>
-          <span>
-            No
-            <input name="recommend" id="no" type="radio" value={false} onChange={onChangeHandler} />
-          </span>
-        </div>
-
-        <div className="inputLabel">
-          {charName.map((title) => (
-            <div key={title}>
-              <span key={title}>
-                {title}
-              </span>
-              <input name={title} type="radio" value={1 || ''} onChange={onChangeHandler} />
-
-              <input name={title} type="radio" value={2 || ''} onChange={onChangeHandler} />
-
-              <input name={title} type="radio" value={3 || ''} onChange={onChangeHandler} />
-
-              <input name={title} type="radio" value={4 || ''} onChange={onChangeHandler} />
-
-              <input name={title} type="radio" value={5 || ''} onChange={onChangeHandler} />
-
-            </div>
+      {!isValid && (
+        <div id="error_message">
+          <div>You must enter the following:</div>
+          {errMsg[0] && errMsg[0].map((err) => (
+            <div key={err}>{err}</div>
           ))}
+          <button
+            type="button"
+            onClick={() => {
+              setErrMsg([]);
+              setIsValid(true);
+            }}
+          >
+            OK
+          </button>
         </div>
+      )}
+      <div className={isValid ? 'window' : 'close'}>
 
-        <div className="inputLabel">
-          <span>
-            Summary:
-          </span>
-          <input
-            className="formInput"
-            name="summary"
-            id="summary"
-            value={newReview.summary || ''}
-            onChange={onChangeHandler}
-            maxLength="60"
-            placeholder="Example: Best purchase ever!"
-            required
-          />
-        </div>
-        <div className="inputLabel">
-          <span>
-            Body:
-          </span>
-          <textarea
-            className="formInput"
-            name="body"
-            id="body"
-            value={newReview.body || ''}
-            onChange={onChangeHandler}
-            maxLength="1000"
-            row="10"
-            placeholder="Why did you like the product or not?"
-            required
-          />
-        </div>
-        <div id="wordCount">
-          {newReview.body.length > 50
-            ? 'Minimum reached'
-            : `Minimum required characters left: ${50 - newReview.body.length}`}
-        </div>
+        <form className="modal">
+          <h1>Write Your Review</h1>
+          <h3>
+            About the
+            {' '}
+            {productName}
+          </h3>
+          <div className="inputLabel">
+            <span>
+              Rating:
+              <StarRating size={30} rating={selectRate} callback={setSelectRate} />
+            </span>
+          </div>
+          <div className="inputLabel">
+            Recommend:
+            <span>
+              Yes
+              <input name="recommend" id="yes" type="radio" value onChange={onChangeHandler} defaultChecked />
+            </span>
+            <span>
+              No
+              <input name="recommend" id="no" type="radio" value={false} onChange={onChangeHandler} />
+            </span>
+          </div>
 
-        <div className="inputLabel">
-          <span>
-            Photos:
-          </span>
-          <input type="file" name="photos" id="upload" onChange={onImageChange} />
-          <div>
-            {newReview.photos.map((photo, index) => (
-              <img src={newReview.photos[index]} alt="not found" width="20px" key={photo} />
+          <div className="inputLabel">
+            {charName.map((title) => (
+              <div key={title}>
+                <span key={title}>
+                  {title}
+                </span>
+                <input name={title} type="radio" value={1 || ''} onChange={onChangeHandler} />
+
+                <input name={title} type="radio" value={2 || ''} onChange={onChangeHandler} />
+
+                <input name={title} type="radio" value={3 || ''} onChange={onChangeHandler} />
+
+                <input name={title} type="radio" value={4 || ''} onChange={onChangeHandler} />
+
+                <input name={title} type="radio" value={5 || ''} onChange={onChangeHandler} />
+
+              </div>
             ))}
           </div>
-        </div>
 
-        <div className="inputLabel">
-          <span>
-            Nickname:
-          </span>
-          <input className="formInput" name="name" id="name" value={newReview.name || ''} onChange={onChangeHandler} placeholder="Example: jackson11!" maxLength="60" />
-        </div>
-        <div className="inputLabel">
-          <span>
-            Email:
-          </span>
-          <input className="formInput" name="email" id="email" value={newReview.email || ''} onChange={onChangeHandler} required placeholder="Example: jackson11@email.com" maxLength="60" />
-        </div>
-        <div className="reviewBtn">
-          <button type="button" onClick={() => closeWriteReview()}>Cancel</button>
-          <button type="button" onClick={onSubmit}>Submit</button>
-        </div>
+          <div className="inputLabel">
+            <span>
+              Summary:
+            </span>
+            <input
+              className="formInput"
+              name="summary"
+              id="summary"
+              value={newReview.summary || ''}
+              onChange={onChangeHandler}
+              maxLength="60"
+              placeholder="Example: Best purchase ever!"
+              required
+            />
+          </div>
+          <div className="inputLabel">
+            <span>
+              Body:
+            </span>
+            <textarea
+              className="formInput"
+              name="body"
+              id="body"
+              value={newReview.body || ''}
+              onChange={onChangeHandler}
+              maxLength="1000"
+              row="10"
+              placeholder="Why did you like the product or not?"
+              required
+            />
+          </div>
+          <div id="wordCount">
+            {newReview.body.length > 50
+              ? 'Minimum reached'
+              : `Minimum required characters left: ${50 - newReview.body.length}`}
+          </div>
 
-      </form>
+          <div className="inputLabel">
+            <span>
+              Photos:
+            </span>
+            <input type="file" name="photos" id="upload" onChange={onImageChange} />
+            <div>
+              {newReview.photos.map((photo, index) => (
+                <img src={newReview.photos[index]} alt="not found" width="20px" key={photo} />
+              ))}
+            </div>
+          </div>
+
+          <div className="inputLabel">
+            <span>
+              Nickname:
+            </span>
+            <input className="formInput" name="name" id="name" value={newReview.name || ''} onChange={onChangeHandler} placeholder="Example: jackson11!" maxLength="60" />
+          </div>
+          <div className="inputLabel">
+            <span>
+              Email:
+            </span>
+            <input className="formInput" name="email" id="email" value={newReview.email || ''} onChange={onChangeHandler} required placeholder="Example: jackson11@email.com" maxLength="60" />
+          </div>
+          <div className="reviewBtn">
+            <button type="button" onClick={() => closeWriteReview()}>Cancel</button>
+            <button type="button" onClick={onSubmit}>Submit</button>
+          </div>
+
+        </form>
+      </div>
     </div>
   );
 };

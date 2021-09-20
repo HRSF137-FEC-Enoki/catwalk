@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { GrTrigger } from 'react-icons/gr';
+import { GoTriangleDown } from 'react-icons/go';
 
 import characteristics from './Reference';
 
@@ -31,7 +31,7 @@ const ProductBreakDown = ({ charValue, charName }) => {
             <div className="scale">
               <div className="productBar">
                 <span className="charName">{name}</span>
-                <span className="pointer" id={name}><GrTrigger /></span>
+                <span className="pointer" id={name}><GoTriangleDown /></span>
               </div>
               <div className="level">
                 {characteristics[name] && characteristics[name].map((scale) => (
