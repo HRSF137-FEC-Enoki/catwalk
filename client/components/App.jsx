@@ -19,8 +19,8 @@ const App = () => {
   useEffect(() => {
     axios.get('/api/products')
       .then(({ data }) => {
-        setCurrentProduct(data[1]);
-        getStarRatingAvg(data[1].id)
+        setCurrentProduct(data[0]);
+        getStarRatingAvg(data[0].id)
           .then((result) => setRating(result));
         setIsLoading(false);
       })

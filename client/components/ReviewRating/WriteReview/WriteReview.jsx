@@ -105,7 +105,6 @@ const WriteReview = ({
       review.rating = Number(selectRate);
       const newChar = {};
       for (let i = 0; i < charName.length; i += 1) {
-        console.log(characteristics[charName[i]], String(charId[i]));
         let value = characteristics[charName[i]];
         const key = String(charId[i]);
         if (value !== null) {
@@ -115,7 +114,6 @@ const WriteReview = ({
       }
       review.characteristics = newChar;
       setNewReview(review);
-      console.log(newReview);
       if (review.name !== '') {
         axios.post('/api/reviews', newReview)
           .then(() => {

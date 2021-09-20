@@ -33,7 +33,6 @@ const StarRating = ({
     if (callback) {
       const firstIndex = e.target.getAttribute('data-id');
       const secondIndex = e.target.parentElement.getAttribute('data-id');
-      // console.log(firstIndex, secondIndex, val)
       const index = firstIndex === null ? Number(secondIndex) : Number(firstIndex);
       callback(index);
     }
@@ -44,28 +43,17 @@ const StarRating = ({
         const ratingVal = i + 1;
         let percentage = null;
 
-        if (val >= (1)) {
+        if (val >= (7 / 8)) {
           percentage = 100;
-        } else if (val >= (3 / 4)) {
+        } else if (val >= (5 / 8)) {
           percentage = 75;
-        } else if (val >= (1 / 2)) {
+        } else if (val >= (3 / 8)) {
           percentage = 50;
-        } else if (val >= (1 / 4)) {
+        } else if (val >= (1 / 8)) {
           percentage = 25;
         } else {
           percentage = 0;
         }
-        // if (val >= (7 / 8)) {
-        //   percentage = 100;
-        // } else if (val >= (5 / 8)) {
-        //   percentage = 75;
-        // } else if (val >= (3 / 8)) {
-        //   percentage = 50;
-        // } else if (val >= (1 / 8)) {
-        //   percentage = 25;
-        // } else {
-        //   percentage = 0;
-        // }
 
         val -= 1;
 
