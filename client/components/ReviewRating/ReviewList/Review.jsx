@@ -28,7 +28,7 @@ const Review = ({ review, fetchReviews }) => (
       </div>
     ) : ''}
     {review.response ? (
-      <div className="reviewResponse">
+      <div className="review_response">
         <p>Response:</p>
         <p>{review.response}</p>
       </div>

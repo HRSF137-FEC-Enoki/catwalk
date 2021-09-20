@@ -27,14 +27,14 @@ const ReviewList = ({
       {
         starFilter.length === 0
           ? (
-            <div className="reviewList">
+            <div className="review_list">
               {filterList(0).map((review) => (
                 <Review key={review.review_id} review={review} fetchReviews={fetchReviews} />
               ))}
             </div>
           )
           : (
-            <div className="reviewList">
+            <div className="review_list">
               {filterList(1).map((review) => (
                 <Review key={review.review_id} review={review} fetchReviews={fetchReviews} />
               ))}

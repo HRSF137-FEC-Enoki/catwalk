@@ -1,16 +1,23 @@
 .related-products {
   &__card {
+    background-color: #fff;
     border: 1px solid #bbb;
     border-radius: 3px;
+    cursor: pointer;
     height: 350px;
     margin: 10px;
-    width: 300px
+    width: 300px;
+
+    &:hover {
+      border-color: dodgerblue;
+    }
   }
 
   &__card-image {
+    background-image: url('../../../public/no_image.png');
     background-repeat: no-repeat;
     background-size: cover;
-    height: 150px;
+    height: 200px;
   }
 
   &__card-details {
