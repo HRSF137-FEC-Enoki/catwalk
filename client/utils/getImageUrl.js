@@ -5,7 +5,6 @@ const getPhotos = (productId) => new Promise((resolve, reject) => {
     .then((styles) => {
       const { results } = styles.data;
       const { photos } = results[0];
-      // const firstPhotoUrl = photos[0].url;
 
       resolve(photos);
     })
