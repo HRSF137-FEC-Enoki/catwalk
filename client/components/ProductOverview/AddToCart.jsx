@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 
 import '../../css/AddToCart.scss';
 
 const AddToCart = ({ currentStyle }) => {
   const [shirtSKU, setShirtSKU] = useState(null);
+  const openSizeSelector = useRef(null);
 
   useEffect(() => {
     setShirtSKU(null);
@@ -15,7 +16,7 @@ const AddToCart = ({ currentStyle }) => {
       return <option value="default" disabled hidden> - </option>;
     }
     if (!currentStyle.skus[shirtSKU]) {
-      return null;
+      return <option value="default" disabled hidden> - </option>;
     }
     let maxQuantity = 0;
     const shirtQuantities = [];
@@ -37,15 +38,20 @@ const AddToCart = ({ currentStyle }) => {
     setShirtSKU(e.target.value);
   };
 
+  const clickDropDown = () => {
+    openSizeSelector.current.focus();
+  };
+
   if (!currentStyle.skus.null) {
     return (
-      <div>
+      <div key={currentStyle.style_id}>
         <span>
           <select
             name="shirtSizes"
             id="shirtSizes"
             defaultValue="default"
             onChange={handleChange}
+            ref={openSizeSelector}
           >
             <option value="default" disabled hidden>Select Size</option>
             {Object.keys(currentStyle.skus).map((sku) => (
@@ -63,14 +69,15 @@ const AddToCart = ({ currentStyle }) => {
             {shirtSizeDropdown()}
           </select>
         </span>
+        <button type="button" onClick={clickDropDown}>Current Shirt SKU</button>
       </div>
     );
   }
   return (
-    <div>
+    <div key={currentStyle.style_id}>
       <span>
-        <select name="shirtSizes" id="shirtSizes">
-          <option disabled>
+        <select name="shirtSizes" id="shirtSizes" disabled>
+          <option disabled selected>
             OUT OF STOCK
           </option>
         </select>

@@ -49,7 +49,7 @@ const ThumbnailView = ({ photos, handleClick, currentIndex }) => {
 
   return (
     <div className="arrowsThumbnailContainer">
-      {currentIndex !== 0 ? <AiOutlineArrowUp className="upArrow" size={arrowSize} onClick={handleArrowUp} /> : null}
+      {currentIndex !== 0 ? <AiOutlineArrowUp className="upArrow" size={arrowSize} onClick={handleArrowUp} /> : <AiOutlineArrowUp className="upArrow" size={arrowSize} onClick={handleArrowUp} style={{ visibility: 'hidden' }} />}
       <div className="thumbnailContainer">
         {photos.map((photo, index) => {
           if (index >= thumbnailStart && index < thumbnailEnd) {
@@ -66,7 +66,7 @@ const ThumbnailView = ({ photos, handleClick, currentIndex }) => {
           } return null;
         })}
       </div>
-      {currentIndex !== photos.length - 1 ? <AiOutlineArrowDown className="downArrow" size={arrowSize} onClick={handleArrowDown} /> : null}
+      {currentIndex !== photos.length - 1 ? <AiOutlineArrowDown className="downArrow" size={arrowSize} onClick={handleArrowDown} /> : <AiOutlineArrowDown className="downArrow" size={arrowSize} onClick={handleArrowDown} style={{ visibility: 'hidden' }} />}
     </div>
   );
 };

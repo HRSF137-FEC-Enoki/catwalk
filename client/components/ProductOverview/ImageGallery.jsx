@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 
 import ThumbnailView from './ThumbnailView';
 
+
 import '../../css/ImageGallery.scss';
 
 const ImageGallery = ({
@@ -72,8 +73,8 @@ const ImageGallery = ({
         />
       </div>
       <ThumbnailView photos={photos} handleClick={handleThumbNailClick} className="thumbnailComponent" currentIndex={imageIndex} />
-      {imageIndex === 0 ? null : <AiOutlineArrowLeft className="leftArrow" onClick={() => handleArrow('left')} size={arrowSize} />}
-      {imageIndex === length - 1 ? null : <AiOutlineArrowRight className="rightArrow" onClick={() => handleArrow('right')} size={arrowSize} />}
+      {imageIndex === 0 ? <AiOutlineArrowLeft className="leftArrow" onClick={() => handleArrow('left')} size={arrowSize} style={{ visibility: 'hidden' }} /> : <AiOutlineArrowLeft className="leftArrow" onClick={() => handleArrow('left')} size={arrowSize} />}
+      {imageIndex === length - 1 ? <AiOutlineArrowRight className="rightArrow" onClick={() => handleArrow('right')} size={arrowSize} style={{ visibility: 'hidden' }} /> : <AiOutlineArrowRight className="rightArrow" onClick={() => handleArrow('right')} size={arrowSize} />}
     </div>
   );
 };

@@ -60,7 +60,7 @@ const ProductOverview = ({
 
   if (currentStyle) {
     return (
-      <div>
+      <div className="productOverviewWrapper">
         <div className="productOverviewContainer" data-testid="productOverview">
           <ImageGallery currentStyle={currentStyle} id="imageGallery" imageIndex={imageIndex} updateImageIndex={updateImageIndex} expand={expand} />
           <div className="productInfo" id={isCollapsed ? 'collapsed' : 'fullSize'}>
