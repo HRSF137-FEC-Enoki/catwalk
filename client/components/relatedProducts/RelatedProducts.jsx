@@ -68,8 +68,20 @@ const RelatedProducts = ({ currentProduct, handleCardClick }) => {
       <h3>Related Products</h3>
       <div className="related-products__row">
         <div className="related-products__nav-overlay">
-          <button type="button" onClick={handleNavigationClick} className={`related-products__chevron-left related-products__navigation ${imageIndex <= 0 ? 'invisible' : ''}`}>{'<'}</button>
-          <button type="button" onClick={handleNavigationClick} className={`related-products__chevron-right related-products__navigation ${imageIndex >= products.length - 4 ? 'invisible' : ''}`}>{'>'}</button>
+          <button
+            type="button"
+            onClick={handleNavigationClick}
+            className={`related-products__chevron-left related-products__navigation ${imageIndex <= 0 ? 'invisible' : ''}`}
+          >
+            {'<'}
+          </button>
+          <button
+            type="button"
+            onClick={handleNavigationClick}
+            className={`related-products__chevron-right related-products__navigation ${imageIndex >= products.length - 4 ? 'invisible' : ''}`}
+          >
+            {'>'}
+          </button>
         </div>
         {!isLoading ? (
           <ul className="related-products__carousel">

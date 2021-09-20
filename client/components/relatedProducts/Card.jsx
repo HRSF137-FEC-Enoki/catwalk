@@ -53,7 +53,13 @@ const Card = ({
   };
 
   return (
-    <div className="related-products__card" role="button" tabIndex={0} onKeyPress={() => { handleCardClick(relatedProduct.id); }} onClick={() => handleCardClick(relatedProduct.id)}>
+    <div
+      className="related-products__card"
+      role="button"
+      tabIndex={0}
+      onKeyPress={() => { handleCardClick(relatedProduct.id); }}
+      onClick={() => handleCardClick(relatedProduct.id)}
+    >
       <div className="related-products__card-image" style={mainImageUrl ? { backgroundImage: `url(${mainImageUrl})` } : {}}>
         <span
           className="related-products__action-btn"
