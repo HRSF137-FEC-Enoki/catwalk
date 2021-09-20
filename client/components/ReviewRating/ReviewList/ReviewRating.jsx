@@ -54,7 +54,6 @@ const ReviewRating = ({ id, rating }) => {
     setIsClickAdd(false);
   };
   return (
-
     <div className="review_rating_container">
       <div className="rating_col">
         <RatingBreakDown

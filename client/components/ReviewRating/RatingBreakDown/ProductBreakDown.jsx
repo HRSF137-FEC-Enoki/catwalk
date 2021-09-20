@@ -2,9 +2,15 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { GoTriangleDown } from 'react-icons/go';
 
-import characteristics from './Reference';
-
 const ProductBreakDown = ({ charValue, charName }) => {
+  const characteristics = {
+    Size: ['Too small', 'Perfect', 'Too wide'],
+    Width: ['Too narrow', 'Perfect', 'Too wide'],
+    Comfort: ['Uncomfortable', 'Ok', 'Perfect'],
+    Quality: ['Poor', 'What I expect', 'Perfect'],
+    Length: ['Runs Short', 'Perfect', 'Runs Long'],
+    Fit: ['Runs tight', 'Perfect', 'Runs Long'],
+  };
   const findPosition = () => {
     const char = Object.entries(characteristics);
 
