@@ -1,15 +1,91 @@
 import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
+import axios from 'axios';
 
 import '../../css/AddToCart.scss';
 
 const AddToCart = ({ currentStyle }) => {
   const [shirtSKU, setShirtSKU] = useState(null);
+  const [sizeChosen, setSizeChosen] = useState(null);
+  const [isAddToCart, setIsAddToCart] = useState(false);
+  const [showCart, setShowCart] = useState(false);
+  const [cartMessage, setCartMessaage] = useState(null);
+
   const openSizeSelector = useRef(null);
 
   useEffect(() => {
     setShirtSKU(null);
+    setSizeChosen(null);
+    setIsAddToCart(false);
+    setShowCart(false);
+    setCartMessaage(null);
   }, [currentStyle]);
+
+  const handleShirtSize = (e) => {
+    setSizeChosen(e.target.value);
+  };
+
+  const handleChange = (e) => {
+    e.preventDefault();
+    setShirtSKU(e.target.value);
+  };
+
+  const renderCartWarning = () => {
+    if (!isAddToCart) {
+      return null;
+    }
+
+    if (!shirtSKU && isAddToCart) {
+      return <p>Please Choose a Size</p>;
+    }
+
+    if (!sizeChosen && isAddToCart) {
+      return <p>Please Choose a Quantity</p>;
+    }
+    return null;
+  };
+
+  const handleAddToCart = () => {
+    if (!shirtSKU) {
+      setIsAddToCart(true);
+      openSizeSelector.current.focus();
+      return;
+    }
+    if (shirtSKU && !sizeChosen) {
+      setIsAddToCart(true);
+      return;
+    }
+    if (shirtSKU && sizeChosen) {
+      axios.post('/api/cart', { sku_id: shirtSKU })
+        .then(() => {
+          setShowCart(true);
+          axios.get('/api/cart')
+            .then((response) => {
+              setCartMessaage(
+                <div className="cartItems">
+                  <p>Added to cart!</p>
+                  <p>Items in Cart:</p>
+                  {response.data.map((item) => <p key={Math.random()}>{`Item: ${item.sku_id} Count: ${item.count}`}</p>)}
+                </div>,
+              );
+            });
+        })
+        .catch(() => { setShowCart('error'); });
+    }
+  };
+
+  const renderCartAdd = () => {
+    if (!showCart) {
+      return null;
+    }
+    if (showCart === 'error') {
+      return <p>Unable to add to cart</p>;
+    }
+    if (showCart === true) {
+      return cartMessage;
+    }
+    return null;
+  };
 
   const shirtSizeDropdown = () => {
     if (!shirtSKU) {
@@ -20,6 +96,7 @@ const AddToCart = ({ currentStyle }) => {
     }
     let maxQuantity = 0;
     const shirtQuantities = [];
+    shirtQuantities.push(<option value="default" key="chooseSize">-</option>);
     if (currentStyle.skus[shirtSKU].quantity <= 15) {
       maxQuantity = currentStyle.skus[shirtSKU].quantity;
     } else {
@@ -31,15 +108,6 @@ const AddToCart = ({ currentStyle }) => {
       );
     }
     return shirtQuantities;
-  };
-
-  const handleChange = (e) => {
-    e.preventDefault();
-    setShirtSKU(e.target.value);
-  };
-
-  const clickDropDown = () => {
-    openSizeSelector.current.focus();
   };
 
   if (!currentStyle.skus.null) {
@@ -65,19 +133,24 @@ const AddToCart = ({ currentStyle }) => {
           </select>
         </span>
         <span>
-          <select name="shirtQuantity" defaultValue="default">
+          <select name="shirtQuantity" defaultValue="default" onChange={handleShirtSize}>
             {shirtSizeDropdown()}
           </select>
         </span>
-        <button type="button" onClick={clickDropDown}>Current Shirt SKU</button>
+        <div>
+          <button type="button" onClick={handleAddToCart}>Add To Cart</button>
+          {renderCartWarning()}
+          {renderCartAdd()}
+        </div>
+
       </div>
     );
   }
   return (
     <div key={currentStyle.style_id}>
       <span>
-        <select name="shirtSizes" id="shirtSizes" disabled>
-          <option disabled selected>
+        <select name="shirtSizes" id="shirtSizes" defaultValue="default">
+          <option disabled value="default">
             OUT OF STOCK
           </option>
         </select>

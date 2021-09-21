@@ -24,14 +24,14 @@ const ProductOverview = ({
     if (currentStyle.sale_price) {
       return (
         <div className="productPrice">
-          <span className="priceStrikethrough">{currentStyle.original_price}</span>
-          <span className="salePrice">{currentStyle.sale_price}</span>
+          <span className="priceStrikethrough">{`$${currentStyle.original_price}`}</span>
+          <span className="salePrice">{`$${currentStyle.sale_price}`}</span>
         </div>
       );
     }
     return (
       <div className="productPrice">
-        {currentStyle.original_price}
+        {`$${currentStyle.original_price}`}
       </div>
     );
   };
