@@ -1,7 +1,7 @@
 .review_rating_container{
   display: grid;
   grid-template-columns: 1fr 2fr;
-  gap:20px;
+  gap: 20px;
 }
 .review_col{
   grid-column: 2/3;
@@ -10,7 +10,7 @@
   grid-column: 1/2;
 }
 .rating_score{
-  margin:30px auto;
+  margin: 30px auto;
   display: flex;
   justify-content: center;
   align-items: flex-start;
@@ -27,7 +27,7 @@
 .star_breakdown{
   display: flex;
   justify-content: center;
-  align-items:flex-start;
+  align-items: flex-start;
   margin: 20px auto;
   width: 80%;
 }
@@ -36,7 +36,7 @@
   background-color: rgb(199, 197, 197);
   height: 5px;
   width: 80%;
-  margin:5px 10px;
+  margin: 5px 10px;
 }
 .rating_bar_left{
   background-color: green;
@@ -44,10 +44,10 @@
   width: 0;
 }
 .sorting{
-  padding:10px;
+  padding: 10px;
 }
 .review_list_container{
-  border:1px solid black;
+  border: 1px solid black;
   padding: 10px;
 }
 .review_list{
@@ -67,7 +67,7 @@
   margin-bottom: 5px;
 }
 .summary{
-  font-weight:bold;
+  font-weight: bold;
   margin-bottom: 5px;
 }
 .review_body{
@@ -103,7 +103,7 @@
   transform: translate(-50%, -50%);
   z-index: 10;
   background-color: rgb(233, 252, 250);
-  border:1px solid black;
+  border: 1px solid black;
   height: fit-content;
   max-width: 80%;
   min-width: 30%;
@@ -161,7 +161,7 @@
 .characteristics_label div{
   display: flex;
   justify-content: space-between;
-  margin:5px auto;
+  margin: 5px auto;
 }
 .review_btn{
   display: flex;
@@ -170,7 +170,7 @@
 }
 .review_btn button{
   border-radius: 12px;
-  padding:10px;
+  padding: 10px;
   margin: 10px 20px;
   box-shadow: 10px 5px 5px grey;
 }
@@ -189,9 +189,6 @@
 }
 .close{
   display: none;
-}
-.error{
-  border-color:red;
 }
 .star_filter{
   text-align: center;
@@ -212,8 +209,8 @@
 }
 .char_name{
   position: absolute;
-  top:-20px;
-  left:0;
+  top: -20px;
+  left: 0;
 }
 .scale{
   width: 80%;
@@ -223,12 +220,12 @@
   position: absolute;
   font-size: 45px;
   top: -15px;
-  left:50%
+  left: 50%
 }
 .level{
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: xx-small;
+  font-size: 10px;
   margin: 8px 0;
 }
