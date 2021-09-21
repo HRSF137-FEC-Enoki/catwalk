@@ -69,10 +69,11 @@ const RelatedProducts = ({ currentProduct, handleCardClick }) => {
     const numOfCards = $cards.length;
     const outerWidth = $('.related-products')[0].getBoundingClientRect().width;
     const innerWidth = numOfCards * 270;
+    const HALF_CARD_WIDTH = 125;
 
     distance += e.deltaY;
 
-    if (distance > 0 && distance < innerWidth - outerWidth) {
+    if (distance > 0 && distance < (innerWidth - outerWidth) + HALF_CARD_WIDTH) {
       $cards.css({ right: `+=${e.deltaY}` });
     }
   };
