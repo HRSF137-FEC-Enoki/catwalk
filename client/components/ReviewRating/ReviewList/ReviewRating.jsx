@@ -54,7 +54,7 @@ const ReviewRating = ({ id, rating, productName }) => {
     setIsClickAdd(false);
   };
   return (
-    <>
+    <div className="widget">
       {reviews.length !== 0
         ? (
           <div className="review_rating_container">
@@ -104,7 +104,7 @@ const ReviewRating = ({ id, rating, productName }) => {
             </div>
           </div>
         ) : (<div style={{ textAlign: 'center' }}>No Reviews</div>)}
-    </>
+    </div>
   );
 };
 ReviewRating.propTypes = {
