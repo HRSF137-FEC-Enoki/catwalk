@@ -82,17 +82,7 @@ app.get('/api/reviews', (req, res) => {
       res.status(404).send(err);
     });
 });
-app.get('/api/products/:product_id/styles', (req, res) => {
-  const pid = req.params.product_id;
 
-  axios.get(`${API_BASE_URL}/products/${pid}/styles`, options)
-    .then((response) => {
-      res.send(response.data);
-    })
-    .catch((err) => {
-      res.send(`Error:: ${err}`);
-    });
-});
 app.put('/api/reviews/:review_id/helpful', (req, res) => {
   axios.put(`${API_BASE_URL}/reviews/${req.params.review_id}/helpful`, {}, options)
     .then(() => res.sendStatus(204))
@@ -123,6 +113,23 @@ app.get('/api/reviews/meta/:id', (req, res) => {
       res.sendStatus(404);
     });
 });
+
+app.get('/api/cart', (req, res) => {
+  axios.get(`${API_BASE_URL}/cart`, options)
+    .then((data) => res.send(data.data))
+    .catch(() => {
+      res.sendStatus(404);
+    });
+});
+
+app.post('/api/cart', (req, res) => {
+  axios.post(`${API_BASE_URL}/cart`, req.body, options)
+    .then((data) => res.send(data.data))
+    .catch(() => {
+      res.sendStatus(404);
+    });
+});
+
 app.listen(port, () => {
   // eslint-disable-next-line no-console
   console.log(`server running on ${port}`);

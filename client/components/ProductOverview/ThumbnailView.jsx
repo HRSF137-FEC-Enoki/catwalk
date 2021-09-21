@@ -49,24 +49,26 @@ const ThumbnailView = ({ photos, handleClick, currentIndex }) => {
 
   return (
     <div className="arrowsThumbnailContainer">
-      {currentIndex !== 0 ? <AiOutlineArrowUp className="upArrow" size={arrowSize} onClick={handleArrowUp} /> : null}
+      {currentIndex !== 0 ? <AiOutlineArrowUp className="upArrow" size={arrowSize} onClick={handleArrowUp} /> : <AiOutlineArrowUp className="upArrow" size={arrowSize} onClick={handleArrowUp} style={{ visibility: 'hidden' }} />}
       <div className="thumbnailContainer">
         {photos.map((photo, index) => {
           if (index >= thumbnailStart && index < thumbnailEnd) {
             return (
-              <div style={{ backgroundImage: `url(${photo.thumbnail_url})` }} id={index === currentIndex ? 'selected' : 'unselected'} className="thumbnail" key={photo.thumbnail_url}>
-                <input
-                  className="thumbnailInput"
-                  type="button"
-                  onClick={() => handleClick(index)}
-                />
-              </div>
-
+              <input
+                className="thumbnailInput"
+                type="image"
+                alt="image from selected style set"
+                onClick={() => handleClick(index)}
+                id={index === currentIndex ? 'selected' : 'unselected'}
+                key={photo.thumbnail_url}
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/HD_transparent_picture.png/1200px-HD_transparent_picture.png"
+                style={{ backgroundImage: `url(${photo.thumbnail_url || '../../../no_image.png'})` }}
+              />
             );
           } return null;
         })}
       </div>
-      {currentIndex !== photos.length - 1 ? <AiOutlineArrowDown className="downArrow" size={arrowSize} onClick={handleArrowDown} /> : null}
+      {currentIndex !== photos.length - 1 ? <AiOutlineArrowDown className="downArrow" size={arrowSize} onClick={handleArrowDown} /> : <AiOutlineArrowDown className="downArrow" size={arrowSize} onClick={handleArrowDown} style={{ visibility: 'hidden' }} />}
     </div>
   );
 };
