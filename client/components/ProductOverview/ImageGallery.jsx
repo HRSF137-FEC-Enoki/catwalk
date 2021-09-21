@@ -75,8 +75,8 @@ const ImageGallery = ({
         />
       </div>
       <ThumbnailView photos={photos} handleClick={handleThumbNailClick} className="thumbnailComponent" currentIndex={imageIndex} />
-      {imageIndex === 0 ? <AiOutlineArrowLeft className="leftArrow" onClick={() => handleArrow('left')} size={arrowSize} style={{ visibility: 'hidden' }} /> : <AiOutlineArrowLeft className="leftArrow" onClick={() => handleArrow('left')} size={arrowSize} />}
-      {imageIndex === length - 1 ? <AiOutlineArrowRight className="rightArrow" onClick={() => handleArrow('right')} size={arrowSize} style={{ visibility: 'hidden' }} /> : <AiOutlineArrowRight className="rightArrow" onClick={() => handleArrow('right')} size={arrowSize} />}
+      <AiOutlineArrowLeft className="leftArrow" onClick={() => handleArrow('left')} size={arrowSize} style={imageIndex === 0 ? { visibility: 'hidden' } : {}} />
+      <AiOutlineArrowRight className="rightArrow" onClick={() => handleArrow('right')} size={arrowSize} style={imageIndex === length - 1 ? { visibility: 'hidden' } : {}} />
     </div>
   );
 };

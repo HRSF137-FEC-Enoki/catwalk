@@ -21,7 +21,7 @@ const AddToCart = ({ currentStyle }) => {
     setCartMessaage(null);
   }, [currentStyle]);
 
-  const handleShirtSize = (e) => {
+  const chooseShirtSize = (e) => {
     setSizeChosen(e.target.value);
   };
 
@@ -45,7 +45,7 @@ const AddToCart = ({ currentStyle }) => {
     return null;
   };
 
-  const handleAddToCart = () => {
+  const handleAddToCartClick = () => {
     if (!shirtSKU) {
       setIsAddToCart(true);
       openSizeSelector.current.focus();
@@ -133,12 +133,12 @@ const AddToCart = ({ currentStyle }) => {
           </select>
         </span>
         <span>
-          <select name="shirtQuantity" defaultValue="default" onChange={handleShirtSize}>
+          <select name="shirtQuantity" defaultValue="default" onChange={chooseShirtSize}>
             {shirtSizeDropdown()}
           </select>
         </span>
         <div>
-          <button type="button" onClick={handleAddToCart}>Add To Cart</button>
+          <button type="button" onClick={handleAddToCartClick}>Add To Cart</button>
           {renderCartWarning()}
           {renderCartAdd()}
         </div>
