@@ -57,7 +57,11 @@ const App = () => {
             currentProduct={currentProduct}
             handleCardClick={handleCardClick}
           />
-          <ReviewRating id={productId} />
+          <ReviewRating
+            id={currentProduct.id}
+            rating={rating}
+            productName={currentProduct.name}
+          />
         </>
       ) : <p>Loading!</p>}
       {isError.error && <p>Currently unable to load page error!</p>}

@@ -62,18 +62,7 @@ app.get('/api/products/:product_id/related', (req, res) => {
 });
 
 app.get('/api/reviews', (req, res) => {
-  const pid = req.query.product_id;
-  axios.get(`${API_BASE_URL}/reviews?product_id=${pid}`, options)
-    .then((response) => {
-      res.send(response.data);
-    })
-    .catch((err) => {
-      res.status(404).send(err);
-    });
-});
-
-app.get('/api/reviews', (req, res) => {
-  const { pid, sort } = req.query;
+  const { product_id: pid, sort } = req.query;
   axios.get(`${API_BASE_URL}/reviews?product_id=${pid}&sort=${sort}`, options)
     .then((response) => {
       res.send(response.data);

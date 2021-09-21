@@ -8,10 +8,11 @@ import ReviewBody from './ReviewBody';
 import Helpfulness from './Helpfulness';
 import StarRating from '../../StarRating';
 
+const STAR_SIZE = 16;
 const Review = ({ review, fetchReviews }) => (
   <div className="review">
     <div className="rating_reviewer_date">
-      <StarRating size={10} rating={review.rating} />
+      <StarRating size={STAR_SIZE} rating={review.rating} />
       <div>
         {review.reviewer_name}
         <span>,&nbsp;</span>

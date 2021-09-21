@@ -1,5 +1,5 @@
-import PropTypes from 'prop-types';
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 
 const ReviewBody = ({ review }) => {
   const [isMoreThanMaxChar, setIsMoreThanMaxChar] = useState(false);
@@ -20,14 +20,18 @@ const ReviewBody = ({ review }) => {
       {isMoreThanMaxChar ? (
         <div>
           {review.body.slice(0, 250)}
-          <button type="button" onClick={() => setIsMoreThanMaxChar(false)}>show more</button>
+          ...
+          {' '}
+          <button type="button" onClick={() => setIsMoreThanMaxChar(false)}>
+            show more
+          </button>
         </div>
       )
         : <div>{review && review.body}</div>}
       {
         review && review.photos.map((photo) => (
           <span key={photo.id}>
-            <img src={photo.url} alt="product" width="50px" onClick={onClickImage} role="presentation" />
+            <img src={photo.url} alt="product" onClick={onClickImage} role="presentation" />
           </span>
         ))
       }

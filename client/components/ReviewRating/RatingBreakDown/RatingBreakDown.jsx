@@ -67,39 +67,39 @@ const RatingBreakDown = ({
 
   return (
     <>
-      <div className="ratingBreakDown">
-        <div className="ratingScore">
-          <p>{Number.isNaN(rating) ? 0 : rating}</p>
+      <div className="rating_breakdown">
+        <div className="rating_score">
+          <p>{Number.isNaN(rating) ? 0 : rating.toFixed(1)}</p>
           <StarRating size={36} rating={rating} />
         </div>
-        <p className="ratingRecommended">
+        <p className="rating_recommended">
           {recommended && getPercentage(recommended.true)}
           {'  '}
           of reviews recommend this product
         </p>
         {[...Array(5)].map((star, index) => (
-          <div className="starBreakDown">
+          <div className="star_breakdown" key={Math.random() * 100}>
             <a href="/" name={5 - index} onClick={onClickHandler}>
               {5 - index}
               star
             </a>
-            <div className="ratingBar">
-              <div className="ratingBarLeft" id={5 - index} />
+            <div className="rating_bar">
+              <div className="rating_bar_left" id={5 - index} />
             </div>
 
           </div>
         ))}
         {starFilter && starFilter.length !== 0
           && (
-            <div className="starFilter">
+            <div className="star_filter">
 
               <span>
-                {starFilter.map((i) => (
-                  <div>
-                    {String(i)}
+                {starFilter.map((val) => (
+                  <div key={val}>
+                    {String(val)}
                     {' '}
                     star
-                    <StarRating size={16} rating={i} />
+                    <StarRating size={16} rating={val} />
                   </div>
                 ))}
               </span>
