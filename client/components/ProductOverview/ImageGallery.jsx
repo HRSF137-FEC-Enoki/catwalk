@@ -23,7 +23,10 @@ const ImageGallery = ({
   if (imageIndex > length) {
     updateImageIndex(0);
   }
-  const currentPhoto = currentStyle.photos[imageIndex].url;
+
+  // /home/andylei/hackreactor/catwalk/client/components/ProductOverview/ImageGallery.jsx
+  // /home/andylei/hackreactor/catwalk/public/no_image.png
+  const currentPhoto = currentStyle.photos[imageIndex].url || '../../../no_image.png';
 
   const handleMousePosition = (e) => {
     const relativeX = e.clientX - e.target.offsetLeft;

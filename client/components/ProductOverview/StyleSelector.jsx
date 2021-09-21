@@ -16,7 +16,7 @@ const StyleSelector = ({ styles, currentStyle, updateCurrentStyle }) => {
             <input
               type="image"
               src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/HD_transparent_picture.png/1200px-HD_transparent_picture.png"
-              style={{ backgroundImage: `url(${style.photos[0].thumbnail_url})` }}
+              style={{ backgroundImage: `url(${style.photos[0].thumbnail_url || '../../../no_image.png'})` }}
               alt="stylethumbail"
               key={style.style_id}
               className="styleThumbnail"

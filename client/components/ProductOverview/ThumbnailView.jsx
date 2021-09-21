@@ -62,7 +62,7 @@ const ThumbnailView = ({ photos, handleClick, currentIndex }) => {
                 id={index === currentIndex ? 'selected' : 'unselected'}
                 key={photo.thumbnail_url}
                 src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/HD_transparent_picture.png/1200px-HD_transparent_picture.png"
-                style={{ backgroundImage: `url(${photo.thumbnail_url})` }}
+                style={{ backgroundImage: `url(${photo.thumbnail_url || '../../../no_image.png'})` }}
               />
             );
           } return null;
