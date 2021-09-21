@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 import $ from 'jquery';
 
-import throttler from '../../utils/throttler';
-
 import Card from './Card';
 import ComparisonModal from './ComparisonModal';
 
@@ -17,7 +15,7 @@ const RelatedProducts = ({ currentProduct, handleCardClick }) => {
   const [showComparison, setShowComparison] = useState(false);
   const [relatedProduct, setRelatedProduct] = useState(null);
   const [imageIndex, setImageIndex] = useState(0);
-  const [carouselIndex, setCarouselIndex] = useState(0);
+  let distance = 0; // distance of wheel scroll
 
   useEffect(() => {
     // make a GET request to /api/products/:product_id/related
@@ -66,21 +64,17 @@ const RelatedProducts = ({ currentProduct, handleCardClick }) => {
     $('.related-products__card').animate(direction, duration);
   };
 
-  let scale = 1;
-
   const handleOnWheel = (e) => {
     const $cards = $('.related-products__card');
     const numOfCards = $cards.length;
     const outerWidth = $('.related-products')[0].getBoundingClientRect().width;
     const innerWidth = numOfCards * 270;
 
-    scale += e.deltaY * -0.01;
-    // Restrict scale
-    console.log(Math.max(0, scale));
+    distance += e.deltaY;
 
-    scale = Math.min(Math.max(0, scale), innerWidth - outerWidth);
-
-    $cards.css({ right: scale });
+    if (distance > 0 && distance < innerWidth - outerWidth) {
+      $cards.css({ right: `+=${e.deltaY}` });
+    }
   };
 
   return (
