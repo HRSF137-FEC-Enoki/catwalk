@@ -193,21 +193,6 @@ const WriteReview = ({
                   <input name={title} type="radio" value={val || ''} key={title + val} onChange={onChangeHandler} />
                 ))}
               </div>
-              // <div key={title}>
-              //   <span key={title}>
-              //     {title}
-              //   </span>
-              //   <input name={title} type="radio" value={1 || ''} onChange={onChangeHandler} />
-
-              //   <input name={title} type="radio" value={2 || ''} onChange={onChangeHandler} />
-
-              //   <input name={title} type="radio" value={3 || ''} onChange={onChangeHandler} />
-
-              //   <input name={title} type="radio" value={4 || ''} onChange={onChangeHandler} />
-
-              //   <input name={title} type="radio" value={5 || ''} onChange={onChangeHandler} />
-
-              // </div>
             ))}
           </div>
 

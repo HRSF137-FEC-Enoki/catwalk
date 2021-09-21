@@ -94,12 +94,12 @@ const RatingBreakDown = ({
             <div className="star_filter">
 
               <span>
-                {starFilter.map((i) => (
-                  <div key={i}>
-                    {String(i)}
+                {starFilter.map((val) => (
+                  <div key={val}>
+                    {String(val)}
                     {' '}
                     star
-                    <StarRating size={16} rating={i} />
+                    <StarRating size={16} rating={val} />
                   </div>
                 ))}
               </span>
