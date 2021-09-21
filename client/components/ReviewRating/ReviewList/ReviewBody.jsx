@@ -1,5 +1,5 @@
-import PropTypes from 'prop-types';
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 
 const ReviewBody = ({ review }) => {
   const [isMoreThanMaxChar, setIsMoreThanMaxChar] = useState(false);

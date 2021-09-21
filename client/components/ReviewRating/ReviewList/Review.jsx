@@ -11,7 +11,7 @@ import StarRating from '../../StarRating';
 const Review = ({ review, fetchReviews }) => (
   <div className="review">
     <div className="rating_reviewer_date">
-      <StarRating size={10} rating={review.rating} />
+      <StarRating size={16} rating={review.rating} />
       <div>
         {review.reviewer_name}
         <span>,&nbsp;</span>

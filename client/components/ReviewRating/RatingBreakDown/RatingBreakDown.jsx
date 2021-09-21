@@ -69,7 +69,7 @@ const RatingBreakDown = ({
     <>
       <div className="rating_breakdown">
         <div className="rating_score">
-          <p>{Number.isNaN(rating) ? 0 : rating}</p>
+          <p>{Number.isNaN(rating) ? 0 : rating.toFixed(1)}</p>
           <StarRating size={36} rating={rating} />
         </div>
         <p className="rating_recommended">
@@ -78,7 +78,7 @@ const RatingBreakDown = ({
           of reviews recommend this product
         </p>
         {[...Array(5)].map((star, index) => (
-          <div className="star_breakdown">
+          <div className="star_breakdown" key={Math.random() * 100}>
             <a href="/" name={5 - index} onClick={onClickHandler}>
               {5 - index}
               star

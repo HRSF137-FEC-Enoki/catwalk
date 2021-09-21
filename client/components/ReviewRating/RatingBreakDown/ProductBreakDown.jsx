@@ -34,14 +34,14 @@ const ProductBreakDown = ({ charValue, charName }) => {
         && charName.length > 0
         && charName
           .map((name) => (
-            <div className="scale">
+            <div className="scale" key={name}>
               <div className="product_bar">
                 <span className="char_name">{name}</span>
                 <span className="pointer" id={name}><GoTriangleDown /></span>
               </div>
               <div className="level">
                 {characteristics[name] && characteristics[name].map((scale) => (
-                  <span>{scale}</span>
+                  <span key={scale}>{scale}</span>
                 ))}
               </div>
             </div>

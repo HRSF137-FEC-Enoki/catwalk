@@ -162,9 +162,10 @@ const WriteReview = ({
             {' '}
             {productName}
           </h3>
-          <div className="input_label">
+          <div>
             <span>
-              Rating:
+              <b>Rating:</b>
+              <p />
               <StarRating size={30} rating={selectRate} callback={setSelectRate} />
             </span>
           </div>
@@ -180,7 +181,7 @@ const WriteReview = ({
             </span>
           </div>
 
-          <div className="input_label">
+          <div className="radios">
             {charName.map((title) => (
               <div key={title}>
                 <span key={title}>
