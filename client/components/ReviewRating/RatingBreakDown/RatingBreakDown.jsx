@@ -3,9 +3,10 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 
 import StarRating from '../../StarRating';
+import ProductBreakDown from './ProductBreakDown';
 
 const RatingBreakDown = ({
-  id, setStarFilter, starFilter, rating,
+  id, setStarFilter, starFilter, rating, charValue, charName,
 }) => {
   const [ratings, setRatings] = useState({});
   const [recommended, setRecommended] = useState({});
@@ -65,47 +66,54 @@ const RatingBreakDown = ({
   };
 
   return (
-    <div className="rating_breakdown">
-      <div className="rating_score">
-        <p>{rating}</p>
-        <StarRating size={36} rating={rating} />
-      </div>
-      <p className="rating_recommended">
-        {recommended && getPercentage(recommended.true)}
-        {'  '}
-        of reviews recommend this product
-      </p>
-      {[...Array(5)].map((star, index) => (
-        <div key={Math.random()} className="star_breakdown">
-          <a href="/" name={5 - index} onClick={onClickHandler}>
-            {5 - index}
-            star
-          </a>
-          <div className="rating_bar">
-            <div className="rating_bar_left" id={5 - index} />
-          </div>
-
+    <>
+      <div className="ratingBreakDown">
+        <div className="ratingScore">
+          <p>{Number.isNaN(rating) ? 0 : rating}</p>
+          <StarRating size={36} rating={rating} />
         </div>
-      ))}
-      {starFilter.length !== 0
-        && (
-          <div className="star_filter">
-            <span>
-              {starFilter.map((i) => (
-                <div>
-                  {String(i)}
-                  {' '}
-                  star
-                  <StarRating size={16} rating={i} />
-                </div>
-              ))}
-            </span>
-            <div>
-              <button type="button" onClick={clearFilter}>clear</button>
+        <p className="ratingRecommended">
+          {recommended && getPercentage(recommended.true)}
+          {'  '}
+          of reviews recommend this product
+        </p>
+        {[...Array(5)].map((star, index) => (
+          <div className="starBreakDown">
+            <a href="/" name={5 - index} onClick={onClickHandler}>
+              {5 - index}
+              star
+            </a>
+            <div className="ratingBar">
+              <div className="ratingBarLeft" id={5 - index} />
             </div>
+
           </div>
-        )}
-    </div>
+        ))}
+        {starFilter && starFilter.length !== 0
+          && (
+            <div className="starFilter">
+
+              <span>
+                {starFilter.map((i) => (
+                  <div>
+                    {String(i)}
+                    {' '}
+                    star
+                    <StarRating size={16} rating={i} />
+                  </div>
+                ))}
+              </span>
+              <div>
+                <button type="button" onClick={clearFilter}>clear</button>
+              </div>
+            </div>
+          )}
+      </div>
+      <ProductBreakDown
+        charName={charName}
+        charValue={charValue}
+      />
+    </>
   );
 };
 
