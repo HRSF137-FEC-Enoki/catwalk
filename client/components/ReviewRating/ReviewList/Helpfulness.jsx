@@ -3,16 +3,16 @@ import React, { useState } from 'react';
 import axios from 'axios';
 
 const Helpfulness = ({ review, fetchReviews }) => {
-  const [clickHelpful, setClickHelpful] = useState(false);
+  const [hasClickedHelpful, setHasClickedHelpful] = useState(false);
 
   const onClickHandler = (e) => {
     e.preventDefault();
     const action = e.target.name;
-    if (!clickHelpful) {
+    if (!hasClickedHelpful) {
       axios.put(`/api/reviews/${review.review_id}/${action}`)
         .then(() => {
           fetchReviews();
-          setClickHelpful(true);
+          setHasClickedHelpful(true);
         });
 
       if (e.target.name === 'helpful') {

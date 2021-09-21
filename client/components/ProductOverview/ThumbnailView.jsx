@@ -9,16 +9,20 @@ const ThumbnailView = ({ photos, handleClick, currentIndex }) => {
   const arrowSize = 45;
 
   useEffect(() => {
-    if (photos.length <= 7) {
+    const THUMBNAIL_LIMIT = 7;
+    if (photos.length <= THUMBNAIL_LIMIT) {
       setThumbnailStart(0);
       setThumbnailEnd(photos.length);
-    } else if (photos.length > 7) {
-      if (currentIndex > photos.length - 7) {
-        setThumbnailStart(photos.length - 7);
+    } else if (photos.length > THUMBNAIL_LIMIT) {
+      if (currentIndex > photos.length - THUMBNAIL_LIMIT) {
+        setThumbnailStart(photos.length - THUMBNAIL_LIMIT);
         setThumbnailEnd(photos.length);
-      } else if (currentIndex < 7) {
+      } else if (currentIndex < THUMBNAIL_LIMIT) {
         setThumbnailStart(0);
-        setThumbnailEnd(7);
+        setThumbnailEnd(THUMBNAIL_LIMIT);
+      } else {
+        setThumbnailStart(currentIndex);
+        setThumbnailEnd(currentIndex + THUMBNAIL_LIMIT);
       }
     }
   }, [currentIndex]);
@@ -50,15 +54,14 @@ const ThumbnailView = ({ photos, handleClick, currentIndex }) => {
         {photos.map((photo, index) => {
           if (index >= thumbnailStart && index < thumbnailEnd) {
             return (
-              <input
-                type="image"
-                alt="style of thumbnail"
-                src={photo.thumbnail_url}
-                id={index === currentIndex ? 'selected' : 'unselected'}
-                key={photo.thumbnail_url}
-                className="thumbnail"
-                onClick={() => handleClick(index)}
-              />
+              <div style={{ backgroundImage: `url(${photo.thumbnail_url})` }} id={index === currentIndex ? 'selected' : 'unselected'} className="thumbnail" key={photo.thumbnail_url}>
+                <input
+                  className="thumbnailInput"
+                  type="button"
+                  onClick={() => handleClick(index)}
+                />
+              </div>
+
             );
           } return null;
         })}

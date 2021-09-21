@@ -9,39 +9,62 @@ import ProductOverview from './ProductOverview/ProductOverview';
 
 import '../css/App.scss';
 
+const INITIAL_PRODUCT_ID = 48432;
+
 const App = () => {
-  // const [products, setProducts] = useState([]);
   const [currentProduct, setCurrentProduct] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState({ error: false, msg: '' });
   const [rating, setRating] = useState(0);
+  const [productId, setProductId] = useState(INITIAL_PRODUCT_ID);
+  const [totalReviews, setTotalReviews] = useState(0);
 
   useEffect(() => {
-    axios.get('/api/products')
+    setIsLoading(true);
+    axios.get(`/api/products/${productId}`)
       .then(({ data }) => {
-        setCurrentProduct(data[1]);
-        getStarRatingAvg(data[1].id)
-          .then((result) => setRating(result));
+        setCurrentProduct(data);
+        getStarRatingAvg(data.id)
+          .then((result) => {
+            setRating(result.avg);
+            setTotalReviews(result.count);
+          });
         setIsLoading(false);
       })
       .catch((err) => {
+        setIsLoading(false);
         setIsError({ error: true, msg: err });
       });
-  }, []);
+  }, [productId]);
+
+  const handleCardClick = (id) => {
+    setProductId(id);
+  };
+
   return (
     <div className="app__container">
-      <header className="app__header">Logo and Search Go Here</header>
-      {isLoading ? <p>Loading!</p> : <ProductOverview productId={currentProduct.id} />}
-      {isLoading ? <p>Loading!</p> : <RelatedProducts productId={currentProduct.id} />}
-      {isError.error ? <p>Currently unable to load page error!</p> : ''}
-      {currentProduct
-        && (
-        <ReviewRating
-          id={currentProduct.id}
-          rating={rating}
-          productName={currentProduct.name}
-        />
-        )}
+      <header className="app__header">Project Catwalk</header>
+      {!isLoading ? (
+        <>
+          <ProductOverview
+            currentProduct={currentProduct}
+            productId={productId}
+            rating={rating}
+            totalReviews={totalReviews}
+          />
+          <RelatedProducts
+            rating={rating}
+            currentProduct={currentProduct}
+            handleCardClick={handleCardClick}
+          />
+          <ReviewRating
+            id={currentProduct.id}
+            rating={rating}
+            productName={currentProduct.name}
+          />
+        </>
+      ) : <p>Loading!</p>}
+      {isError.error && <p>Currently unable to load page error!</p>}
     </div>
   );
 };

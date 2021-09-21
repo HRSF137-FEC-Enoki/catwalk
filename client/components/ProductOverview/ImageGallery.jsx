@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai';
 import PropTypes from 'prop-types';
 
@@ -6,10 +6,15 @@ import ThumbnailView from './ThumbnailView';
 
 import '../../css/ImageGallery.scss';
 
-const ImageGallery = ({ currentStyle, imageIndex, updateImageIndex }) => {
+const ImageGallery = ({
+  currentStyle, imageIndex, updateImageIndex, expand,
+}) => {
   if (currentStyle === null) {
     return <div>No data available</div>;
   }
+
+  const [bgPosition, setPosition] = useState('center');
+  const [isImageExpanded, setImageExpanded] = useState(false);
 
   const { photos } = currentStyle;
   const { length } = photos;
@@ -19,6 +24,22 @@ const ImageGallery = ({ currentStyle, imageIndex, updateImageIndex }) => {
     updateImageIndex(0);
   }
   const currentPhoto = currentStyle.photos[imageIndex].url;
+
+  const handleMousePosition = (e) => {
+    const relativeX = e.clientX - e.target.offsetLeft;
+    const relativeY = e.clientY - e.target.offsetTop;
+    const width = e.target.offsetWidth;
+    const height = e.target.offsetHeight;
+
+    const bgPosX = ((relativeX) / width) * 100;
+    const bgPosY = ((relativeY) / height) * 100;
+
+    setPosition(`${bgPosX}% ${bgPosY}%`);
+  };
+
+  const handleMouseLeave = () => {
+    setPosition('center');
+  };
 
   const handleArrow = (direction) => {
     if (direction === 'left') {
@@ -32,12 +53,27 @@ const ImageGallery = ({ currentStyle, imageIndex, updateImageIndex }) => {
     updateImageIndex(index);
   };
 
+  const handleImageClick = () => {
+    expand();
+    setImageExpanded(!isImageExpanded);
+  };
+
   return (
     <div className="imageGalleryContainer">
-      <div className="mainImageContainer" style={{ backgroundImage: `url(${currentPhoto})` }} />
+      <div className="mainImageContainer">
+        <input
+          className={isImageExpanded ? 'focusedImageExpand' : 'focusedImage'}
+          style={
+            isImageExpanded ? { backgroundImage: `url(${currentPhoto})`, backgroundPosition: `${bgPosition}` } : { backgroundImage: `url(${currentPhoto})` }
+          }
+          onClick={handleImageClick}
+          onMouseMove={handleMousePosition}
+          onMouseLeave={handleMouseLeave}
+        />
+      </div>
       <ThumbnailView photos={photos} handleClick={handleThumbNailClick} className="thumbnailComponent" currentIndex={imageIndex} />
-      <AiOutlineArrowLeft className="leftArrow" onClick={() => handleArrow('left')} size={arrowSize} />
-      <AiOutlineArrowRight className="rightArrow" onClick={() => handleArrow('right')} size={arrowSize} />
+      {imageIndex === 0 ? null : <AiOutlineArrowLeft className="leftArrow" onClick={() => handleArrow('left')} size={arrowSize} />}
+      {imageIndex === length - 1 ? null : <AiOutlineArrowRight className="rightArrow" onClick={() => handleArrow('right')} size={arrowSize} />}
     </div>
   );
 };
@@ -53,6 +89,7 @@ ImageGallery.propTypes = {
   }),
   imageIndex: PropTypes.number.isRequired,
   updateImageIndex: PropTypes.func.isRequired,
+  expand: PropTypes.func.isRequired,
 };
 
 ImageGallery.defaultProps = {

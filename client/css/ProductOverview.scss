@@ -8,7 +8,58 @@
   margin: 0 1%;
 }
 
+#collapsed {
+  margin: 0;
+  display: none;
+  width: 0;
+}
+
+.starRating {
+  background-color: blue;
+  width: 40%;
+}
+
+.productCategory {
+  font-size: 30px;
+  margin: 10px 0;
+}
+
+.productName {
+  font-size: 50px;
+  margin: 10px 0;
+}
+
+.productPrice {
+  font-size: 35px;
+  margin: 10px 0;
+}
+
+.salePrice {
+  margin: 0 10px;
+}
+
+.priceStrikethrough {
+  text-decoration: line-through;
+  color: red;
+}
+
+.socialMedia {
+  display: flex;
+  margin: 10px 0;
+  justify-content: left;
+}
+
+.styleIndicator {
+  font-weight: bold;
+}
+
+.styleSelected {
+  font-size: 30px;
+}
+
 .productDescription {
   border: 2px solid black;
   margin: 1% 0;
+  font-size: 25px;
 }
+

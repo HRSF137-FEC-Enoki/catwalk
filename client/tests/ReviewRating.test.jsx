@@ -12,7 +12,7 @@ describe('ReviewRating Component', () => {
   test('render ReviewList Component', () => {
     const rendered = render(<ReviewRating />);
     const div = rendered.container.querySelector('div');
-    expect(div.className).toBe('reviewRatingContainer');
+    expect(div.className).toBe('review_rating_container');
   });
   test('render reviewBody Component', () => {
     const { getByTestId } = render(<Helpfulness />);

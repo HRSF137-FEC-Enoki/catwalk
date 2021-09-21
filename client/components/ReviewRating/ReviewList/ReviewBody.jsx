@@ -16,7 +16,7 @@ const ReviewBody = ({ review }) => {
     }
   }, []);
   return (
-    <div className="reviewBody" data-testid="reviewBody">
+    <div className="review_body" data-testid="reviewBody">
       {isMoreThanMaxChar ? (
         <div>
           {review.body.slice(0, 250)}
