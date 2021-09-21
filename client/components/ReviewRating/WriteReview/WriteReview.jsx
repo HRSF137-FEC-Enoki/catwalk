@@ -162,13 +162,13 @@ const WriteReview = ({
             {' '}
             {productName}
           </h3>
-          <div className="inputLabel">
+          <div className="input_label">
             <span>
               Rating:
               <StarRating size={30} rating={selectRate} callback={setSelectRate} />
             </span>
           </div>
-          <div className="inputLabel">
+          <div className="input_label">
             Recommend:
             <span>
               Yes
@@ -180,7 +180,7 @@ const WriteReview = ({
             </span>
           </div>
 
-          <div className="inputLabel">
+          <div className="input_label">
             {charName.map((title) => (
               <div key={title}>
                 <span key={title}>
@@ -200,12 +200,12 @@ const WriteReview = ({
             ))}
           </div>
 
-          <div className="inputLabel">
+          <div className="input_label">
             <span>
               Summary:
             </span>
             <input
-              className="formInput"
+              className="form_input"
               name="summary"
               id="summary"
               value={newReview.summary || ''}
@@ -215,12 +215,12 @@ const WriteReview = ({
               required
             />
           </div>
-          <div className="inputLabel">
+          <div className="input_label">
             <span>
               Body:
             </span>
             <textarea
-              className="formInput"
+              className="form_input"
               name="body"
               id="body"
               value={newReview.body || ''}
@@ -231,13 +231,13 @@ const WriteReview = ({
               required
             />
           </div>
-          <div id="wordCount">
+          <div id="word_count">
             {newReview.body.length > 50
               ? 'Minimum reached'
               : `Minimum required characters left: ${50 - newReview.body.length}`}
           </div>
 
-          <div className="inputLabel">
+          <div className="input_label">
             <span>
               Photos:
             </span>
@@ -249,19 +249,19 @@ const WriteReview = ({
             </div>
           </div>
 
-          <div className="inputLabel">
+          <div className="input_label">
             <span>
               Nickname:
             </span>
-            <input className="formInput" name="name" id="name" value={newReview.name || ''} onChange={onChangeHandler} placeholder="Example: jackson11!" maxLength="60" />
+            <input className="form_input" name="name" id="name" value={newReview.name || ''} onChange={onChangeHandler} placeholder="Example: jackson11!" maxLength="60" />
           </div>
-          <div className="inputLabel">
+          <div className="input_label">
             <span>
               Email:
             </span>
-            <input className="formInput" name="email" id="email" value={newReview.email || ''} onChange={onChangeHandler} required placeholder="Example: jackson11@email.com" maxLength="60" />
+            <input className="form_input" name="email" id="email" value={newReview.email || ''} onChange={onChangeHandler} required placeholder="Example: jackson11@email.com" maxLength="60" />
           </div>
-          <div className="reviewBtn">
+          <div className="review_btn">
             <button type="button" onClick={() => closeWriteReview()}>Cancel</button>
             <button type="button" onClick={onSubmit}>Submit</button>
           </div>
