@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
+import $ from 'jquery';
 
 import StarRating from '../../StarRating';
 
@@ -30,7 +31,7 @@ const WriteReview = ({
 
   useEffect(() => {
     if (newReview.photos.length === 5) {
-      document.getElementById('upload').disabled = true;
+      $('#upload').disabled = true;
     }
   }, [newReview.photos]);
   const looksLikeMail = (str) => {
@@ -46,10 +47,11 @@ const WriteReview = ({
         images.push(URL.createObjectURL(img));
         setNewReview({ ...newReview, photos: images });
       }
-      document.getElementById('upload').value = '';
+      $('#upload').value = '';
     }
   };
   const onChangeHandler = (e) => {
+    console.log(e.target);
     if (charName.includes(e.target.name)) {
       setCharacteristics({ ...characteristics, [e.target.name]: e.target.value });
     } else {
@@ -62,32 +64,32 @@ const WriteReview = ({
     e.preventDefault();
     const errBlock = [];
     if (!newReview.summary) {
-      document.getElementById('summary').placeholder = 'Example: Best purchase ever!';
+      $('#form_summary').placeholder = 'Example: Best purchase ever!';
       errBlock.push('Summary');
     }
     if (!newReview.body) {
       errBlock.push('Body');
-      document.getElementById('body').placeholder = 'Why did you like the product or not?';
+      $('#form_body').placeholder = 'Why did you like the product or not?';
     }
     if (!newReview.email) {
       errBlock.push('Email');
-      document.getElementById('email').placeholder = 'Example: jackson11@email.com';
+      $('#form_email').placeholder = 'Example: jackson11@email.com';
     }
     if (!newReview.name) {
       errBlock.push('Nikename');
-      document.getElementById('name').placeholder = 'Example: jackson11!';
+      $('#form_name').placeholder = 'Example: jackson11!';
     }
     if (newReview.email && !looksLikeMail(newReview.email)) {
       if (!errMsg.includes('Email')) {
         errBlock.push('Email');
       }
-      document.getElementById('email').placeholder = 'Example: jackson11@email.com';
+      $('#form_email').placeholder = 'Example: jackson11@email.com';
     }
     if (newReview.body && newReview.body.length < 5) {
       if (!errMsg.includes('Body')) {
         errBlock.push('Body');
       }
-      document.getElementById('body').placeholder = 'must be greater than 50 characters';
+      $('#form_body').placeholder = 'must be greater than 50 characters';
     }
     setErrMsg([...errMsg, errBlock]);
     if (errBlock.length !== 0) {
@@ -155,7 +157,7 @@ const WriteReview = ({
       )}
       <div className={isValid ? 'window' : 'close'}>
 
-        <form className="modal">
+        <form className="form_modal">
           <h1>Write Your Review</h1>
           <h3>
             About the
@@ -187,17 +189,25 @@ const WriteReview = ({
                 <span key={title}>
                   {title}
                 </span>
-                <input name={title} type="radio" value={1 || ''} onChange={onChangeHandler} />
-
-                <input name={title} type="radio" value={2 || ''} onChange={onChangeHandler} />
-
-                <input name={title} type="radio" value={3 || ''} onChange={onChangeHandler} />
-
-                <input name={title} type="radio" value={4 || ''} onChange={onChangeHandler} />
-
-                <input name={title} type="radio" value={5 || ''} onChange={onChangeHandler} />
-
+                {[1, 2, 3, 4, 5].map((val) => (
+                  <input name={title} type="radio" value={val || ''} key={title + val} onChange={onChangeHandler} />
+                ))}
               </div>
+              // <div key={title}>
+              //   <span key={title}>
+              //     {title}
+              //   </span>
+              //   <input name={title} type="radio" value={1 || ''} onChange={onChangeHandler} />
+
+              //   <input name={title} type="radio" value={2 || ''} onChange={onChangeHandler} />
+
+              //   <input name={title} type="radio" value={3 || ''} onChange={onChangeHandler} />
+
+              //   <input name={title} type="radio" value={4 || ''} onChange={onChangeHandler} />
+
+              //   <input name={title} type="radio" value={5 || ''} onChange={onChangeHandler} />
+
+              // </div>
             ))}
           </div>
 
@@ -208,7 +218,7 @@ const WriteReview = ({
             <input
               className="form_input"
               name="summary"
-              id="summary"
+              id="form_summary"
               value={newReview.summary || ''}
               onChange={onChangeHandler}
               maxLength="60"
@@ -223,7 +233,7 @@ const WriteReview = ({
             <textarea
               className="form_input"
               name="body"
-              id="body"
+              id="form_body"
               value={newReview.body || ''}
               onChange={onChangeHandler}
               maxLength="1000"
@@ -245,7 +255,7 @@ const WriteReview = ({
             <input type="file" name="photos" id="upload" onChange={onImageChange} />
             <div>
               {newReview.photos.map((photo, index) => (
-                <img src={newReview.photos[index]} alt="not found" width="20px" key={photo} />
+                <img src={newReview.photos[index]} alt="not found" key={photo} />
               ))}
             </div>
           </div>
@@ -254,13 +264,13 @@ const WriteReview = ({
             <span>
               Nickname:
             </span>
-            <input className="form_input" name="name" id="name" value={newReview.name || ''} onChange={onChangeHandler} placeholder="Example: jackson11!" maxLength="60" />
+            <input className="form_input" name="name" id="form_name" value={newReview.name || ''} onChange={onChangeHandler} placeholder="Example: jackson11!" maxLength="60" />
           </div>
           <div className="input_label">
             <span>
               Email:
             </span>
-            <input className="form_input" name="email" id="email" value={newReview.email || ''} onChange={onChangeHandler} required placeholder="Example: jackson11@email.com" maxLength="60" />
+            <input className="form_input" name="email" id="form_email" value={newReview.email || ''} onChange={onChangeHandler} required placeholder="Example: jackson11@email.com" maxLength="60" />
           </div>
           <div className="review_btn">
             <button type="button" onClick={() => closeWriteReview()}>Cancel</button>

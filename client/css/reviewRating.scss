@@ -75,6 +75,7 @@
 }
 .review_body img{
   margin: 20px 10px;
+  width: 100px;
 }
 .recommend{
   margin-bottom: 10px;
@@ -95,7 +96,7 @@
   margin: 5px 10px;
 }
 
-.modal, #error_message{
+.form_modal, #error_message{
   position: fixed;
   top: 50%;
   left: 50%;
@@ -118,7 +119,7 @@
   padding: 10px;
   text-align: center;
 }
-.modal .input_label{
+.form_modal .input_label{
   width: 100%;
   display: flex;
   justify-content: space-around;
@@ -128,6 +129,9 @@
 }
 .input_label span{
   width: 20%;
+}
+.input_label img{
+  width: 20px;
 }
 .radios{
   width: 90%;
@@ -148,7 +152,7 @@
 
 #word_count{
   width: 80%;
-  font-size: x-small;
+  font-size: 10px;
   text-align: right;
 }
 .form_input{
