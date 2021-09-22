@@ -7,7 +7,7 @@ const Sorting = ({ setSort, reviews }) => {
     setSort(selectOrderBy);
   };
   return (
-    <form>
+    <form className="sorting">
       <span>
         {reviews.length}
         &nbsp;reviews, sorted by&nbsp;

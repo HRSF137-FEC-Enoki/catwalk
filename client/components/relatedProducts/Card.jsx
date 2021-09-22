@@ -9,7 +9,7 @@ import getPhotos from '../../utils/getPhotos';
 
 import '../../css/relatedProducts/Card.scss';
 
-const STAR_SIZE = 16;
+const STAR_SIZE = 24;
 
 const Card = ({
   relatedProduct, handleActionBtnClick, handleCardClick,

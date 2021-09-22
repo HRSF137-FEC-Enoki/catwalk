@@ -1,5 +1,5 @@
-import PropTypes from 'prop-types';
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import axios from 'axios';
 
 const Helpfulness = ({ review, fetchReviews }) => {
@@ -9,9 +9,12 @@ const Helpfulness = ({ review, fetchReviews }) => {
     e.preventDefault();
     const action = e.target.name;
     if (!hasClickedHelpful) {
-      axios.put(`/api/reviews/${review.review_id}/${action}`);
-      setHasClickedHelpful(true);
-      fetchReviews();
+      axios.put(`/api/reviews/${review.review_id}/${action}`)
+        .then(() => {
+          fetchReviews();
+          setHasClickedHelpful(true);
+        });
+
       if (e.target.name === 'helpful') {
         e.target.nextSibling.nextSibling.removeAttribute('href');
       } else {

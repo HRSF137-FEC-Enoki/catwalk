@@ -23,7 +23,10 @@ const ImageGallery = ({
   if (imageIndex > length) {
     updateImageIndex(0);
   }
-  const currentPhoto = currentStyle.photos[imageIndex].url;
+
+  // /home/andylei/hackreactor/catwalk/client/components/ProductOverview/ImageGallery.jsx
+  // /home/andylei/hackreactor/catwalk/public/no_image.png
+  const currentPhoto = currentStyle.photos[imageIndex].url || '../../../no_image.png';
 
   const handleMousePosition = (e) => {
     const relativeX = e.clientX - e.target.offsetLeft;
@@ -72,8 +75,8 @@ const ImageGallery = ({
         />
       </div>
       <ThumbnailView photos={photos} handleClick={handleThumbNailClick} className="thumbnailComponent" currentIndex={imageIndex} />
-      {imageIndex === 0 ? null : <AiOutlineArrowLeft className="leftArrow" onClick={() => handleArrow('left')} size={arrowSize} />}
-      {imageIndex === length - 1 ? null : <AiOutlineArrowRight className="rightArrow" onClick={() => handleArrow('right')} size={arrowSize} />}
+      <AiOutlineArrowLeft className="leftArrow" onClick={() => handleArrow('left')} size={arrowSize} style={imageIndex === 0 ? { visibility: 'hidden' } : {}} />
+      <AiOutlineArrowRight className="rightArrow" onClick={() => handleArrow('right')} size={arrowSize} style={imageIndex === length - 1 ? { visibility: 'hidden' } : {}} />
     </div>
   );
 };

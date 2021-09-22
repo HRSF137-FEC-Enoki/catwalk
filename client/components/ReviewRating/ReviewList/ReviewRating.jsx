@@ -1,6 +1,6 @@
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
-import React, { useEffect, useState } from 'react';
 
 import WriteReview from '../WriteReview/WriteReview';
 import Sorting from '../Sorting/Sorting';
@@ -9,7 +9,7 @@ import ReviewList from './ReviewList';
 
 import '../../../css/reviewRating.scss';
 
-const ReviewRating = ({ id, rating }) => {
+const ReviewRating = ({ id, rating, productName }) => {
   const [reviews, setReviews] = useState([]);
   const [reviewShow, setReviewShow] = useState(2);
   const [isLoading, setIsLoading] = useState(false);
@@ -54,46 +54,56 @@ const ReviewRating = ({ id, rating }) => {
     setIsClickAdd(false);
   };
   return (
-    <div className="review_rating_container">
-      <div className="rating_col">
-        <RatingBreakDown
-          id={id}
-          starFilter={starFilter}
-          setStarFilter={setStarFilter}
-          rating={rating}
-          charName={charName}
-          charValue={charValue}
-        />
-      </div>
-      <div className="review_col">
-        <Sorting id={id} setSort={setSort} reviews={reviews} />
-        <div className="review_list_container">
-          <ReviewList
-            reviews={reviews}
-            reviewShow={reviewShow}
-            fetchReviews={fetchReviews}
-            starFilter={starFilter}
-            setStarFilter={setStarFilter}
-            rating={rating}
-            charName={charName}
-            charValue={charValue}
-            setCurrReviewsLength={setCurrReviewsLength}
-          />
-        </div>
-        <div className="review_btn">
-          {reviews.length > 2 && !isLoading && <button data-testid="button" type="button" onClick={loadMoreView}>View More</button>}
-          <button type="button" onClick={() => setIsClickAdd(true)}>
-            Add a Review +
-          </button>
-          <WriteReview
-            isClickAdd={isClickAdd}
-            closeWriteReview={closeWriteReview}
-            id={id}
-            fetchReviews={fetchReviews}
-            charId={charId}
-          />
-        </div>
-      </div>
+    <div className="widget">
+      {reviews.length !== 0
+        ? (
+          <div className="review_rating_container">
+            <div className="rating_col">
+              <RatingBreakDown
+                id={id}
+                starFilter={starFilter}
+                setStarFilter={setStarFilter}
+                rating={rating}
+                charName={charName}
+                charValue={charValue}
+              />
+            </div>
+            <div className="review_col">
+              <Sorting id={id} setSort={setSort} reviews={reviews} />
+              <div className="review_list_container">
+                <ReviewList
+                  reviews={reviews}
+                  reviewShow={reviewShow}
+                  fetchReviews={fetchReviews}
+                  starFilter={starFilter}
+                  setStarFilter={setStarFilter}
+                  rating={rating}
+                  charName={charName}
+                  charValue={charValue}
+                  setCurrReviewsLength={setCurrReviewsLength}
+                />
+              </div>
+              <div className="review_col">
+                <div className="review_btn">
+                  {reviews.length > 2 && !isLoading && <button data-testid="button" type="button" onClick={loadMoreView}>More View</button>}
+                  <button type="button" onClick={() => setIsClickAdd(true)}>
+                    ADD A REVIEW +
+                  </button>
+                  <WriteReview
+                    isClickAdd={isClickAdd}
+                    closeWriteReview={closeWriteReview}
+                    id={id}
+                    fetchReviews={fetchReviews}
+                    charName={charName}
+                    charId={charId}
+                    charValue={charValue}
+                    productName={productName}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        ) : (<div style={{ textAlign: 'center' }}>No Reviews</div>)}
     </div>
   );
 };
