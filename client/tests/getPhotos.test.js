@@ -20,7 +20,14 @@ describe('getPhotos utitlity function', () => {
 
   test('it should work with promises', () => {
     expect.assertions(1);
-    return getPhotos(1234).then((data) => expect(data.results[0].photos).toEqual(mockPhotos));
+    return getPhotos(1234).then((photos) => expect(photos).toEqual(mockPhotos));
+  });
+
+  test('it works with async/await', async () => {
+    expect.assertions(1);
+    const data = await getPhotos(1234);
+
+    expect(data).toEqual(mockPhotos);
   });
 
   test('it should throw an error with invalid id', () => getPhotos(5150).catch((err) => expect(err).toBe('No photos here')));

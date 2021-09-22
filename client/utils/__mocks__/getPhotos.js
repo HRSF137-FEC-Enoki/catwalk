@@ -40,7 +40,7 @@ export default function request(productId) {
   return new Promise((resolve, reject) => {
     process.nextTick(() => {
       if (productId) {
-        resolve(productSyles);
+        resolve(productSyles.results[0].photos);
       }
       reject(new Error('No photos here'));
     });
