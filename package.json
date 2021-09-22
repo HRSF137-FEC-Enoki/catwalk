@@ -4,7 +4,7 @@
   "description": "E-commerce practice project",
   "private": true,
   "scripts": {
-    "test": "jest",
+    "test": "jest --colors",
     "build": "webpack --watch",
     "start": "nodemon server/index.js",
     "lint": "eslint \"**/*.js\" \"**/*.jsx\" --ignore-pattern node_modules/ --ignore-pattern public/",
