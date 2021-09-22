@@ -32,15 +32,11 @@ describe('Related Products', () => {
 
     axios.get.mockResolvedValueOnce({ data: mockRelated });
 
-    await act(async () => {
-      const renderOptions = render(<RelatedProducts
-        currentProduct={mockCurrent}
-        handleCardClick={() => {}}
-      />);
-
-      // rerender = renderOptions.render;
-    });
-  });
+    await act(async () => render(<RelatedProducts
+      currentProduct={mockCurrent}
+      handleCardClick={() => {}}
+    />)
+    );
 
   test('it should have a header element', () => {
     expect(screen.getByRole('heading')).toHaveTextContent('Related Products');
