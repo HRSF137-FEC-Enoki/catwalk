@@ -15,9 +15,7 @@ const getStarRatingAvg = (productId) => new Promise((resolve, reject) => {
 
       resolve({ avg, count });
     })
-    .catch((err) => {
-      reject(err);
-    });
+    .catch((err) => reject(err));
 });
 
 export default getStarRatingAvg;

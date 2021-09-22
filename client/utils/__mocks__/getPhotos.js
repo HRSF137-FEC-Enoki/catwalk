@@ -1,4 +1,3 @@
-// __mocks__/request.js
 const productSyles = {
   product_id: 1234,
   results: [
