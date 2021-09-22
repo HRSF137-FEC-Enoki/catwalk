@@ -1,6 +1,6 @@
-import getPhotos from '../getPhotos';
+import getPhotos from '../utils/getPhotos';
 
-jest.mock('../getPhotos');
+jest.mock('../utils/getPhotos');
 
 describe('getPhotos utitlity function', () => {
   const mockPhotos = [
