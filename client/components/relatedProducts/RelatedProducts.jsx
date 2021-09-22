@@ -101,7 +101,7 @@ const RelatedProducts = ({ currentProduct, handleCardClick }) => {
         {!isLoading ? (
           <ul className="related-products__carousel">
             {products.map((product) => (
-              <li key={product.id} className="related-products__carousel-item">
+              <li data-testid="list-items" key={product.id} className="related-products__carousel-item">
                 <Card
                   handleCardClick={handleCardClick}
                   handleActionBtnClick={handleActionBtnClick}

@@ -17,12 +17,9 @@ describe('Related Products', () => {
     ],
   };
 
-  const mockRating = 3.5;
-
   beforeEach(() => {
     render(<RelatedProducts
       currentProduct={mockCurrent}
-      rating={mockRating}
       handleCardClick={() => {}}
     />);
   });
@@ -31,9 +28,13 @@ describe('Related Products', () => {
     expect(screen.getByRole('heading')).toHaveTextContent('Related Products');
   });
 
-  // test('it should render multiple list elements', async () => {
-  //   const items = await screen.findAllByRole('');
+  test('it should render a loading state', () => {
+    expect(screen.getByText('Loadiing Related Products!')).toBeInTheDocument();
+  });
 
-  //   expect(items.length).toBeGreaterThan(0);
-  // });
+  test('it should render multiple list elements', async () => {
+    const items = await screen.findAllByTestId('list-items');
+
+    expect(items.length).toBeGreaterThan(0);
+  });
 });
