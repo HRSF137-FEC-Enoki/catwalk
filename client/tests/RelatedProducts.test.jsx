@@ -1,8 +1,11 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, act } from '@testing-library/react';
 import '@testing-library/jest-dom';
+import axios from 'axios';
 
 import RelatedProducts from '../components/relatedProducts/RelatedProducts';
+
+jest.mock('axios');
 
 describe('Related Products', () => {
   const mockCurrent = {
@@ -17,11 +20,26 @@ describe('Related Products', () => {
     ],
   };
 
-  beforeEach(() => {
-    render(<RelatedProducts
-      currentProduct={mockCurrent}
-      handleCardClick={() => {}}
-    />);
+  const mockRelated = [
+    48433,
+    48434,
+    48439,
+    48438,
+  ];
+
+  beforeEach(async () => {
+    // let rerender;
+
+    axios.get.mockResolvedValueOnce({ data: mockRelated });
+
+    await act(async () => {
+      const renderOptions = render(<RelatedProducts
+        currentProduct={mockCurrent}
+        handleCardClick={() => {}}
+      />);
+
+      // rerender = renderOptions.render;
+    });
   });
 
   test('it should have a header element', () => {
