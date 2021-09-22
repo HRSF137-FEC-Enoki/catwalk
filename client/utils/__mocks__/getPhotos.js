@@ -1,0 +1,48 @@
+// __mocks__/request.js
+const productSyles = {
+  product_id: 1234,
+  results: [
+    {
+      style_id: 1,
+      name: 'Forest Green & Black',
+      original_price: '140',
+      sale_price: '0',
+      'default?': true,
+      photos: [
+        {
+          thumbnail_url: 'urlplaceholder/style_1_photo_number_thumbnail.jpg',
+          url: 'urlplaceholder/style_1_photo_number.jpg',
+        },
+        {
+          thumbnail_url: 'urlplaceholder/style_1_photo_number_thumbnail.jpg',
+          url: 'urlplaceholder/style_1_photo_number.jpg',
+        },
+      ],
+      skus: {
+        37: {
+          quantity: 8,
+          size: 'XS',
+        },
+        38: {
+          quantity: 16,
+          size: 'S',
+        },
+        39: {
+          quantity: 17,
+          size: 'M',
+        },
+      },
+    },
+  ],
+};
+
+export default function request(productId) {
+  return new Promise((resolve, reject) => {
+    process.nextTick(() => {
+      if (productId) {
+        resolve(productSyles);
+      }
+      reject(new Error('No photos here'));
+    });
+  });
+}
