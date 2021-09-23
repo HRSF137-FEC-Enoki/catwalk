@@ -112,9 +112,10 @@ describe('ReviewRating Component', () => {
 describe('sub-component in ReviewRating', () => {
   test('render Helpfulness Component', async () => {
     await act(async () => {
-      render(<Helpfulness
+      await render(<Helpfulness
         review={mockReviews.data.results[0]}
         fetchReviews={() => { }}
+        fetchMeta={() => { }}
       />);
     });
     const input = screen.getByTestId('helpful');
@@ -149,7 +150,11 @@ describe('sub-component in ReviewRating', () => {
       helpfulness: 62,
       photos: [],
     };
-    const { getByTestId } = render(<Review review={mockReview} fetchReviews={() => { }} />);
+    const { getByTestId } = render(<Review
+      review={mockReview}
+      fetchReviews={() => { }}
+      fetchMeta={() => { }}
+    />);
     const summary = getByTestId('summary');
     expect(summary.textContent).toBe('Not good value');
     const recommend = getByTestId('recommend');
