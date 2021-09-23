@@ -97,7 +97,7 @@ const ProductOverview = ({
           </div>
           <div className="productDescription__features">
             <ul>
-              {currentProduct.features.map((feature) => <li key={feature.value}>{`${feature.value} ${feature.feature}`}</li>)}
+              {currentProduct.features.map((feature) => <li key={feature.value} className="productDescription__feature-item">{`${feature.value} ${feature.feature}`}</li>)}
             </ul>
           </div>
         </div>
