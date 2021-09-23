@@ -9,7 +9,6 @@ import '../../css/ImageGallery.scss';
 const ImageGallery = ({
   currentStyle, imageIndex, updateImageIndex, expand,
 }) => {
-  // console.log(currentStyle, imageIndex, updateImageIndex, expand)
   if (currentStyle === null) {
     return <div>No data available</div>;
   }
