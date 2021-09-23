@@ -19,13 +19,13 @@ const ProductOverview = ({
   const [allStyles, setAllStyles] = useState(null);
   const [isCollapsed, setCollapse] = useState(false);
   const starSize = 20;
-  const socialMediaButtonSize = 40;
-  const salePrice = () => {
+  const socialMediaButtonSize = 20;
+  const SalePrice = () => {
     if (currentStyle.sale_price) {
       return (
         <div className="productPrice">
-          <span className="priceStrikethrough">{`$${currentStyle.original_price}`}</span>
-          <span className="salePrice">{`$${currentStyle.sale_price}`}</span>
+          <span className="priceStrikethrough" data-testid="original-price">{`$${currentStyle.original_price}`}</span>
+          <span className="salePrice" data-testid="sale-price">{`$${currentStyle.sale_price}`}</span>
         </div>
       );
     }
@@ -42,7 +42,8 @@ const ProductOverview = ({
         setStyleIndex(2);
         setAllStyles(response.data.results);
         setCurrentStyle(response.data.results[styleIndex]);
-      });
+      })
+      .catch((err) => { throw err; });
   }, []);
 
   const updateImageIndex = (index) => {
@@ -58,19 +59,24 @@ const ProductOverview = ({
     setCollapse(!isCollapsed);
   };
 
+  const scrollToReviews = () => {
+    const reviews = document.getElementsByClassName('review_rating_container')[0];
+    reviews.scrollIntoView({ behavior: 'smooth' });
+  };
+
   if (currentStyle) {
     return (
       <div className="productOverviewWrapper">
         <div className="productOverviewContainer" data-testid="productOverview">
           <ImageGallery currentStyle={currentStyle} id="imageGallery" imageIndex={imageIndex} updateImageIndex={updateImageIndex} expand={expand} />
-          <div className="productInfo" id={isCollapsed ? 'collapsed' : 'fullSize'}>
+          <div className="productInfo" id={isCollapsed ? 'collapsed' : 'fullSize'} data-testid="product-info">
             <div className="starRating">
               <StarRating rating={rating} size={starSize} />
             </div>
-            {totalReviews ? <i>{`Read all ${totalReviews} reviews`}</i> : null}
+            {totalReviews ? <button id="scrollToReviews" type="button" onClick={scrollToReviews}>{`Read all ${totalReviews} reviews`}</button> : null}
             <div className="productCategory">{currentProduct.category}</div>
             <div className="productName">{currentProduct.name}</div>
-            { currentStyle ? salePrice() : <div className="productPrice">Loading Price</div> }
+            <SalePrice />
             <div className="socialMedia">
               <FaFacebook size={socialMediaButtonSize} />
               <FaTwitter size={socialMediaButtonSize} />

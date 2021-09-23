@@ -15,6 +15,7 @@ const RelatedProducts = ({ currentProduct, handleCardClick }) => {
   const [showComparison, setShowComparison] = useState(false);
   const [relatedProduct, setRelatedProduct] = useState(null);
   const [imageIndex, setImageIndex] = useState(0);
+  let distance = 0; // distance of wheel scroll
 
   useEffect(() => {
     // make a GET request to /api/products/:product_id/related
@@ -63,10 +64,24 @@ const RelatedProducts = ({ currentProduct, handleCardClick }) => {
     $('.related-products__card').animate(direction, duration);
   };
 
+  const handleOnWheel = (e) => {
+    const $cards = $('.related-products__card');
+    const numOfCards = $cards.length;
+    const outerWidth = $('.related-products')[0].getBoundingClientRect().width;
+    const innerWidth = numOfCards * 270;
+    const HALF_CARD_WIDTH = 125;
+
+    distance += e.deltaY;
+
+    if (distance > 0 && distance < (innerWidth - outerWidth) + HALF_CARD_WIDTH) {
+      $cards.css({ right: `+=${e.deltaY}` });
+    }
+  };
+
   return (
     <div className="related-products">
       <h3>Related Products</h3>
-      <div className="related-products__row">
+      <div className="related-products__row" onWheel={handleOnWheel}>
         <div className="related-products__nav-overlay">
           <button
             type="button"
@@ -86,7 +101,7 @@ const RelatedProducts = ({ currentProduct, handleCardClick }) => {
         {!isLoading ? (
           <ul className="related-products__carousel">
             {products.map((product) => (
-              <li key={product.id} className="related-products__carousel-item">
+              <li data-testid="list-items" key={product.id} className="related-products__carousel-item">
                 <Card
                   handleCardClick={handleCardClick}
                   handleActionBtnClick={handleActionBtnClick}

@@ -35,6 +35,13 @@
     }
   }
 
+  &__action-btn {
+    float: right;
+    & svg {
+      padding: 10px;
+    }
+  }
+
   &__card-thumbnails {
     bottom: 10px;
     display: flex;

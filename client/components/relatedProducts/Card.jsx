@@ -5,11 +5,11 @@ import { AiOutlineStar } from 'react-icons/ai';
 import StarRating from '../StarRating';
 
 import getStarRatingAvg from '../../utils/getStarRatingAvg';
-import getPhotos from '../../utils/getImageUrl';
+import getPhotos from '../../utils/getPhotos';
 
 import '../../css/relatedProducts/Card.scss';
 
-const STAR_SIZE = 16;
+const STAR_SIZE = 24;
 
 const Card = ({
   relatedProduct, handleActionBtnClick, handleCardClick,

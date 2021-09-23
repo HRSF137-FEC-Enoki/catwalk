@@ -19,6 +19,7 @@ const StyleSelector = ({ styles, currentStyle, updateCurrentStyle }) => {
               style={{ backgroundImage: `url(${style.photos[0].thumbnail_url || '../../../no_image.png'})` }}
               alt="stylethumbail"
               key={style.style_id}
+              data-testid={style.style_id}
               className="styleThumbnail"
               id={currentStyle.style_id === style.style_id ? 'selected' : 'unselected'}
               onClick={() => updateCurrentStyle(index)}
