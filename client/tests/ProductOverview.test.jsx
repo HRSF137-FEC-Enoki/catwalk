@@ -88,7 +88,62 @@ describe('Product Overview Component', () => {
     });
   });
 
-  test('Product Overview Component without total reviews', async () => {
+  test('Navigates to next image on down arrow click', () => {
+    userEvent.click(screen.getByTestId('down-arrow'));
+    expect(screen.getByTestId('main-image')).toHaveStyle({
+      backgroundImage: 'url("https://images.unsplash.com/photo-1534011546717-407bced4d25c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2734&q=80")',
+    });
+  });
+
+  test('Navigates to previous image on up arrow click', () => {
+    userEvent.click(screen.getByTestId('down-arrow'));
+    userEvent.click(screen.getByTestId('down-arrow'));
+    userEvent.click(screen.getByTestId('up-arrow'));
+    expect(screen.getByTestId('main-image')).toHaveStyle({
+      backgroundImage: 'url("https://images.unsplash.com/photo-1534011546717-407bced4d25c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2734&q=80")',
+    });
+  });
+
+  test('Up arrow should not be visible if first thumbail is chosen', () => {
+    expect(screen.getByTestId('up-arrow')).toHaveStyle({ visibility: 'hidden' });
+  });
+
+  test('Down arrow should not be visible if last thumbail is chosen', async () => {
+    await act(async () => {
+      await userEvent.click(screen.getByTestId('down-arrow'));
+      await userEvent.click(screen.getByTestId('down-arrow'));
+      await userEvent.click(screen.getByTestId('down-arrow'));
+      await userEvent.click(screen.getByTestId('down-arrow'));
+      await userEvent.click(screen.getByTestId('down-arrow'));
+    });
+    expect(screen.getByTestId('down-arrow')).toHaveStyle({ visibility: 'hidden' });
+  });
+
+  test('Clicking add to cart should prompt user to select size if none chosen', async () => {
+    await userEvent.click(screen.getByRole('button', { name: /Add to Cart/i }));
+    expect(screen.getByText('Please Choose a Size'));
+  });
+
+  test('size drop down menu should have size options', async () => {
+    expect(screen.queryAllByRole('option'));
+  });
+
+  test('Should select be able to select size from dropdown menu', async () => {
+    await act(async () => {
+      userEvent.selectOptions(screen.getByTestId('select-shirt-size'), 'XS');
+    });
+    expect(screen.getByRole('option', { name: 'XS' }).selected).toBe(true);
+  });
+
+  test('Should have access to quantity choices when a size is chosen', async () => {
+    await act(async () => {
+      userEvent.selectOptions(screen.getByTestId('select-shirt-size'), 'XS');
+    });
+
+    expect(screen.queryAllByTestId('quantity-choices').length).toBeGreaterThan(0);
+  });
+
+  test('Product Overview should not display link to reviews when there are none.', async () => {
     const mockCurrent = {
       id: 48432,
       name: 'Jackson Pollock',
@@ -109,6 +164,6 @@ describe('Product Overview Component', () => {
       rating={rating}
       totalReviews={totalReviews}
     />));
-    expect(screen.queryByText(/Read all/i)).not.toBeInTheDocument();
+    expect(screen.queryByText(/reviews/i)).not.toBeInTheDocument();
   });
 });
