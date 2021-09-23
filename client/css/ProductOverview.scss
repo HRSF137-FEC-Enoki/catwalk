@@ -1,6 +1,11 @@
+$header-height: 86px;
+
+.productOverviewWrapper {
+  height: calc(100vh - $header-height);
+}
+
 .productOverviewContainer {
   display: flex;
-  height: calc(80vh);
 }
 
 .productInfo{
@@ -59,9 +64,27 @@
 }
 
 .productDescription {
-  border: 2px solid black;
-  margin: 1% 0;
-  font-size: 25px;
+  color: #777;
+  display: flex;
+  padding: 15px 0;
+
+  &__info {
+    border-right: 2px solid #777;
+    padding: 30px 45px;
+    flex: 2;
+  }
+
+  &__title {
+    color: #333;
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0;
+  }
+
+  &__features {
+    flex: 1;
+    padding: 30px 45px;
+  }
 }
 
 #scrollToReviews {
@@ -72,8 +95,3 @@
   text-align: left;
   width:fit-content;
 }
-
-// .productOverviewWrapper {
-//   height: calc(100vh - 86px);
-//   border: 2px solid black;
-// }

@@ -90,7 +90,17 @@ const ProductOverview = ({
             <AddToCart currentStyle={currentStyle} />
           </div>
         </div>
-        <div className="productDescription">{currentProduct.description}</div>
+        <div className="productDescription">
+          <div className="productDescription__info">
+            <p className="productDescription__title">{currentProduct.slogan}</p>
+            <p className="productDescription__description">{currentProduct.description}</p>
+          </div>
+          <div className="productDescription__features">
+            <ul>
+              {currentProduct.features.map((feature) => <li key={feature.value}>{`${feature.value} ${feature.feature}`}</li>)}
+            </ul>
+          </div>
+        </div>
       </div>
     );
   }
@@ -108,6 +118,7 @@ ProductOverview.propTypes = {
     description: PropTypes.string,
     category: PropTypes.string,
     default_price: PropTypes.string,
+    features: PropTypes.arrayOf(PropTypes.object),
   }).isRequired,
 };
 
