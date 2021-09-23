@@ -44,6 +44,14 @@ const App = () => {
   return (
     <div className="app__container">
       <header className="app__header">Project Catwalk</header>
+      <div className="app__sitewide-message">
+        <i>
+          Site-wide Announcement Message! - Sale / Discount
+          <strong> Offer </strong>
+          -
+          <span> New Product Highlight</span>
+        </i>
+      </div>
       {!isLoading ? (
         <>
           <ProductOverview

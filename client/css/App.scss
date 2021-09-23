@@ -6,19 +6,34 @@ body {
 .app {
   &__container {
     font-family: Arial, Helvetica, sans-serif;
-    border: solid 2px black;
+    border: 1px solid #ddd;
     margin: 0 auto;
     max-width: 1280px;
   }
 
   &__header {
     align-items: center;
-    background-color: #ddd;
+    background-color: #333;
+    color: dodgerblue;
     display: flex;
     height: 56px;
-    font-size: 20px;
+    font-size: 32px;
+    font-style: italic;
     font-weight: bold;
     padding: 15px;
+    text-decoration: underline;
+    text-transform: uppercase;
+  }
+
+  &__sitewide-message {
+    font-weight: 100;
+    padding: 20px;
     text-align: center;
+    text-transform: uppercase;
+
+    & span {
+      color: dodgerblue;
+      text-decoration: underline;
+    }
   }
 }
