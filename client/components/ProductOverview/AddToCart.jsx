@@ -114,7 +114,7 @@ const AddToCart = ({ currentStyle }) => {
 
   if (!currentStyle.skus.null) {
     return (
-      <div key={currentStyle.style_id}>
+      <div key={currentStyle.style_id} className="addToCart__actions">
         <span>
           <select
             data-testid="select-shirt-size"
