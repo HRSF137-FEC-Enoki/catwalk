@@ -50,7 +50,9 @@ const ImageGallery = ({
     }
   };
 
-  const handleThumbNailClick = (index) => {
+  const handleThumbNailClick = (e, index) => {
+    e.stopPropagation();
+
     updateImageIndex(index);
   };
 

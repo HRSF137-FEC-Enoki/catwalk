@@ -58,7 +58,7 @@ const ThumbnailView = ({ photos, handleClick, currentIndex }) => {
                 className="thumbnailInput"
                 type="image"
                 alt="image from selected style set"
-                onClick={() => handleClick(index)}
+                onClick={(e) => handleClick(e, index)}
                 id={index === currentIndex ? 'selected' : 'unselected'}
                 key={photo.thumbnail_url}
                 src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/HD_transparent_picture.png/1200px-HD_transparent_picture.png"

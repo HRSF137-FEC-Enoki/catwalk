@@ -76,6 +76,7 @@
 
 .thumbnailInput {
   border: 1px solid goldenrod;
+  border-radius: 3px;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -93,11 +94,7 @@
   cursor: pointer;
 }
 
-// #selected {
-//   border: 3px solid black;
-// }
-
-.upArrow, .downArrow {
+.upArrow,
+.downArrow {
   cursor: pointer;
 }
-
