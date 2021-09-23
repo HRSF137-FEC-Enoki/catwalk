@@ -34,7 +34,7 @@ const ReviewList = ({
             </div>
           )
           : (
-            <div className="review_list">
+            <div className="review_list" data-testid="review_list">
               {filterList(1).map((review) => (
                 <Review key={review.review_id} review={review} fetchReviews={fetchReviews} />
               ))}

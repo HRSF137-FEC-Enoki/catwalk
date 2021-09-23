@@ -31,6 +31,7 @@ const Helpfulness = ({ review, fetchReviews }) => {
         href="/"
         aria-hidden="true"
         onClick={onClickHandler}
+        data-testid="helpful_link"
       >
         Yes(
         {review && review.helpfulness}

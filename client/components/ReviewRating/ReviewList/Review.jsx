@@ -20,21 +20,20 @@ const Review = ({ review, fetchReviews }) => (
       </div>
     </div>
 
-    <div className="summary">{review.summary}</div>
+    <div className="summary" data-testid="summary">{review.summary}</div>
     <ReviewBody review={review} />
-    {review.recommend ? (
+    {review.recommend && (
       <div className="recommend">
         <AiOutlineCheck />
-        <span>I recommend this product</span>
+        <span data-testid="recommend">I recommend this product</span>
       </div>
-    ) : ''}
-    {review.response ? (
+    )}
+    {review.response && (
       <div className="review_response">
         <p>Response:</p>
-        <p>{review.response}</p>
+        <p data-testid="review_response">{review.response}</p>
       </div>
-    )
-      : ''}
+    )}
     <Helpfulness review={review} fetchReviews={fetchReviews} />
   </div>
 );

@@ -20,10 +20,19 @@ const ReviewRating = ({ id, rating, productName }) => {
   const [charName, setCharName] = useState([]);
   const [charId, setCharId] = useState([]);
   const [charValue, setCharValue] = useState([]);
+  const [ratings, setRatings] = useState({});
+  const [recommended, setRecommended] = useState({});
 
   const fetchReviews = () => {
     axios.get('/api/reviews', { params: { product_id: id, sort } })
       .then((res) => setReviews(res.data.results));
+  };
+  const fetchMeta = () => {
+    axios.get(`/api/reviews/meta/${id}`)
+      .then((res) => {
+        setRatings(res.data.ratings);
+        setRecommended(res.data.recommended);
+      });
   };
   useEffect(() => {
     axios.get(`/api/reviews/meta/${id}`)
@@ -37,6 +46,7 @@ const ReviewRating = ({ id, rating, productName }) => {
           .map((name) => name[1])
           .map((val) => parseInt(val.value, 10)));
       });
+    fetchMeta();
   }, []);
 
   useEffect(() => {
@@ -51,13 +61,15 @@ const ReviewRating = ({ id, rating, productName }) => {
   };
 
   const closeWriteReview = () => {
+    fetchMeta();
     setIsClickAdd(false);
   };
   return (
     <div className="widget">
       {reviews.length !== 0
         ? (
-          <div className="review_rating_container">
+
+          <div className="review_rating_container" data-testid="widget">
             <div className="rating_col">
               <RatingBreakDown
                 id={id}
@@ -66,6 +78,9 @@ const ReviewRating = ({ id, rating, productName }) => {
                 rating={rating}
                 charName={charName}
                 charValue={charValue}
+                ratings={ratings}
+                recommended={recommended}
+                fetchMeta={fetchMeta}
               />
             </div>
             <div className="review_col">
@@ -86,7 +101,7 @@ const ReviewRating = ({ id, rating, productName }) => {
               <div className="review_col">
                 <div className="review_btn">
                   {reviews.length > 2 && !isLoading && <button data-testid="button" type="button" onClick={loadMoreView}>More View</button>}
-                  <button type="button" onClick={() => setIsClickAdd(true)}>
+                  <button type="button" onClick={() => setIsClickAdd(true)} data-testid="addBtn">
                     ADD A REVIEW +
                   </button>
                   <WriteReview
