@@ -4,12 +4,13 @@ $sitewide-msg-height: 56px;
 .productOverviewWrapper {
   display: flex;
   flex-direction: column;
-  height: calc(100vh - ($header-height + $sitewide-msg-height));
+  // height: calc(100vh - ($header-height + $sitewide-msg-height));
 }
 
 .productOverviewContainer {
   display: flex;
   flex: 1;
+  height: 100%;
 }
 
 .productInfo{

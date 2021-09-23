@@ -3,26 +3,33 @@
   background-color: rgb(128, 128, 128);
   display: flex;
   flex: 2;
+
+  &__navigation {
+    align-items: center;
+    display: flex;
+    flex: 1;
+    justify-content: space-between;
+  }
 }
 
-.mainImageContainer {
-  display: flex;
-  height: 100%;
-  width: 100%;
-  justify-content: space-around;
-  align-items: center;
-  order: 3;
-  background-color: rgb(128, 128, 128);
-};
+// .mainImageContainer {
+//   display: flex;
+//   height: 100%;
+//   width: 100%;
+//   justify-content: space-around;
+//   align-items: center;
+//   order: 3;
+//   background-color: rgb(128, 128, 128);
+// };
 
 
 .focusedImage {
   background-position: center;
   background-repeat: no-repeat;
-  background-size: 100%;
-  height: 99%;
-  width: 100%;
+  background-size: cover;
   cursor: zoom-in;
+  display: flex;
+  flex-direction: row;
 }
 
 .focusedImageExpand {
@@ -45,41 +52,36 @@
 
 
 .arrowsThumbnailContainer {
-  margin: 0 1%;
+  align-items: center;
   display: flex;
   flex-direction: column;
-  order: 1;
-  width: 15%;
-  align-items: center;
-  justify-content: space-between;
+  height: 100%;
+  padding: 0 20px;
 }
 
 .thumbnailContainer {
   display: flex;
   flex-direction: column;
-  width: 100%;
   align-items: center;
-  justify-content: center;
 }
 
-.thumbnail {
-  height: 75px;
-  width: 75px;
-  margin: 5% 0;
-  background-size: 100%;
-  background-position: center;
-  background-repeat: no-repeat;
-}
+// .thumbnail {
+//   height: 60px;
+//   width: 60px;
+//   margin: 5px 0;
+//   background-size: cover;
+//   background-position: center;
+//   background-repeat: no-repeat;
+// }
 
 .thumbnailInput {
-  height: 75px;
-  width: 75px;
-  margin: 5px;
-  padding: 0;
-  border: 0;
-  background-size: 100%;
+  border: 1px solid goldenrod;
+  background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  height: 60px;
+  width: 60px;
+  margin: 10px 0;
 }
 
 .leftArrow {
@@ -91,9 +93,9 @@
   cursor: pointer;
 }
 
-#selected {
-  border: 3px solid black;
-}
+// #selected {
+//   border: 3px solid black;
+// }
 
 .upArrow, .downArrow {
   cursor: pointer;

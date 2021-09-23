@@ -60,22 +60,24 @@ const ImageGallery = ({
   };
 
   return (
-    <div className="imageGalleryContainer">
-      <div className="mainImageContainer">
-        <AiOutlineArrowLeft data-testid="left-arrow" className="leftArrow" onClick={() => handleArrow('left')} size={arrowSize} style={imageIndex === 0 ? { visibility: 'hidden' } : {}} />
-        <input
-          className={isImageExpanded ? 'focusedImageExpand' : 'focusedImage'}
-          style={
-            isImageExpanded ? { backgroundImage: `url(${currentPhoto})`, backgroundPosition: `${bgPosition}` } : { backgroundImage: `url(${currentPhoto})` }
-          }
-          data-testid="main-image"
-          onClick={handleImageClick}
-          onMouseMove={handleMousePosition}
-          onMouseLeave={handleMouseLeave}
-        />
-        <AiOutlineArrowRight data-testid="right-arrow" className="rightArrow" onClick={() => handleArrow('right')} size={arrowSize} style={imageIndex === length - 1 ? { visibility: 'hidden' } : {}} />
-      </div>
+    <div
+      className={`imageGalleryContainer ${isImageExpanded ? 'focusedImageExpand' : 'focusedImage'}`}
+      style={
+        isImageExpanded ? { backgroundImage: `url(${currentPhoto})`, backgroundPosition: `${bgPosition}` } : { backgroundImage: `url(${currentPhoto})` }
+      }
+      data-testid="main-image"
+      onClick={handleImageClick}
+      onKeyPress={() => {}}
+      role="button"
+      tabIndex={0}
+      onMouseMove={handleMousePosition}
+      onMouseLeave={handleMouseLeave}
+    >
       <ThumbnailView photos={photos} handleClick={handleThumbNailClick} className="thumbnailComponent" currentIndex={imageIndex} />
+      <nav className="imageGalleryContainer__navigation">
+        <AiOutlineArrowLeft data-testid="left-arrow" className="leftArrow" onClick={() => handleArrow('left')} size={arrowSize} style={imageIndex === 0 ? { visibility: 'hidden' } : {}} />
+        <AiOutlineArrowRight data-testid="right-arrow" className="rightArrow" onClick={() => handleArrow('right')} size={arrowSize} style={imageIndex === length - 1 ? { visibility: 'hidden' } : {}} />
+      </nav>
     </div>
   );
 };
