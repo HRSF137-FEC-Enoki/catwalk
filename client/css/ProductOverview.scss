@@ -62,17 +62,27 @@ $header-height: 86px;
 .socialMedia {
   display: flex;
   margin: 10px 0;
-  justify-content: left;
+  justify-content: space-between;
+  width: 50%;
+
+  svg {
+    transition: color 200ms;
+  }
+
+  svg:hover {
+    color: goldenrod;
+    transition: color 200ms;
+  }
 }
 
 .productDescription {
   color: #777;
   display: flex;
-  padding: 15px 0;
+  padding: 25px 0;
 
   &__info {
-    border-right: 2px solid #777;
-    padding: 30px 45px;
+    border-right: 2px solid #bbb;
+    padding: 20px 45px;
     flex: 2;
   }
 
@@ -85,7 +95,7 @@ $header-height: 86px;
 
   &__features {
     flex: 1;
-    padding: 30px 45px;
+    padding: 20px 45px;
   }
 
   &__feature-item {
@@ -96,6 +106,7 @@ $header-height: 86px;
 #scrollToReviews {
   background-color: transparent;
   border-color: transparent;
+  color: #777;
   cursor: pointer;
   text-decoration: underline;
 }

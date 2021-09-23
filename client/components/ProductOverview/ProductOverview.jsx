@@ -19,7 +19,7 @@ const ProductOverview = ({
   const [allStyles, setAllStyles] = useState(null);
   const [isCollapsed, setCollapse] = useState(false);
   const starSize = 14;
-  const socialMediaButtonSize = 20;
+  const socialMediaButtonSize = 36;
   const SalePrice = () => {
     if (currentStyle.sale_price) {
       return (
