@@ -85,7 +85,7 @@ const ReviewRating = ({ id, rating, productName }) => {
               />
             </div>
             <div className="review_col">
-              <Sorting id={id} setSort={setSort} reviews={reviews} />
+              <Sorting id={id} setSort={setSort} reviews={reviews} fetchMeta={fetchMeta} />
               <div className="review_list_container">
                 <ReviewList
                   reviews={reviews}
