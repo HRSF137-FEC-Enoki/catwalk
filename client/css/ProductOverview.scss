@@ -1,11 +1,14 @@
 $header-height: 86px;
 
 .productOverviewWrapper {
+  display: flex;
+  flex-direction: column;
   height: calc(100vh - $header-height);
 }
 
 .productOverviewContainer {
   display: flex;
+  flex: 1;
 }
 
 .productInfo{
