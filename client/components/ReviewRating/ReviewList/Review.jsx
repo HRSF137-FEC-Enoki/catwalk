@@ -9,7 +9,7 @@ import Helpfulness from './Helpfulness';
 import StarRating from '../../StarRating';
 
 const STAR_SIZE = 16;
-const Review = ({ review, fetchReviews }) => (
+const Review = ({ review, fetchReviews, fetchMeta }) => (
   <div className="review">
     <div className="rating_reviewer_date">
       <StarRating size={STAR_SIZE} rating={review.rating} />
@@ -34,7 +34,7 @@ const Review = ({ review, fetchReviews }) => (
         <p data-testid="review_response">{review.response}</p>
       </div>
     )}
-    <Helpfulness review={review} fetchReviews={fetchReviews} />
+    <Helpfulness review={review} fetchReviews={fetchReviews} fetchMeta={fetchMeta} />
   </div>
 );
 Review.propTypes = PropTypes.shape({

@@ -2,7 +2,9 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 
-const Helpfulness = ({ review, fetchReviews }) => {
+const Helpfulness = ({
+  review, fetchReviews, fetchMeta,
+}) => {
   const [hasClickedHelpful, setHasClickedHelpful] = useState(false);
 
   const onClickHandler = (e) => {
@@ -12,6 +14,7 @@ const Helpfulness = ({ review, fetchReviews }) => {
       axios.put(`/api/reviews/${review.review_id}/${action}`)
         .then(() => {
           fetchReviews();
+          fetchMeta();
           setHasClickedHelpful(true);
         });
 

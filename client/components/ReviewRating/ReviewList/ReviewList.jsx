@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Review from './Review';
 
 const ReviewList = ({
-  reviews, reviewShow, fetchReviews, starFilter, setCurrReviewsLength,
+  reviews, reviewShow, fetchReviews, starFilter, setCurrReviewsLength, fetchMeta,
 }) => {
   let list;
   const filterList = (num) => {
@@ -29,14 +29,24 @@ const ReviewList = ({
           ? (
             <div className="review_list">
               {filterList(0).map((review) => (
-                <Review key={review.review_id} review={review} fetchReviews={fetchReviews} />
+                <Review
+                  key={review.review_id}
+                  review={review}
+                  fetchReviews={fetchReviews}
+                  fetchMeta={fetchMeta}
+                />
               ))}
             </div>
           )
           : (
             <div className="review_list" data-testid="review_list">
               {filterList(1).map((review) => (
-                <Review key={review.review_id} review={review} fetchReviews={fetchReviews} />
+                <Review
+                  key={review.review_id}
+                  review={review}
+                  fetchReviews={fetchReviews}
+                  fetchMeta={fetchMeta}
+                />
               ))}
             </div>
           )

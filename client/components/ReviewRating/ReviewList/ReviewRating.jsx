@@ -57,6 +57,7 @@ const ReviewRating = ({ id, rating, productName }) => {
     if (currReviewsLength - reviewShow <= 2) {
       setIsLoading(true);
     }
+    fetchMeta();
     setReviewShow(reviewShow + 2);
   };
 
@@ -90,6 +91,7 @@ const ReviewRating = ({ id, rating, productName }) => {
                   reviews={reviews}
                   reviewShow={reviewShow}
                   fetchReviews={fetchReviews}
+                  fetchMeta={fetchMeta}
                   starFilter={starFilter}
                   setStarFilter={setStarFilter}
                   rating={rating}
