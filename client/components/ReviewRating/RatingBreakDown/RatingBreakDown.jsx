@@ -1,24 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import axios from 'axios';
 
 import StarRating from '../../StarRating';
 import ProductBreakDown from './ProductBreakDown';
 
 const RatingBreakDown = ({
-  id, setStarFilter, starFilter, rating, charValue, charName,
+  setStarFilter, starFilter, rating, charValue, charName, ratings, recommended, fetchMeta,
 }) => {
-  const [ratings, setRatings] = useState({});
-  const [recommended, setRecommended] = useState({});
-
-  useEffect(() => {
-    axios.get(`/api/reviews/meta/${id}`)
-      .then((res) => {
-        setRatings(res.data.ratings);
-        setRecommended(res.data.recommended);
-      });
-  }, []);
-
   const getPercentage = (target) => {
     if (target === undefined) {
       return 0;
@@ -39,7 +27,7 @@ const RatingBreakDown = ({
     // Total 5 stars, and check which star has value from API
     for (let i = 1; i < 6; i += 1) {
       if (ratings[String(i)]) {
-        document.getElementById(i).style.width = getPercentage(ratings[String(i)]);
+        document.getElementById(`left${i}`).style.width = getPercentage(ratings[String(i)]);
       }
     }
   };
@@ -51,6 +39,7 @@ const RatingBreakDown = ({
   const clearFilter = (e) => {
     e.preventDefault();
     setStarFilter([]);
+    fetchMeta();
   };
 
   const onClickHandler = (e) => {
@@ -63,6 +52,7 @@ const RatingBreakDown = ({
       set.add(Number(e.target.name));
     }
     setStarFilter(Array.from(set));
+    fetchMeta();
   };
 
   return (
@@ -72,19 +62,19 @@ const RatingBreakDown = ({
           <p>{Number.isNaN(rating) ? 0 : rating.toFixed(1)}</p>
           <StarRating size={36} rating={rating} />
         </div>
-        <p className="rating_recommended">
+        <p className="rating_recommended" role="note">
           {recommended && getPercentage(recommended.true)}
           {'  '}
           of reviews recommend this product
         </p>
         {[...Array(5)].map((star, index) => (
           <div className="star_breakdown" key={Math.random() * 100}>
-            <a href="/" name={5 - index} onClick={onClickHandler}>
+            <a href="/" name={5 - index} onClick={onClickHandler} data-testid={`star${5 - index}`}>
               {5 - index}
               star
             </a>
             <div className="rating_bar">
-              <div className="rating_bar_left" id={5 - index} />
+              <div className="rating_bar_left" id={`left${5 - index}`} />
             </div>
 
           </div>

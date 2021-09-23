@@ -51,7 +51,6 @@ const WriteReview = ({
     }
   };
   const onChangeHandler = (e) => {
-    console.log(e.target);
     if (charName.includes(e.target.name)) {
       setCharacteristics({ ...characteristics, [e.target.name]: e.target.value });
     } else {
@@ -150,6 +149,7 @@ const WriteReview = ({
               setErrMsg([]);
               setIsValid(true);
             }}
+            data-testid="form_button"
           >
             OK
           </button>
@@ -208,6 +208,7 @@ const WriteReview = ({
               onChange={onChangeHandler}
               maxLength="60"
               placeholder="Example: Best purchase ever!"
+              data-testid="form_summary"
               required
             />
           </div>
@@ -224,6 +225,7 @@ const WriteReview = ({
               maxLength="1000"
               row="10"
               placeholder="Why did you like the product or not?"
+              data-testid="form_body"
               required
             />
           </div>
@@ -249,17 +251,17 @@ const WriteReview = ({
             <span>
               Nickname:
             </span>
-            <input className="form_input" name="name" id="form_name" value={newReview.name || ''} onChange={onChangeHandler} placeholder="Example: jackson11!" maxLength="60" />
+            <input className="form_input" name="name" id="form_name" value={newReview.name || ''} onChange={onChangeHandler} placeholder="Example: jackson11!" maxLength="60" data-testid="form_name" />
           </div>
           <div className="input_label">
             <span>
               Email:
             </span>
-            <input className="form_input" name="email" id="form_email" value={newReview.email || ''} onChange={onChangeHandler} required placeholder="Example: jackson11@email.com" maxLength="60" />
+            <input className="form_input" name="email" id="form_email" value={newReview.email || ''} onChange={onChangeHandler} required placeholder="Example: jackson11@email.com" maxLength="60" data-testid="form_email" />
           </div>
           <div className="review_btn">
-            <button type="button" onClick={() => closeWriteReview()}>Cancel</button>
-            <button type="button" onClick={onSubmit}>Submit</button>
+            <button type="button" onClick={() => closeWriteReview()} data-testid="cancel">Cancel</button>
+            <button type="button" onClick={onSubmit} data-testid="submit">Submit</button>
           </div>
 
         </form>
