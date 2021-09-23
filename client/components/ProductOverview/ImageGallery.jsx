@@ -42,7 +42,9 @@ const ImageGallery = ({
     setPosition('center');
   };
 
-  const handleArrow = (direction) => {
+  const handleArrow = (e, direction) => {
+    e.stopPropagation();
+
     if (direction === 'left') {
       updateImageIndex(imageIndex === 0 ? length - 1 : imageIndex - 1);
     } else if (direction === 'right') {
@@ -77,8 +79,8 @@ const ImageGallery = ({
     >
       <ThumbnailView photos={photos} handleClick={handleThumbNailClick} className="thumbnailComponent" currentIndex={imageIndex} />
       <nav className="imageGalleryContainer__navigation">
-        <AiOutlineArrowLeft data-testid="left-arrow" className="leftArrow" onClick={() => handleArrow('left')} size={arrowSize} style={imageIndex === 0 ? { visibility: 'hidden' } : {}} />
-        <AiOutlineArrowRight data-testid="right-arrow" className="rightArrow" onClick={() => handleArrow('right')} size={arrowSize} style={imageIndex === length - 1 ? { visibility: 'hidden' } : {}} />
+        <AiOutlineArrowLeft data-testid="left-arrow" className="leftArrow" onClick={(e) => handleArrow(e, 'left')} size={arrowSize} style={imageIndex === 0 ? { visibility: 'hidden' } : {}} />
+        <AiOutlineArrowRight data-testid="right-arrow" className="rightArrow" onClick={(e) => handleArrow(e, 'right')} size={arrowSize} style={imageIndex === length - 1 ? { visibility: 'hidden' } : {}} />
       </nav>
     </div>
   );
