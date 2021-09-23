@@ -63,6 +63,7 @@ const ImageGallery = ({
   return (
     <div className="imageGalleryContainer">
       <div className="mainImageContainer">
+        <AiOutlineArrowLeft data-testid="left-arrow" className="leftArrow" onClick={() => handleArrow('left')} size={arrowSize} style={imageIndex === 0 ? { visibility: 'hidden' } : {}} />
         <input
           className={isImageExpanded ? 'focusedImageExpand' : 'focusedImage'}
           style={
@@ -73,10 +74,9 @@ const ImageGallery = ({
           onMouseMove={handleMousePosition}
           onMouseLeave={handleMouseLeave}
         />
+        <AiOutlineArrowRight data-testid="right-arrow" className="rightArrow" onClick={() => handleArrow('right')} size={arrowSize} style={imageIndex === length - 1 ? { visibility: 'hidden' } : {}} />
       </div>
       <ThumbnailView photos={photos} handleClick={handleThumbNailClick} className="thumbnailComponent" currentIndex={imageIndex} />
-      <AiOutlineArrowLeft data-testid="left-arrow" className="leftArrow" onClick={() => handleArrow('left')} size={arrowSize} style={imageIndex === 0 ? { visibility: 'hidden' } : {}} />
-      <AiOutlineArrowRight data-testid="right-arrow" className="rightArrow" onClick={() => handleArrow('right')} size={arrowSize} style={imageIndex === length - 1 ? { visibility: 'hidden' } : {}} />
     </div>
   );
 };

@@ -64,8 +64,10 @@ const AddToCart = ({ currentStyle }) => {
               setCartMessaage(
                 <div className="cartItems">
                   <p>Added to cart!</p>
-                  <p>Items in Cart:</p>
-                  {response.data.map((item) => <p key={Math.random()}>{`Item: ${item.sku_id} Count: ${item.count}`}</p>)}
+                  <div>Items in Cart:</div>
+                  <div className="cartItemsWrapper">
+                    {response.data.map((item) => <p key={Math.random()}>{`Item: ${item.sku_id} Count: ${item.count}`}</p>)}
+                  </div>
                 </div>,
               );
             });
@@ -104,7 +106,7 @@ const AddToCart = ({ currentStyle }) => {
     }
     for (let i = 0; i < maxQuantity; i += 1) {
       shirtQuantities.push(
-        <option value={i + 1} key={i + 1}>{i + 1}</option>,
+        <option data-testid="quantity-choices" value={i + 1} key={i + 1}>{i + 1}</option>,
       );
     }
     return shirtQuantities;
@@ -115,6 +117,7 @@ const AddToCart = ({ currentStyle }) => {
       <div key={currentStyle.style_id}>
         <span>
           <select
+            data-testid="select-shirt-size"
             name="shirtSizes"
             id="shirtSizes"
             defaultValue="default"
@@ -133,7 +136,7 @@ const AddToCart = ({ currentStyle }) => {
           </select>
         </span>
         <span>
-          <select name="shirtQuantity" defaultValue="default" onChange={chooseShirtSize}>
+          <select data-testid="shirt-quantity" defaultValue="default" onChange={chooseShirtSize}>
             {shirtSizeDropdown()}
           </select>
         </span>
@@ -141,6 +144,7 @@ const AddToCart = ({ currentStyle }) => {
           <button type="button" onClick={handleAddToCartClick}>Add To Cart</button>
           {renderCartWarning()}
           {renderCartAdd()}
+
         </div>
 
       </div>

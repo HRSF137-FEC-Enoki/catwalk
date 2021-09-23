@@ -19,7 +19,7 @@ const ProductOverview = ({
   const [allStyles, setAllStyles] = useState(null);
   const [isCollapsed, setCollapse] = useState(false);
   const starSize = 20;
-  const socialMediaButtonSize = 40;
+  const socialMediaButtonSize = 20;
   const SalePrice = () => {
     if (currentStyle.sale_price) {
       return (
@@ -59,6 +59,11 @@ const ProductOverview = ({
     setCollapse(!isCollapsed);
   };
 
+  const scrollToReviews = () => {
+    const reviews = document.getElementsByClassName('review_rating_container')[0];
+    reviews.scrollIntoView({ behavior: 'smooth' });
+  };
+
   if (currentStyle) {
     return (
       <div className="productOverviewWrapper">
@@ -68,7 +73,7 @@ const ProductOverview = ({
             <div className="starRating">
               <StarRating rating={rating} size={starSize} />
             </div>
-            {totalReviews ? <i>{`Read all ${totalReviews} reviews`}</i> : null}
+            {totalReviews ? <button id="scrollToReviews" type="button" onClick={scrollToReviews}>{`Read all ${totalReviews} reviews`}</button> : null}
             <div className="productCategory">{currentProduct.category}</div>
             <div className="productName">{currentProduct.name}</div>
             <SalePrice />

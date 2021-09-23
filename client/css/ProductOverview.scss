@@ -1,9 +1,12 @@
 .productOverviewContainer {
   display: flex;
+  height: calc(80vh);
 }
 
 .productInfo{
-  border: 2px solid black;
+  display: flex;
+  flex-direction: column;
+  border: 2px solid rgb(85, 0, 110);
   width: 50%;
   margin: 0 1%;
 }
@@ -15,22 +18,21 @@
 }
 
 .starRating {
-  background-color: blue;
-  width: 40%;
+  width: 300px;
 }
 
 .productCategory {
-  font-size: 30px;
+  font-size: 20px;
   margin: 10px 0;
 }
 
 .productName {
-  font-size: 50px;
+  font-size: 30px;
   margin: 10px 0;
 }
 
 .productPrice {
-  font-size: 35px;
+  font-size: 30px;
   margin: 10px 0;
 }
 
@@ -54,13 +56,22 @@
 }
 
 .styleSelected {
-  font-size: 30px;
+  font-size: 25px;
 }
 
 .productDescription {
   border: 2px solid black;
   margin: 1% 0;
   font-size: 25px;
+}
+
+#scrollToReviews {
+  background:none;
+  border:none;
+  color: blue;
+  cursor: pointer;
+  text-align: left;
+  width:fit-content;
 }
 
 // .productOverviewWrapper {
