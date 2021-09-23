@@ -6,9 +6,9 @@ import '../../css/StyleSelector.scss';
 const StyleSelector = ({ styles, currentStyle, updateCurrentStyle }) => {
   if (styles) {
     return (
-      <div>
+      <div className="stylesContainer">
         <div className="styleSelected">
-          <span className="styleIndicator">{'Style > '}</span>
+          <span className="styleIndicator">{'Style  >   '}</span>
           {currentStyle.name}
         </div>
         <div className="stylesAvailable">

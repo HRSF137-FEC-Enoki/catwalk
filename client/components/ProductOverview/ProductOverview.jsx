@@ -18,7 +18,7 @@ const ProductOverview = ({
   const [currentStyle, setCurrentStyle] = useState(null);
   const [allStyles, setAllStyles] = useState(null);
   const [isCollapsed, setCollapse] = useState(false);
-  const starSize = 20;
+  const starSize = 14;
   const socialMediaButtonSize = 20;
   const SalePrice = () => {
     if (currentStyle.sale_price) {
@@ -72,22 +72,22 @@ const ProductOverview = ({
           <div className="productInfo" id={isCollapsed ? 'collapsed' : 'fullSize'} data-testid="product-info">
             <div className="starRating">
               <StarRating rating={rating} size={starSize} />
+              {totalReviews ? <button id="scrollToReviews" type="button" onClick={scrollToReviews}>{`Read all ${totalReviews} reviews`}</button> : null}
             </div>
-            {totalReviews ? <button id="scrollToReviews" type="button" onClick={scrollToReviews}>{`Read all ${totalReviews} reviews`}</button> : null}
             <div className="productCategory">{currentProduct.category}</div>
             <div className="productName">{currentProduct.name}</div>
             <SalePrice />
-            <div className="socialMedia">
-              <FaFacebook size={socialMediaButtonSize} />
-              <FaTwitter size={socialMediaButtonSize} />
-              <FaPinterest size={socialMediaButtonSize} />
-            </div>
             <StyleSelector
               styles={allStyles}
               currentStyle={currentStyle}
               updateCurrentStyle={updateCurrentStyle}
             />
             <AddToCart currentStyle={currentStyle} />
+            <div className="socialMedia">
+              <FaFacebook size={socialMediaButtonSize} />
+              <FaTwitter size={socialMediaButtonSize} />
+              <FaPinterest size={socialMediaButtonSize} />
+            </div>
           </div>
         </div>
         <div className="productDescription">
