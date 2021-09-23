@@ -43,6 +43,20 @@ option {
   overflow: auto;
 }
 
-.addToCart__actions {
-  padding: 10px 0;
+.addToCart {
+  &__actions {
+    padding: 10px 0;
+  }
+
+  &__btn-container {
+    padding: 20px 0;
+  }
+
+  &__btn {
+    background-color: transparent;
+    border: 1px solid #999;
+    font-size: 20px;
+    padding: 15px 30px;
+    text-transform: uppercase;
+  }
 }

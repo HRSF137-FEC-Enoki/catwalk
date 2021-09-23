@@ -8,6 +8,10 @@
     margin: 5px;
     position: relative;
     width: 22%;
+
+    & svg {
+      stroke-width: 20px;
+    }
   }
 
   &__selected {
@@ -26,6 +30,7 @@
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  border: 2px solid #bbb;
   border-radius: 50%;
   height: 100%;
   width: 100%;
