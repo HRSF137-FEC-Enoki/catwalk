@@ -136,12 +136,12 @@ const AddToCart = ({ currentStyle }) => {
           </select>
         </span>
         <span>
-          <select data-testid="shirt-quantity" defaultValue="default" onChange={chooseShirtSize}>
+          <select data-testid="shirt-quantity" defaultValue="default" onChange={chooseShirtSize} id="shirtCount">
             {shirtSizeDropdown()}
           </select>
         </span>
         <div>
-          <button type="button" onClick={handleAddToCartClick}>Add To Cart</button>
+          <button type="button" onClick={handleAddToCartClick} id="addToCart">Add To Cart</button>
           {renderCartWarning()}
           {renderCartAdd()}
 
