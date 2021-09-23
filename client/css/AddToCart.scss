@@ -8,6 +8,38 @@ option {
   color: black;
 }
 
-.cartItems {
+#shirtSizes, #shirtCount{
+  border: 1px solid #999;
+  font-size: 25px;
+  color: #000000;
+  background-color: #eee;
+  border-radius: 5px;
+  box-shadow: 4px 4px #ccc;
+  padding: 5px;
+  margin: 5px;
+}
+
+// #addToCart {
+//   display:inline-block;
+//   padding:0.35em 1.2em;
+//   border:0.1em solid #FFFFFF;
+//   margin:0 0.3em 0.3em 0;
+//   border-radius:0.12em;
+//   box-sizing: border-box;
+//   text-decoration:none;
+//   font-family:'Roboto',sans-serif;
+//   font-weight:300;
+//   color:#000000;
+//   text-align:center;
+//   transition: all 0.2s;
+// }
+
+// #addToCart:hover {
+//   color:#000000;
+//   background-color: #FFFFFF;
+// }
+
+.cartItemsWrapper{
+  height: 200px;
   overflow: auto;
 }

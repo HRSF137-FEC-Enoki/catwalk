@@ -24,8 +24,6 @@ const ImageGallery = ({
     updateImageIndex(0);
   }
 
-  // /home/andylei/hackreactor/catwalk/client/components/ProductOverview/ImageGallery.jsx
-  // /home/andylei/hackreactor/catwalk/public/no_image.png
   const currentPhoto = currentStyle.photos[imageIndex].url || '../../../no_image.png';
 
   const handleMousePosition = (e) => {
@@ -64,19 +62,20 @@ const ImageGallery = ({
   return (
     <div className="imageGalleryContainer">
       <div className="mainImageContainer">
+        <AiOutlineArrowLeft data-testid="left-arrow" className="leftArrow" onClick={() => handleArrow('left')} size={arrowSize} style={imageIndex === 0 ? { visibility: 'hidden' } : {}} />
         <input
           className={isImageExpanded ? 'focusedImageExpand' : 'focusedImage'}
           style={
             isImageExpanded ? { backgroundImage: `url(${currentPhoto})`, backgroundPosition: `${bgPosition}` } : { backgroundImage: `url(${currentPhoto})` }
           }
+          data-testid="main-image"
           onClick={handleImageClick}
           onMouseMove={handleMousePosition}
           onMouseLeave={handleMouseLeave}
         />
+        <AiOutlineArrowRight data-testid="right-arrow" className="rightArrow" onClick={() => handleArrow('right')} size={arrowSize} style={imageIndex === length - 1 ? { visibility: 'hidden' } : {}} />
       </div>
       <ThumbnailView photos={photos} handleClick={handleThumbNailClick} className="thumbnailComponent" currentIndex={imageIndex} />
-      <AiOutlineArrowLeft className="leftArrow" onClick={() => handleArrow('left')} size={arrowSize} style={imageIndex === 0 ? { visibility: 'hidden' } : {}} />
-      <AiOutlineArrowRight className="rightArrow" onClick={() => handleArrow('right')} size={arrowSize} style={imageIndex === length - 1 ? { visibility: 'hidden' } : {}} />
     </div>
   );
 };
