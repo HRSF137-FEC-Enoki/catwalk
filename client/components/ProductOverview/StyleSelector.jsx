@@ -26,7 +26,7 @@ const StyleSelector = ({ styles, currentStyle, updateCurrentStyle }) => {
                 // id={currentStyle.style_id === style.style_id ? 'selected' : 'unselected'}
                 onClick={() => updateCurrentStyle(index)}
               />
-              <AiOutlineCheckCircle color="goldenrod" size={24} className={`stylesAvailable__selected ${currentStyle.style_id === style.style_id ? 'visible' : ''}`} />
+              {currentStyle.style_id === style.style_id && <AiOutlineCheckCircle color="goldenrod" size={24} className="stylesAvailable__selected" />}
             </span>
           ))}
         </div>
