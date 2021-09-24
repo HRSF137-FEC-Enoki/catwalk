@@ -18,7 +18,7 @@ const ImageGallery = ({
 
   const { photos } = currentStyle;
   const { length } = photos;
-  const arrowSize = 35;
+  const arrowSize = 30;
 
   if (imageIndex > length) {
     updateImageIndex(0);

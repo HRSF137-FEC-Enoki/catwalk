@@ -10,6 +10,7 @@
     display: flex;
     flex: 1;
     justify-content: space-between;
+    padding-left: 30px;
   }
 }
 
@@ -74,26 +75,31 @@
 // }
 
 .thumbnailInput {
-  border: 1px solid goldenrod;
+  border: 2px solid #777;
   border-radius: 3px;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   height: 60px;
-  width: 60px;
   margin: 10px 0;
-}
+  transition: border-color 200ms;
+  width: 60px;
 
-.leftArrow {
-  left: 102px;
-  cursor: pointer;
-}
-
-.rightArrow {
-  cursor: pointer;
+  &:hover {
+    border-color: goldenrod;
+    transition: border-color 200ms;
+  }
 }
 
 .upArrow,
-.downArrow {
+.downArrow,
+.rightArrow,
+.leftArrow {
   cursor: pointer;
+  transition: color 200ms;
+
+  &:hover {
+    color: goldenrod;
+    transition: color 200ms;
+  }
 }

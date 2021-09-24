@@ -52,7 +52,7 @@ const ThumbnailView = ({ photos, handleClick, currentIndex }) => {
 
   return (
     <div className="arrowsThumbnailContainer">
-      <BsCaretUp data-testid="up-arrow" className="upArrow" color="goldenrod" size={arrowSize} onClick={(e) => handleArrowUp(e)} style={currentIndex !== 0 ? {} : { visibility: 'hidden' }} />
+      <BsCaretUp data-testid="up-arrow" className="upArrow" size={arrowSize} onClick={(e) => handleArrowUp(e)} style={currentIndex !== 0 ? {} : { visibility: 'hidden' }} />
       <div className="thumbnailContainer">
         {photos.map((photo, index) => {
           if (index >= thumbnailStart && index < thumbnailEnd) {
@@ -71,7 +71,7 @@ const ThumbnailView = ({ photos, handleClick, currentIndex }) => {
           } return null;
         })}
       </div>
-      <BsCaretDown data-testid="down-arrow" color="goldenrod" className="downArrow" size={arrowSize} onClick={(e) => handleArrowDown(e)} style={currentIndex !== photos.length - 1 ? {} : { visibility: 'hidden' }} />
+      <BsCaretDown data-testid="down-arrow" className="downArrow" size={arrowSize} onClick={(e) => handleArrowDown(e)} style={currentIndex !== photos.length - 1 ? {} : { visibility: 'hidden' }} />
     </div>
   );
 };
