@@ -64,6 +64,8 @@ const ImageGallery = ({
   };
 
   const handleKeyPress = (e) => {
+    e.stopPropagation();
+
     if (e.keyCode === 0) {
       handleImageClick();
     }
