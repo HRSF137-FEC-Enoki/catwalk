@@ -71,7 +71,7 @@ const ImageGallery = ({
       }
       data-testid="main-image"
       onClick={handleImageClick}
-      onKeyPress={() => {}}
+      onKeyPress={handleImageClick}
       role="button"
       tabIndex={0}
       onMouseMove={handleMousePosition}

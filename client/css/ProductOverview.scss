@@ -111,4 +111,10 @@ $sitewide-msg-height: 56px;
   color: #777;
   cursor: pointer;
   text-decoration: underline;
+  transition: color 200ms;
+
+  &:hover {
+    color: goldenrod;
+    transition: color 200ms;
+  }
 }

@@ -28,7 +28,13 @@
   border: 2px solid #bbb;
   border-radius: 50%;
   height: 100%;
+  transition: border-color 200ms;
   width: 100%;
+
+  &:hover {
+    border-color: goldenrod;
+    transition: border-color 200ms;
+  }
 }
 
 .styleIndicator {
