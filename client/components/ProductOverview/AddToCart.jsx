@@ -114,7 +114,7 @@ const AddToCart = ({ currentStyle }) => {
 
   if (!currentStyle.skus.null) {
     return (
-      <div key={currentStyle.style_id}>
+      <div key={currentStyle.style_id} className="addToCart__actions">
         <span>
           <select
             data-testid="select-shirt-size"
@@ -140,11 +140,10 @@ const AddToCart = ({ currentStyle }) => {
             {shirtSizeDropdown()}
           </select>
         </span>
-        <div>
-          <button type="button" onClick={handleAddToCartClick} id="addToCart">Add To Cart</button>
+        <div className="addToCart__btn-container">
+          <button type="button" onClick={handleAddToCartClick} className="addToCart__btn">Add To Cart</button>
           {renderCartWarning()}
           {renderCartAdd()}
-
         </div>
 
       </div>

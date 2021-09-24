@@ -18,7 +18,7 @@ const ImageGallery = ({
 
   const { photos } = currentStyle;
   const { length } = photos;
-  const arrowSize = 35;
+  const arrowSize = 30;
 
   if (imageIndex > length) {
     updateImageIndex(0);
@@ -42,7 +42,9 @@ const ImageGallery = ({
     setPosition('center');
   };
 
-  const handleArrow = (direction) => {
+  const handleArrow = (e, direction) => {
+    e.stopPropagation();
+
     if (direction === 'left') {
       updateImageIndex(imageIndex === 0 ? length - 1 : imageIndex - 1);
     } else if (direction === 'right') {
@@ -50,7 +52,9 @@ const ImageGallery = ({
     }
   };
 
-  const handleThumbNailClick = (index) => {
+  const handleThumbNailClick = (e, index) => {
+    e.stopPropagation();
+
     updateImageIndex(index);
   };
 
@@ -59,23 +63,33 @@ const ImageGallery = ({
     setImageExpanded(!isImageExpanded);
   };
 
+  const handleKeyPress = (e) => {
+    e.stopPropagation();
+
+    if (e.keyCode === 0) {
+      handleImageClick();
+    }
+  };
+
   return (
-    <div className="imageGalleryContainer">
-      <div className="mainImageContainer">
-        <AiOutlineArrowLeft data-testid="left-arrow" className="leftArrow" onClick={() => handleArrow('left')} size={arrowSize} style={imageIndex === 0 ? { visibility: 'hidden' } : {}} />
-        <input
-          className={isImageExpanded ? 'focusedImageExpand' : 'focusedImage'}
-          style={
-            isImageExpanded ? { backgroundImage: `url(${currentPhoto})`, backgroundPosition: `${bgPosition}` } : { backgroundImage: `url(${currentPhoto})` }
-          }
-          data-testid="main-image"
-          onClick={handleImageClick}
-          onMouseMove={handleMousePosition}
-          onMouseLeave={handleMouseLeave}
-        />
-        <AiOutlineArrowRight data-testid="right-arrow" className="rightArrow" onClick={() => handleArrow('right')} size={arrowSize} style={imageIndex === length - 1 ? { visibility: 'hidden' } : {}} />
-      </div>
+    <div
+      className={`imageGalleryContainer ${isImageExpanded ? 'focusedImageExpand' : 'focusedImage'}`}
+      style={
+        isImageExpanded ? { backgroundImage: `url(${currentPhoto})`, backgroundPosition: `${bgPosition}` } : { backgroundImage: `url(${currentPhoto})` }
+      }
+      data-testid="main-image"
+      onClick={handleImageClick}
+      onKeyPress={handleKeyPress}
+      role="button"
+      tabIndex={0}
+      onMouseMove={handleMousePosition}
+      onMouseLeave={handleMouseLeave}
+    >
       <ThumbnailView photos={photos} handleClick={handleThumbNailClick} className="thumbnailComponent" currentIndex={imageIndex} />
+      <nav className="imageGalleryContainer__navigation">
+        <AiOutlineArrowLeft data-testid="left-arrow" className="leftArrow" onClick={(e) => handleArrow(e, 'left')} size={arrowSize} style={imageIndex === 0 ? { visibility: 'hidden' } : {}} />
+        <AiOutlineArrowRight data-testid="right-arrow" className="rightArrow" onClick={(e) => handleArrow(e, 'right')} size={arrowSize} style={imageIndex === length - 1 ? { visibility: 'hidden' } : {}} />
+      </nav>
     </div>
   );
 };

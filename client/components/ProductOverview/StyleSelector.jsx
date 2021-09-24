@@ -1,29 +1,33 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import { AiOutlineCheckCircle } from 'react-icons/ai';
+
 import '../../css/StyleSelector.scss';
 
 const StyleSelector = ({ styles, currentStyle, updateCurrentStyle }) => {
   if (styles) {
     return (
-      <div>
+      <div className="stylesContainer">
         <div className="styleSelected">
           <span className="styleIndicator">{'Style > '}</span>
           {currentStyle.name}
         </div>
         <div className="stylesAvailable">
           {styles.map((style, index) => (
-            <input
-              type="image"
-              src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/HD_transparent_picture.png/1200px-HD_transparent_picture.png"
-              style={{ backgroundImage: `url(${style.photos[0].thumbnail_url || '../../../no_image.png'})` }}
-              alt="stylethumbail"
-              key={style.style_id}
-              data-testid={style.style_id}
-              className="styleThumbnail"
-              id={currentStyle.style_id === style.style_id ? 'selected' : 'unselected'}
-              onClick={() => updateCurrentStyle(index)}
-            />
+            <span className="stylesAvailable__list-item" key={style.style_id}>
+              <input
+                type="image"
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/HD_transparent_picture.png/1200px-HD_transparent_picture.png"
+                style={{ backgroundImage: `url(${style.photos[0].thumbnail_url || '../../../no_image.png'})` }}
+                alt="stylethumbail"
+                data-testid={style.style_id}
+                className="styleThumbnail"
+                id={currentStyle.style_id === style.style_id ? 'selected' : 'unselected'}
+                onClick={() => updateCurrentStyle(index)}
+              />
+              {currentStyle.style_id === style.style_id && <AiOutlineCheckCircle color="goldenrod" size={24} className="stylesAvailable__selected" />}
+            </span>
           ))}
         </div>
       </div>

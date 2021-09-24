@@ -1,18 +1,51 @@
 .stylesAvailable {
-  margin: 10px 0;
-  display: inline-flex;
+  display: flex;
   flex-wrap: wrap;
-  height: auto;
-  align-content: flex-start;
-  width: 100%;
+  padding: 15px 0;
+
+  &__list-item {
+    height: 75px;
+    margin: 5px;
+    position: relative;
+    width: 22%;
+
+    & svg {
+      stroke-width: 20px;
+    }
+  }
+
+  &__selected {
+    position: absolute;
+    right: -2px;
+    top: -3px;
+  }
 }
 
 .styleThumbnail {
-  margin: 5px 1%;
-  height: 85px;
-  width: 22%;
-  background-size: 100%;
+  background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  border: 2px solid #bbb;
   border-radius: 50%;
+  height: 100%;
+  transition: border-color 200ms;
+  width: 100%;
+
+  &:hover {
+    border-color: goldenrod;
+    transition: border-color 200ms;
+  }
+}
+
+.styleIndicator {
+  font-weight: bold;
+  margin-right: 6px;
+}
+
+.styleSelected {
+  text-transform: uppercase;
+}
+
+#selected {
+  border: 2px solid goldenrod;
 }
