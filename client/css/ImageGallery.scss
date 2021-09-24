@@ -3,6 +3,7 @@
   background-color: rgb(128, 128, 128);
   display: flex;
   flex: 2;
+  padding: 30px;
 
   &__navigation {
     align-items: center;
@@ -22,7 +23,6 @@
 //   background-color: rgb(128, 128, 128);
 // };
 
-
 .focusedImage {
   background-position: center;
   background-repeat: no-repeat;
@@ -37,11 +37,11 @@
   background-size: 100%;
   height: 100%;
   width: 100%;
-}
 
-.focusedImageExpand:hover {
-  background-size: 175%;
-  cursor: crosshair;
+  &:hover {
+    background-size: 175%;
+    cursor: crosshair;
+  }
 }
 
 .mainImage {
@@ -56,7 +56,6 @@
   display: flex;
   flex-direction: column;
   height: 100%;
-  padding: 0 20px;
 }
 
 .thumbnailContainer {
