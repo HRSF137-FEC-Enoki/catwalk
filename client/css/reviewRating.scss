@@ -1,4 +1,3 @@
-$width_rating_bar:30%;
 .review_rating_container{
   display: grid;
   grid-template-columns: 1fr 2fr;
@@ -34,7 +33,7 @@ $width_rating_bar:30%;
   width: 80%;
 }
 .rating_bar{
-  background-color: white;
+  background-color: #fff;
   border-radius: 5px;
   height: 5px;
   width: 80%;
@@ -46,7 +45,7 @@ $width_rating_bar:30%;
   height: 100%;
   width: 0;
 }
-#clear_btn{
+.clear_btn{
   margin: 10px 0;
 }
 .sorting{
@@ -107,7 +106,7 @@ $width_rating_bar:30%;
   transform: translate(-50%, -50%);
   z-index: 10;
   background-color: rgb(233, 252, 250);
-  border: 1px solid black;
+  border: 1px solid #000;
   height: fit-content;
   max-width: 80%;
   min-width: 40%;

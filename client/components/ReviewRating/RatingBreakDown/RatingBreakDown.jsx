@@ -96,7 +96,7 @@ const RatingBreakDown = ({
                 ))}
               </span>
               <div>
-                <button type="button" onClick={clearFilter} id="clear_btn">clear</button>
+                <button type="button" onClick={clearFilter} className="clear_btn">clear</button>
               </div>
             </div>
           )}
