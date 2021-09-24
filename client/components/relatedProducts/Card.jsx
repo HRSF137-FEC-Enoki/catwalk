@@ -41,15 +41,9 @@ const Card = ({
   };
 
   const handleKeyPress = (e) => {
-    e.stopPropagation();
-    const { id } = e.target;
-    const photosCopy = photos.slice();
-    const temp = photosCopy[0];
-    photosCopy[0] = photosCopy[id];
-    photosCopy[id] = temp;
-
-    setMainImageUrl(photosCopy[0].url);
-    setPhotos(photosCopy);
+    if (e.keyCode === 0) {
+      handleThumbnailClick();
+    }
   };
 
   return (

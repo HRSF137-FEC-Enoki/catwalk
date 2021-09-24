@@ -63,6 +63,12 @@ const ImageGallery = ({
     setImageExpanded(!isImageExpanded);
   };
 
+  const handleKeyPress = (e) => {
+    if (e.keyCode === 0) {
+      handleImageClick();
+    }
+  };
+
   return (
     <div
       className={`imageGalleryContainer ${isImageExpanded ? 'focusedImageExpand' : 'focusedImage'}`}
@@ -71,7 +77,7 @@ const ImageGallery = ({
       }
       data-testid="main-image"
       onClick={handleImageClick}
-      onKeyPress={handleImageClick}
+      onKeyPress={handleKeyPress}
       role="button"
       tabIndex={0}
       onMouseMove={handleMousePosition}
