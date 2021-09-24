@@ -101,7 +101,13 @@ $sitewide-msg-height: 56px;
   }
 
   &__feature-item {
+    list-style: none;
     padding: 5px;
+
+    &:before {
+      content: '\2713\0020';
+      margin-right: 5px;
+    }
   }
 }
 
