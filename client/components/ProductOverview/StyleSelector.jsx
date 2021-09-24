@@ -10,7 +10,7 @@ const StyleSelector = ({ styles, currentStyle, updateCurrentStyle }) => {
     return (
       <div className="stylesContainer">
         <div className="styleSelected">
-          <span className="styleIndicator">{'Style  >   '}</span>
+          <span className="styleIndicator">{'Style > '}</span>
           {currentStyle.name}
         </div>
         <div className="stylesAvailable">
@@ -23,7 +23,7 @@ const StyleSelector = ({ styles, currentStyle, updateCurrentStyle }) => {
                 alt="stylethumbail"
                 data-testid={style.style_id}
                 className="styleThumbnail"
-                // id={currentStyle.style_id === style.style_id ? 'selected' : 'unselected'}
+                id={currentStyle.style_id === style.style_id ? 'selected' : 'unselected'}
                 onClick={() => updateCurrentStyle(index)}
               />
               {currentStyle.style_id === style.style_id && <AiOutlineCheckCircle color="goldenrod" size={24} className="stylesAvailable__selected" />}

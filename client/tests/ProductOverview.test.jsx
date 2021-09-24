@@ -51,14 +51,14 @@ describe('Product Overview Component', () => {
 
   // If first style id changes, this test will fail
   // We expect the Forest Green & Black style to be the first result
-  // test('Forest Green & Black is selected on load', () => {
-  //   expect(screen.getByTestId(293480)).toHaveAttribute('id', 'selected');
-  // });
+  test('Forest Green & Black is selected on load', () => {
+    expect(screen.getByTestId(293480)).toHaveAttribute('id', 'selected');
+  });
 
-  // test('Clicking on new style updates currently selected style', () => {
-  //   userEvent.click(screen.getByTestId(293481));
-  //   expect(screen.getByTestId(293481)).toHaveAttribute('id', 'selected');
-  // });
+  test('Clicking on new style updates currently selected style', () => {
+    userEvent.click(screen.getByTestId(293481));
+    expect(screen.getByTestId(293481)).toHaveAttribute('id', 'selected');
+  });
 
   test('Applies sale price on appropriate style', () => {
     userEvent.click(screen.getByTestId(293482));
