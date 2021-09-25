@@ -1,7 +1,8 @@
 # node modules
 node_modules
 # public
-public/bundle.js
+public/main.*
+public/vendor.*
 # config
 config/config.js
 # jest coverage
