@@ -21,18 +21,17 @@
 
 .rating_score {
   display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  font-size: 48px;
+  font-size: 72px;
   font-weight: bold;
 
   & p {
     margin: 0;
-    font-size: 72px;
   }
 
   & .star-rating {
+    display: flex;
     flex: 1;
+    padding: 10px;
   }
 }
 
