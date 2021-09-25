@@ -86,15 +86,17 @@ const RatingBreakDown = ({
               <span>
                 {starFilter.map((val) => (
                   <div key={val}>
-                    {String(val)}
-                    {' '}
-                    star
+                    <p>
+                      {String(val)}
+                      {' '}
+                      star
+                    </p>
                     <StarRating size={16} rating={val} />
                   </div>
                 ))}
               </span>
               <div>
-                <button type="button" onClick={clearFilter}>clear</button>
+                <button type="button" onClick={clearFilter} className="clear_btn">clear</button>
               </div>
             </div>
           )}

@@ -107,6 +107,7 @@
 .review_body{
   color: #777;
   font-size: 14px;
+  line-height: 1.4;
   padding-bottom: 15px;
 }
 
@@ -158,10 +159,10 @@
   transform: translate(-50%, -50%);
   z-index: 10;
   background-color: rgb(233, 252, 250);
-  border: 1px solid black;
+  border: 1px solid #000;
   height: fit-content;
   max-width: 80%;
-  min-width: 30%;
+  min-width: 40%;
   padding: 5px;
   max-height: 90%;
   display: flex;
@@ -257,6 +258,9 @@
 .star_filter{
   text-align: center;
 }
+.star_filter p{
+  margin-bottom: 2px;
+}
 .product_breakdown{
   display: flex;
   flex-direction: column;
@@ -265,9 +269,9 @@
 }
 .product_bar {
   position: relative;
-  width: 100%;
   height: 10px;
-  background-color: rgb(199, 197, 197);
+  border: 1px solid #bbb;
+  background-color: #ddd;
 }
 .char_name{
   font-size: 14px;

@@ -57,6 +57,7 @@ const ReviewRating = ({ id, rating, productName }) => {
     if (currReviewsLength - reviewShow <= 2) {
       setIsLoading(true);
     }
+    fetchMeta();
     setReviewShow(reviewShow + 2);
   };
 
@@ -85,12 +86,13 @@ const ReviewRating = ({ id, rating, productName }) => {
               />
             </div>
             <div className="review_col">
-              <Sorting id={id} setSort={setSort} reviews={reviews} />
+              <Sorting id={id} setSort={setSort} reviews={reviews} fetchMeta={fetchMeta} />
               <div className="review_list_container">
                 <ReviewList
                   reviews={reviews}
                   reviewShow={reviewShow}
                   fetchReviews={fetchReviews}
+                  fetchMeta={fetchMeta}
                   starFilter={starFilter}
                   setStarFilter={setStarFilter}
                   rating={rating}
