@@ -17,7 +17,7 @@ const ProductBreakDown = ({ charValue, charName }) => {
     for (let i = 0; i < char.length; i += 1) {
       if (charName.includes(char[i][0])) {
         const index = charName.indexOf(char[i][0]);
-        const position = ((charValue[index] / 5) * 100).toFixed(0).concat('%');
+        const position = ((charValue[index] / 5) * 100 - 5).toFixed(0).concat('%');
         document.getElementById(char[i][0]).style.left = position;
       }
     }
@@ -37,7 +37,7 @@ const ProductBreakDown = ({ charValue, charName }) => {
             <div className="scale" key={name}>
               <div className="product_bar">
                 <span className="char_name">{name}</span>
-                <span className="pointer" id={name}><GoTriangleDown /></span>
+                <span className="pointer" id={name}><GoTriangleDown color="goldenrod" size={36} /></span>
               </div>
               <div className="level">
                 {characteristics[name] && characteristics[name].map((scale) => (

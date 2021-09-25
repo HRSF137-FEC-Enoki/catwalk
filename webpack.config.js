@@ -24,6 +24,7 @@ module.exports = {
       },
     ],
   },
+  devtool: false,
   resolve: { extensions: ['*', '.js', '.jsx'] },
   optimization: {
     splitChunks: {

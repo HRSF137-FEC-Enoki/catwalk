@@ -57,6 +57,7 @@ const ReviewRating = ({ id, rating, productName }) => {
     if (currReviewsLength - reviewShow <= 2) {
       setIsLoading(true);
     }
+    fetchMeta();
     setReviewShow(reviewShow + 2);
   };
 
@@ -70,6 +71,7 @@ const ReviewRating = ({ id, rating, productName }) => {
         ? (
 
           <div className="review_rating_container" data-testid="widget">
+            <h3>Ratings and Reviews</h3>
             <div className="rating_col">
               <RatingBreakDown
                 id={id}
@@ -84,12 +86,13 @@ const ReviewRating = ({ id, rating, productName }) => {
               />
             </div>
             <div className="review_col">
-              <Sorting id={id} setSort={setSort} reviews={reviews} />
+              <Sorting id={id} setSort={setSort} reviews={reviews} fetchMeta={fetchMeta} />
               <div className="review_list_container">
                 <ReviewList
                   reviews={reviews}
                   reviewShow={reviewShow}
                   fetchReviews={fetchReviews}
+                  fetchMeta={fetchMeta}
                   starFilter={starFilter}
                   setStarFilter={setStarFilter}
                   rating={rating}
@@ -100,7 +103,7 @@ const ReviewRating = ({ id, rating, productName }) => {
               </div>
               <div className="review_col">
                 <div className="review_btn">
-                  {reviews.length > 2 && !isLoading && <button data-testid="button" type="button" onClick={loadMoreView}>More View</button>}
+                  {reviews.length > 2 && !isLoading && <button data-testid="button" type="button" onClick={loadMoreView}>More Reviews</button>}
                   <button type="button" onClick={() => setIsClickAdd(true)} data-testid="addBtn">
                     ADD A REVIEW +
                   </button>

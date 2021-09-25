@@ -60,7 +60,7 @@ const RatingBreakDown = ({
       <div className="rating_breakdown">
         <div className="rating_score">
           <p>{Number.isNaN(rating) ? 0 : rating.toFixed(1)}</p>
-          <StarRating size={36} rating={rating} />
+          <StarRating size={16} rating={rating} />
         </div>
         <p className="rating_recommended" role="note">
           {recommended && getPercentage(recommended.true)}
@@ -86,15 +86,17 @@ const RatingBreakDown = ({
               <span>
                 {starFilter.map((val) => (
                   <div key={val}>
-                    {String(val)}
-                    {' '}
-                    star
+                    <p>
+                      {String(val)}
+                      {' '}
+                      star
+                    </p>
                     <StarRating size={16} rating={val} />
                   </div>
                 ))}
               </span>
               <div>
-                <button type="button" onClick={clearFilter}>clear</button>
+                <button type="button" onClick={clearFilter} className="clear_btn">clear</button>
               </div>
             </div>
           )}
