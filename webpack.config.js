@@ -1,7 +1,6 @@
 const path = require('path');
 const CompressionPlugin = require('compression-webpack-plugin');
-const zlib = require("zlib");
-
+const zlib = require('zlib');
 
 module.exports = {
   entry: './client/index.jsx',
@@ -38,8 +37,8 @@ module.exports = {
   // },
   plugins: [
     new CompressionPlugin({
-      filename: "[path][base].br",
-      algorithm: "brotliCompress",
+      filename: '[path][base].br',
+      algorithm: 'brotliCompress',
       test: /\.(js|css|html|svg|jsx)$/,
       compressionOptions: {
         params: {
