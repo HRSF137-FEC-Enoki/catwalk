@@ -46,16 +46,29 @@ app.get('/', (req, res, next) => {
   });
 });
 
-app.get('/bundle.js', (req, res) => {
+app.get('/main.js', (req, res) => {
   console.log('recieved get request');
   if (req.header('Accept-Encoding').includes('br')) {
     console.log('calling brotli');
     res.set('Content-Encoding', 'br');
     res.set('Content-Type', 'application/javascript');
-    res.sendFile(join(__dirname, '..', 'public', 'bundle.js.br'));
+    res.sendFile(join(__dirname, '..', 'public', 'main.js.br'));
   } else {
     console.log('calling uncompressed');
-    res.sendFile(join(__dirname, '..', 'public', 'bundle.js'));
+    res.sendFile(join(__dirname, '..', 'public', 'main.js'));
+  }
+});
+
+app.get('/vendor.js', (req, res) => {
+  console.log('recieved get request');
+  if (req.header('Accept-Encoding').includes('br')) {
+    console.log('calling brotli vendor');
+    res.set('Content-Encoding', 'br');
+    res.set('Content-Type', 'application/javascript');
+    res.sendFile(join(__dirname, '..', 'public', 'vendor.js.br'));
+  } else {
+    console.log('calling uncompressed');
+    res.sendFile(join(__dirname, '..', 'public', 'vendor.js'));
   }
 });
 
