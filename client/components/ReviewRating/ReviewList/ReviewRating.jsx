@@ -100,7 +100,7 @@ const ReviewRating = ({ id, rating, productName }) => {
               </div>
               <div className="review_col">
                 <div className="review_btn">
-                  {reviews.length > 2 && !isLoading && <button data-testid="button" type="button" onClick={loadMoreView}>More View</button>}
+                  {reviews.length > 2 && !isLoading && <button data-testid="button" type="button" onClick={loadMoreView}>More Reviews</button>}
                   <button type="button" onClick={() => setIsClickAdd(true)} data-testid="addBtn">
                     ADD A REVIEW +
                   </button>
