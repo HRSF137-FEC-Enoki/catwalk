@@ -6,6 +6,13 @@ import { AiOutlineCheckCircle } from 'react-icons/ai';
 import '../../css/StyleSelector.scss';
 
 const StyleSelector = ({ styles, currentStyle, updateCurrentStyle }) => {
+  const handleKeyPress = (e, index) => {
+    e.stopPropagation();
+    if (e.key === 'Enter') {
+      updateCurrentStyle(index);
+    }
+  };
+
   if (styles) {
     return (
       <div className="stylesContainer">
@@ -18,10 +25,7 @@ const StyleSelector = ({ styles, currentStyle, updateCurrentStyle }) => {
             <span className="stylesAvailable__list-item" key={style.style_id}>
               <div
                 role="button"
-                onKeyPress={(e) => {
-                  e.stopPropagation();
-                  if (e.key === 'Enter') { updateCurrentStyle(index); }
-                }}
+                onKeyPress={(e) => handleKeyPress(e, index)}
                 tabIndex={0}
                 style={{ backgroundImage: `url(${style.photos[0].thumbnail_url || '../../../no_image.png'})` }}
                 alt="stylethumbail"

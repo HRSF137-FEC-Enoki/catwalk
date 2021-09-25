@@ -1,7 +1,6 @@
 const express = require('express');
-const path = require('path');
-const axios = require('axios');
 const { join } = require('path');
+const axios = require('axios');
 
 const { API_BASE_URL, GITHUB_API_TOKEN } = require('../config/config');
 
@@ -15,11 +14,11 @@ const options = {
   headers: { Authorization: GITHUB_API_TOKEN },
 };
 
-app.use(express.static(path.join(__dirname, '..', 'public', 'images')));
+app.use(express.static(join(__dirname, '..', 'public', 'images')));
 
 app.get('/', (req, res, next) => {
   const sendFileOptions = {
-    root: path.join(__dirname, '../public'),
+    root: join(__dirname, '../public'),
     dotfiles: 'deny',
     headers: {
       'x-timestamp': Date.now(),

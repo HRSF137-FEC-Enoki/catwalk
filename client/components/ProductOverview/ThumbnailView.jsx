@@ -50,6 +50,13 @@ const ThumbnailView = ({ photos, handleClick, currentIndex }) => {
     }
   };
 
+  const handleKeyPress = (e, index) => {
+    e.stopPropagation();
+    if (e.key === 'Enter') {
+      handleClick(e, index);
+    }
+  };
+
   return (
     <div className="arrowsThumbnailContainer">
       <BsCaretUp data-testid="up-arrow" className="upArrow" size={arrowSize} onClick={(e) => handleArrowUp(e)} style={currentIndex !== 0 ? {} : { visibility: 'hidden' }} />
@@ -63,10 +70,7 @@ const ThumbnailView = ({ photos, handleClick, currentIndex }) => {
                 tabIndex={0}
                 alt="image from selected style set"
                 onClick={(e) => handleClick(e, index)}
-                onKeyPress={(e) => {
-                  e.stopPropagation();
-                  if (e.key === 'Enter') { handleClick(e, index); }
-                }}
+                onKeyPress={(e) => handleKeyPress(e, index)}
                 id={index === currentIndex ? 'selected' : 'unselected'}
                 key={photo.thumbnail_url}
                 style={{ backgroundImage: `url(${photo.thumbnail_url || '../../../no_image.png'})` }}
