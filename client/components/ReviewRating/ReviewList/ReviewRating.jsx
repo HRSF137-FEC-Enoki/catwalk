@@ -70,6 +70,7 @@ const ReviewRating = ({ id, rating, productName }) => {
         ? (
 
           <div className="review_rating_container" data-testid="widget">
+            <h3>Ratings and Reviews</h3>
             <div className="rating_col">
               <RatingBreakDown
                 id={id}
