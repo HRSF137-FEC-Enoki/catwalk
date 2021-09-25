@@ -15,19 +15,9 @@ const options = {
   headers: { Authorization: GITHUB_API_TOKEN },
 };
 
-// app.use(express.static(path.join(__dirname, '../public')));
-
-// app.use((req, res, next) => {
-//   console.log('req recieved')
-//   console.log(join(__dirname, '..', '/public', '/index.html'))
-//   res.sendFile(join(__dirname, '..', '/public', '/index.html'), {}, (err) => {
-//     console.log(err)
-//   })
-//   next()
-// })
+app.use(express.static(path.join(__dirname, '..', 'public', 'images')));
 
 app.get('/', (req, res, next) => {
-  console.log(req.url);
   const sendFileOptions = {
     root: path.join(__dirname, '../public'),
     dotfiles: 'deny',
@@ -36,38 +26,29 @@ app.get('/', (req, res, next) => {
       'x-sent': true,
     },
   };
-  const fileName = 'index.html';
   res.sendFile('index.html', sendFileOptions, (err) => {
     if (err) {
       next(err);
-    } else {
-      console.log('Sent:', fileName);
     }
   });
 });
 
 app.get('/main.js', (req, res) => {
-  console.log('recieved get request');
   if (req.header('Accept-Encoding').includes('br')) {
-    console.log('calling brotli');
     res.set('Content-Encoding', 'br');
     res.set('Content-Type', 'application/javascript');
     res.sendFile(join(__dirname, '..', 'public', 'main.js.br'));
   } else {
-    console.log('calling uncompressed');
     res.sendFile(join(__dirname, '..', 'public', 'main.js'));
   }
 });
 
 app.get('/vendor.js', (req, res) => {
-  console.log('recieved get request');
   if (req.header('Accept-Encoding').includes('br')) {
-    console.log('calling brotli vendor');
     res.set('Content-Encoding', 'br');
     res.set('Content-Type', 'application/javascript');
     res.sendFile(join(__dirname, '..', 'public', 'vendor.js.br'));
   } else {
-    console.log('calling uncompressed');
     res.sendFile(join(__dirname, '..', 'public', 'vendor.js'));
   }
 });
