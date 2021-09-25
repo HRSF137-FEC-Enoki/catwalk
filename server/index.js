@@ -1,19 +1,43 @@
 const express = require('express');
 const path = require('path');
 const axios = require('axios');
+const { join } = require('path');
 
 const { API_BASE_URL, GITHUB_API_TOKEN } = require('../config/config');
 
 const app = express();
 
-app.use(express.static(path.join(__dirname, '../public')));
-app.use(express.urlencoded({ extended: false }));
+
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 const port = 3000;
 const options = {
   headers: { Authorization: GITHUB_API_TOKEN },
 };
+
+app.use(express.static(path.join(__dirname, '../public')));
+
+// app.use('/*', (req, res, next) => {
+//   console.log('req recieved')
+//   console.log(join(__dirname, '..', '/public', '/index.html'))
+//   res.sendFile(join(__dirname, '..', '/public', '/index.html'))
+//   next()
+// })
+
+app.get('/bundle.js', (req, res, next) => {
+  console.log('recieved get request')
+  if (req.header('Accept-Encoding').includes('br')) {
+    console.log('calling brotli')
+    res.set('Content-Encoding', 'br');
+    res.set('Content-Type', 'application/javascript');
+    res.sendFile(join(__dirname, '..', 'public', 'bundle.js.br'));
+  } else {
+    console.log('calling uncompressed')
+    res.sendFile(join(__dirname, '..', 'public', 'bundle.js'));
+  }
+
+});
 
 app.get('/api/products', (req, res) => {
   axios.get(`${API_BASE_URL}/products`, options)
