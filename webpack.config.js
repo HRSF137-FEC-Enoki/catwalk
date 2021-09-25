@@ -1,16 +1,21 @@
 const path = require('path');
 const CompressionPlugin = require('compression-webpack-plugin');
+const WebpackBundleAnalyzer = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = {
   mode: 'production',
   entry: './client/index.jsx',
   output: {
-    filename: 'bundle.js',
+    filename: '[name].js',
     path: path.resolve(__dirname, 'public'),
+    chunkFilename: '[id][chunkhash].js',
   },
-  plugins: [new CompressionPlugin({
-    test: /\.js(\?.*)?$/i,
-  })],
+  plugins: [
+    new CompressionPlugin({
+      test: /\.(js(\?.*)?|scss|html|svg)$/i,
+    }),
+    new WebpackBundleAnalyzer(),
+  ],
   module: {
     rules: [
       {
@@ -26,4 +31,15 @@ module.exports = {
     ],
   },
   resolve: { extensions: ['*', '.js', '.jsx'] },
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        vendors: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendor',
+          chunks: 'all',
+        },
+      },
+    },
+  },
 };
