@@ -1,13 +1,24 @@
+$header-height: 86px;
+$sitewide-msg-height: 56px;
+
+.productOverviewWrapper {
+  display: flex;
+  flex-direction: column;
+  // height: calc(100vh - ($header-height + $sitewide-msg-height));
+}
+
 .productOverviewContainer {
   display: flex;
-  height: calc(80vh);
+  flex: 1;
+  height: 100%;
 }
 
 .productInfo{
+  color: #555;
   display: flex;
+  flex: 1;
   flex-direction: column;
-  width: 50%;
-  margin: 0 1%;
+  padding: 30px;
 }
 
 #collapsed {
@@ -17,22 +28,28 @@
 }
 
 .starRating {
-  width: 300px;
+  display: flex;
+  margin-bottom: 15px;
 }
 
 .productCategory {
+  color: #999;
   font-size: 20px;
-  margin: 10px 0;
+  font-weight: 100;
+  text-transform: uppercase;
 }
 
 .productName {
-  font-size: 30px;
-  margin: 10px 0;
+  font-size: 36px;
+  font-weight: bold;
+  line-height: 1.2;
+  padding: 5px 0;
 }
 
 .productPrice {
-  font-size: 30px;
-  margin: 10px 0;
+  color: #999;
+  font-weight: 100;
+  padding: 15px 0 20px;
 }
 
 .salePrice {
@@ -47,33 +64,63 @@
 .socialMedia {
   display: flex;
   margin: 10px 0;
-  justify-content: left;
-}
+  justify-content: space-between;
+  width: 50%;
 
-.styleIndicator {
-  font-weight: bold;
-}
+  svg {
+    transition: color 200ms;
+  }
 
-.styleSelected {
-  font-size: 25px;
+  svg:hover {
+    color: goldenrod;
+    transition: color 200ms;
+  }
 }
 
 .productDescription {
-  border: 2px solid black;
-  margin: 1% 0;
-  font-size: 25px;
+  color: #777;
+  display: flex;
+  padding: 25px 0;
+
+  &__info {
+    border-right: 2px solid #bbb;
+    padding: 20px 45px;
+    flex: 2;
+  }
+
+  &__title {
+    color: #333;
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0;
+  }
+
+  &__features {
+    flex: 1;
+    padding: 20px 45px;
+  }
+
+  &__feature-item {
+    list-style: none;
+    padding: 5px;
+
+    &:before {
+      content: '\2713\0020';
+      margin-right: 5px;
+    }
+  }
 }
 
 #scrollToReviews {
-  background:none;
-  border:none;
-  color: blue;
+  background-color: transparent;
+  border-color: transparent;
+  color: #777;
   cursor: pointer;
-  text-align: left;
-  width:fit-content;
-}
+  text-decoration: underline;
+  transition: color 200ms;
 
-// .productOverviewWrapper {
-//   height: calc(100vh - 86px);
-//   border: 2px solid black;
-// }
+  &:hover {
+    color: goldenrod;
+    transition: color 200ms;
+  }
+}

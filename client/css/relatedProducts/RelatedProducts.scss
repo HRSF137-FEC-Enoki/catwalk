@@ -1,6 +1,12 @@
 .related-products {
   position: relative;
 
+  h3 {
+    color: #777;
+    font-weight: 100;
+    text-transform: uppercase;
+  }
+
   &__row {
     position: relative;
   }

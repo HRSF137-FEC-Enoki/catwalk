@@ -1,28 +1,26 @@
 .imageGalleryContainer {
-  display: flex;
-  width: 100%;
   align-items: center;
   background-color: rgb(128, 128, 128);
+  display: flex;
+  flex: 2;
+  padding: 30px;
+
+  &__navigation {
+    align-items: center;
+    display: flex;
+    flex: 1;
+    justify-content: space-between;
+    padding-left: 30px;
+  }
 }
-
-.mainImageContainer {
-  display: flex;
-  height: 100%;
-  width: 100%;
-  justify-content: space-around;
-  align-items: center;
-  order: 3;
-  background-color: rgb(128, 128, 128);
-};
-
 
 .focusedImage {
   background-position: center;
   background-repeat: no-repeat;
-  background-size: 100%;
-  height: 99%;
-  width: 100%;
+  background-size: cover;
   cursor: zoom-in;
+  display: flex;
+  flex-direction: row;
 }
 
 .focusedImageExpand {
@@ -30,72 +28,52 @@
   background-size: 100%;
   height: 100%;
   width: 100%;
-}
 
-.focusedImageExpand:hover {
-  background-size: 175%;
-  cursor: crosshair;
+  &:hover {
+    background-size: 175%;
+    cursor: crosshair;
+  }
 }
-
-.mainImage {
-  width: 50%;
-  min-height: 50%;
-  max-height: 50%;
-}
-
 
 .arrowsThumbnailContainer {
-  margin: 0 1%;
+  align-items: center;
   display: flex;
   flex-direction: column;
-  order: 1;
-  width: 15%;
-  align-items: center;
-  justify-content: space-between;
+  height: 100%;
 }
 
 .thumbnailContainer {
   display: flex;
   flex-direction: column;
-  width: 100%;
   align-items: center;
-  justify-content: center;
-}
-
-.thumbnail {
-  height: 100px;
-  width: 100px;
-  margin: 5% 0;
-  background-size: 100%;
-  background-position: center;
-  background-repeat: no-repeat;
 }
 
 .thumbnailInput {
-  height: 100px;
-  width: 100px;
-  margin: 5px;
-  padding: 0;
-  border: 0;
-  background-size: 100%;
+  border: 2px solid #777;
+  border-radius: 3px;
+  background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  height: 60px;
+  margin: 10px 0;
+  transition: border-color 200ms;
+  width: 60px;
+
+  &:hover {
+    border-color: goldenrod;
+    transition: border-color 200ms;
+  }
 }
 
+.upArrow,
+.downArrow,
+.rightArrow,
 .leftArrow {
-  left: 102px;
   cursor: pointer;
-}
+  transition: color 200ms;
 
-.rightArrow {
-  cursor: pointer;
+  &:hover {
+    color: goldenrod;
+    transition: color 200ms;
+  }
 }
-
-#selected {
-  border: 3px solid black;
-}
-
-.upArrow, .downArrow {
-  cursor: pointer;
-}
-

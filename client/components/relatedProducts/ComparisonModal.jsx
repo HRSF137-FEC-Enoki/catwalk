@@ -27,6 +27,7 @@ const ComparisonModal = ({ related, current, handleCloseClick }) => {
 
   const keyPressHandler = (e) => {
     // airbnb style guide requires keypress and tab index for accessibility
+    // keyCode refers to tab index
     if (e.keyCode === 0) {
       handleCloseClick();
     }

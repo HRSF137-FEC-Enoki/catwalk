@@ -18,8 +18,8 @@ const ProductOverview = ({
   const [currentStyle, setCurrentStyle] = useState(null);
   const [allStyles, setAllStyles] = useState(null);
   const [isCollapsed, setCollapse] = useState(false);
-  const starSize = 20;
-  const socialMediaButtonSize = 20;
+  const starSize = 14;
+  const socialMediaButtonSize = 36;
   const SalePrice = () => {
     if (currentStyle.sale_price) {
       return (
@@ -72,25 +72,35 @@ const ProductOverview = ({
           <div className="productInfo" id={isCollapsed ? 'collapsed' : 'fullSize'} data-testid="product-info">
             <div className="starRating">
               <StarRating rating={rating} size={starSize} />
+              {totalReviews ? <button id="scrollToReviews" type="button" onClick={scrollToReviews}>{`Read all ${totalReviews} reviews`}</button> : null}
             </div>
-            {totalReviews ? <button id="scrollToReviews" type="button" onClick={scrollToReviews}>{`Read all ${totalReviews} reviews`}</button> : null}
             <div className="productCategory">{currentProduct.category}</div>
             <div className="productName">{currentProduct.name}</div>
             <SalePrice />
-            <div className="socialMedia">
-              <FaFacebook size={socialMediaButtonSize} />
-              <FaTwitter size={socialMediaButtonSize} />
-              <FaPinterest size={socialMediaButtonSize} />
-            </div>
             <StyleSelector
               styles={allStyles}
               currentStyle={currentStyle}
               updateCurrentStyle={updateCurrentStyle}
             />
             <AddToCart currentStyle={currentStyle} />
+            <div className="socialMedia">
+              <FaFacebook size={socialMediaButtonSize} />
+              <FaTwitter size={socialMediaButtonSize} />
+              <FaPinterest size={socialMediaButtonSize} />
+            </div>
           </div>
         </div>
-        <div className="productDescription">{currentProduct.description}</div>
+        <div className="productDescription">
+          <div className="productDescription__info">
+            <p className="productDescription__title">{currentProduct.slogan}</p>
+            <p className="productDescription__description">{currentProduct.description}</p>
+          </div>
+          <div className="productDescription__features">
+            <ul>
+              {currentProduct.features.map((feature) => <li key={feature.value} className="productDescription__feature-item">{`${feature.value} ${feature.feature}`}</li>)}
+            </ul>
+          </div>
+        </div>
       </div>
     );
   }
@@ -108,6 +118,7 @@ ProductOverview.propTypes = {
     description: PropTypes.string,
     category: PropTypes.string,
     default_price: PropTypes.string,
+    features: PropTypes.arrayOf(PropTypes.object),
   }).isRequired,
 };
 

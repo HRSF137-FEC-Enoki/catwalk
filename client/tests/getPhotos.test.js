@@ -51,7 +51,7 @@ describe('getPhotos utitlity function', () => {
       thumbnail_url: 'urlplaceholder/style_1_photo_number_thumbnail.jpg',
       url: 'urlplaceholder/style_1_photo_number.jpg',
     },
-  ]
+  ];
 
   beforeEach(() => {
     axios.get.mockResolvedValue({ data: productSyles });

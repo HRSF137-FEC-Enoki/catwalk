@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { AiOutlineArrowDown, AiOutlineArrowUp } from 'react-icons/ai';
+import { BsCaretDown, BsCaretUp } from 'react-icons/bs';
 import PropTypes from 'prop-types';
 
 const ThumbnailView = ({ photos, handleClick, currentIndex }) => {
   const [thumbnailStart, setThumbnailStart] = useState(currentIndex);
   const [thumbnailEnd, setThumbnailEnd] = useState(7);
 
-  const arrowSize = 45;
+  const arrowSize = 32;
 
   useEffect(() => {
     const THUMBNAIL_LIMIT = 7;
@@ -27,29 +27,32 @@ const ThumbnailView = ({ photos, handleClick, currentIndex }) => {
     }
   }, [currentIndex]);
 
-  const handleArrowUp = () => {
+  const handleArrowUp = (e) => {
+    e.stopPropagation();
     if (currentIndex > thumbnailStart && currentIndex <= thumbnailEnd - 1) {
-      handleClick(currentIndex - 1);
+      handleClick(e, currentIndex - 1);
     } else if (currentIndex === thumbnailStart) {
       setThumbnailStart(thumbnailStart - 1);
       setThumbnailEnd(thumbnailEnd - 1);
-      handleClick(currentIndex - 1);
+      handleClick(e, currentIndex - 1);
     }
   };
 
-  const handleArrowDown = () => {
+  const handleArrowDown = (e) => {
+    e.stopPropagation();
+
     if (currentIndex >= thumbnailStart && currentIndex < thumbnailEnd - 1) {
-      handleClick(currentIndex + 1);
+      handleClick(e, currentIndex + 1);
     } else if (currentIndex >= thumbnailEnd - 1) {
       setThumbnailStart(thumbnailStart + 1);
       setThumbnailEnd(thumbnailEnd + 1);
-      handleClick(currentIndex + 1);
+      handleClick(e, currentIndex + 1);
     }
   };
 
   return (
     <div className="arrowsThumbnailContainer">
-      <AiOutlineArrowUp data-testid="up-arrow" className="upArrow" size={arrowSize} onClick={handleArrowUp} style={currentIndex !== 0 ? {} : { visibility: 'hidden' }} />
+      <BsCaretUp data-testid="up-arrow" className="upArrow" size={arrowSize} onClick={(e) => handleArrowUp(e)} style={currentIndex !== 0 ? {} : { visibility: 'hidden' }} />
       <div className="thumbnailContainer">
         {photos.map((photo, index) => {
           if (index >= thumbnailStart && index < thumbnailEnd) {
@@ -58,7 +61,7 @@ const ThumbnailView = ({ photos, handleClick, currentIndex }) => {
                 className="thumbnailInput"
                 type="image"
                 alt="image from selected style set"
-                onClick={() => handleClick(index)}
+                onClick={(e) => handleClick(e, index)}
                 id={index === currentIndex ? 'selected' : 'unselected'}
                 key={photo.thumbnail_url}
                 src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/HD_transparent_picture.png/1200px-HD_transparent_picture.png"
@@ -68,7 +71,7 @@ const ThumbnailView = ({ photos, handleClick, currentIndex }) => {
           } return null;
         })}
       </div>
-      <AiOutlineArrowDown data-testid="down-arrow" className="downArrow" size={arrowSize} onClick={handleArrowDown} style={currentIndex !== photos.length - 1 ? {} : { visibility: 'hidden' }} />
+      <BsCaretDown data-testid="down-arrow" className="downArrow" size={arrowSize} onClick={(e) => handleArrowDown(e)} style={currentIndex !== photos.length - 1 ? {} : { visibility: 'hidden' }} />
     </div>
   );
 };
