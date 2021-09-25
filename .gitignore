@@ -1,10 +1,15 @@
 # node modules
 node_modules
 # public
-public/bundle.*
+public/main.js
+public/main.js.br
+public/vendor.js
+public/vendor.js.br
+public/vendor.js.LICENSE.txt
 # config
 config/config.js
 # jest coverage
 coverage
 #MockData used for ProductOverview component
 MockData
+#

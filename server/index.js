@@ -1,19 +1,56 @@
 const express = require('express');
-const path = require('path');
+const { join } = require('path');
 const axios = require('axios');
 
 const { API_BASE_URL, GITHUB_API_TOKEN } = require('../config/config');
 
 const app = express();
 
-app.use(express.static(path.join(__dirname, '../public')));
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 const port = 3000;
 const options = {
   headers: { Authorization: GITHUB_API_TOKEN },
 };
+
+app.use(express.static(join(__dirname, '..', 'public', 'images')));
+
+app.get('/', (req, res, next) => {
+  const sendFileOptions = {
+    root: join(__dirname, '../public'),
+    dotfiles: 'deny',
+    headers: {
+      'x-timestamp': Date.now(),
+      'x-sent': true,
+    },
+  };
+  res.sendFile('index.html', sendFileOptions, (err) => {
+    if (err) {
+      next(err);
+    }
+  });
+});
+
+app.get('/main.js', (req, res) => {
+  if (req.header('Accept-Encoding').includes('br')) {
+    res.set('Content-Encoding', 'br');
+    res.set('Content-Type', 'application/javascript');
+    res.sendFile(join(__dirname, '..', 'public', 'main.js.br'));
+  } else {
+    res.sendFile(join(__dirname, '..', 'public', 'main.js'));
+  }
+});
+
+app.get('/vendor.js', (req, res) => {
+  if (req.header('Accept-Encoding').includes('br')) {
+    res.set('Content-Encoding', 'br');
+    res.set('Content-Type', 'application/javascript');
+    res.sendFile(join(__dirname, '..', 'public', 'vendor.js.br'));
+  } else {
+    res.sendFile(join(__dirname, '..', 'public', 'vendor.js'));
+  }
+});
 
 app.get('/api/products', (req, res) => {
   axios.get(`${API_BASE_URL}/products`, options)

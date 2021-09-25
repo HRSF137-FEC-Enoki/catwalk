@@ -4,6 +4,8 @@
   display: flex;
   flex: 2;
   padding: 30px;
+  transition: background-position 850ms;
+  height: 600px;
 
   &__navigation {
     align-items: center;
@@ -26,8 +28,7 @@
 .focusedImageExpand {
   background-repeat: no-repeat;
   background-size: 100%;
-  height: 100%;
-  width: 100%;
+  animation: flexanimation 5s ease-out;
 
   &:hover {
     background-size: 175%;
@@ -58,6 +59,7 @@
   margin: 10px 0;
   transition: border-color 200ms;
   width: 60px;
+  cursor: pointer;
 
   &:hover {
     border-color: goldenrod;

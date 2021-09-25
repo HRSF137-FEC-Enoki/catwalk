@@ -50,6 +50,13 @@ const ThumbnailView = ({ photos, handleClick, currentIndex }) => {
     }
   };
 
+  const handleKeyPress = (e, index) => {
+    e.stopPropagation();
+    if (e.key === 'Enter') {
+      handleClick(e, index);
+    }
+  };
+
   return (
     <div className="arrowsThumbnailContainer">
       <BsCaretUp data-testid="up-arrow" className="upArrow" size={arrowSize} onClick={(e) => handleArrowUp(e)} style={currentIndex !== 0 ? {} : { visibility: 'hidden' }} />
@@ -57,14 +64,15 @@ const ThumbnailView = ({ photos, handleClick, currentIndex }) => {
         {photos.map((photo, index) => {
           if (index >= thumbnailStart && index < thumbnailEnd) {
             return (
-              <input
+              <div
                 className="thumbnailInput"
-                type="image"
+                role="button"
+                tabIndex={0}
                 alt="image from selected style set"
                 onClick={(e) => handleClick(e, index)}
+                onKeyPress={(e) => handleKeyPress(e, index)}
                 id={index === currentIndex ? 'selected' : 'unselected'}
                 key={photo.thumbnail_url}
-                src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/HD_transparent_picture.png/1200px-HD_transparent_picture.png"
                 style={{ backgroundImage: `url(${photo.thumbnail_url || '../../../no_image.png'})` }}
               />
             );
