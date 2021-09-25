@@ -17,18 +17,25 @@
 .rating_col{
   grid-column: 1/2;
 }
-.rating_score{
+.rating_score {
   margin: 30px auto;
   display: flex;
   justify-content: center;
   align-items: flex-start;
   font-size: 48px;
-  font-weight: bolder;
+  font-weight: bold;
+
+  & p {
+    margin: 0;
+    font-size: 72px;
+    padding: 15px;
+  }
+
+  & .star-rating {
+    flex: 1;
+  }
 }
-.rating_score p{
-  padding: 0;
-  margin: 0;
-}
+
 .rating_recommended{
   text-align: center;
 }
