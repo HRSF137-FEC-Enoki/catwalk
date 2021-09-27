@@ -12,4 +12,5 @@ config/config.js
 coverage
 #MockData used for ProductOverview component
 MockData
-#
+# random png files
+public/*.png
